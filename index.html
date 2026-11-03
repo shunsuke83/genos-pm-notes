@@ -66,6 +66,11 @@ p{margin:0}
 .s-gen{color:var(--gen);background:var(--gen-soft)}
 .s-est{color:var(--est);background:var(--est-soft)}
 .s-need{color:var(--need);background:var(--need-soft)}
+.s-live{color:var(--accent);background:var(--accent-soft)}
+.live{border:1px solid var(--accent);border-radius:var(--r);padding:16px 18px;display:grid;gap:10px;background:var(--surface)}
+.live h4{font-size:var(--t-md);font-weight:600;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.live .bul{gap:5px}
+.menu-map td:first-child{white-space:nowrap}
 
 /* layout */
 .layout{display:grid;grid-template-columns:200px minmax(0,1fr);gap:40px;align-items:start}
@@ -287,7 +292,7 @@ footer li{break-inside:avoid}
 
 <div class="wrap">
   <header class="top">
-    <div class="eyebrow">GenOS 공식 문서 v1.9.6 기준 · 확인일 2026-10-30</div>
+    <div class="eyebrow">GenOS 공식 문서 v1.9.6 기준 · 확인일 2026-10-30 · 실제 환경 점검 2026-11-03</div>
     <h1>GenOS PM 학습 노트</h1>
     <p class="lede">고객 요구사항의 구현 가능성, 범위, 일정, 비용, 품질을 근거 있게 판단하기 위한 10회 과정입니다. 회차마다 쉬운 설명, 자사 플랫폼 적용, 직접 확인 과제, PM 판단, 실무 사례, 이해도 질문을 담았습니다.</p>
     <div class="top-row">
@@ -296,6 +301,7 @@ footer li{break-inside:avoid}
         <span class="item"><span class="stamp s-gen">원리</span>일반적인 AI 원리</span>
         <span class="item"><span class="stamp s-est">추정</span>단서로 짐작</span>
         <span class="item"><span class="stamp s-need">확인 필요</span>개발·구축팀에 물어볼 것</span>
+        <span class="item"><span class="stamp s-live">실환경</span>실제 환경(v1.9.6)에서 확인</span>
       </div>
       <div class="status">
         <span class="meter"><span class="bar"><i id="meter-fill"></i></span><span id="meter-text">1회차 0%</span></span>
@@ -396,8 +402,8 @@ footer li{break-inside:avoid}
 
             <h3 style="margin-top:12px">버전에 따라 달라지는 기능</h3>
             <ul class="obs">
-              <li><span class="stamp s-ok">확인</span><span>보안등급 문서는 <b>v1.9.0</b>부터, 워크스페이스와 승인(결재) 문서는 <b>v1.9.1</b>부터 목차에 나옵니다. 고객 현장이 이보다 낮은 버전이면 해당 기능이 없을 수 있습니다.</span></li>
-              <li><span class="stamp s-need">확인 필요</span><span>태스크플로우 문서는 v1.8.7까지 있고 v1.8.8부터 목차에서 빠졌습니다. 단종인지, 다른 기능에 통합됐는지 알 수 없습니다.</span></li>
+              <li><span class="stamp s-live">실환경</span><span>릴리스 노트 기준 보안등급(RAG 노출 차단)과 워크스페이스는 모두 <b>v1.9.0</b>(2026-07-09)에 추가됐고, 워크스페이스 권한 체계는 <b>v1.9.1</b>(2026-07-23)에 확대됐습니다. 문서 목차에는 보안등급이 v1.9.0, 워크스페이스가 v1.9.1부터 나옵니다. 고객 현장이 v1.9.0보다 낮으면 두 기능이 없습니다.</span></li>
+              <li><span class="stamp s-need">확인 필요</span><span>태스크플로우 문서는 v1.8.7까지 있고 v1.8.8부터 목차에서 빠졌습니다. v1.8.8 릴리스 노트에도 설명이 없어 단종인지, 다른 기능에 통합됐는지 알 수 없습니다.</span></li>
               <li><span class="stamp s-ok">확인</span><span><span class="mono">v1.6.1-komipo</span>라는 고객사 전용 문서 버전이 있습니다. 표준 제품과 고객 전용 개발이 따로 관리된 사례입니다.</span></li>
               <li><span class="stamp s-ok">확인</span><span>워크플로우 이관 문서는 개발망에서 검증한 워크플로우를 결재를 거쳐 운영망에 반영하는 방식을 설명합니다. 망이 분리된 고객 구축을 전제로 한 기능입니다.</span></li>
             </ul>
@@ -413,10 +419,46 @@ footer li{break-inside:avoid}
                 <span class="vx-pages" id="vx-pages"></span>
               </div>
               <div class="vx-cols" id="vx-cols"></div>
+              <p class="small muted">릴리스 노트는 관리자 화면 <span class="mono">/update/</span>에 v1.4부터 v1.9.6까지 날짜와 함께 있습니다 <span class="stamp s-live">실환경</span>. 문서 목차보다 정확하므로 버전 판단은 릴리스 노트를 우선합니다.</p>
               <details>
                 <summary class="small" style="cursor:pointer">기능 문서가 처음 목차에 나온 버전</summary>
                 <ul class="milestones" id="milestones" style="margin-top:10px"></ul>
               </details>
+            </div>
+          </div>
+        </div>
+
+        <!-- 실제 환경 -->
+        <div class="step">
+          <div class="num">◎</div>
+          <div class="body">
+            <h3>실제 환경에서 확인한 것</h3>
+            <div class="live">
+              <h4><span class="stamp s-live">실환경</span>실제 환경에서 확인 · genos.genon.ai v1.9.6 · 2026-11-03</h4>
+              <ul class="bul">
+                <li>푸터 버전 <b>v1.9.6</b>. 릴리스 노트가 관리자 화면 <span class="mono">/update/</span>에 v1.4(2025-02)부터 v1.9.6(2026-10-29)까지 날짜와 함께 있습니다. 약 2주 간격으로 버전이 나옵니다. 업그레이드가 잦다는 뜻이므로 고객 현장 버전 고정·변경 관리 합의가 필요합니다.</li>
+                <li>메뉴는 아래 지도처럼 구성됩니다. 공식 문서에 없던 메뉴: <b>스킬</b>(SKILL.md, v1.9.5), <b>젠빌더</b>(Sandbox 관리), <b>유량 제어</b>(한도 정책·한도 현황, v1.9.6), <b>인증 키</b> 통합 메뉴(전체 키·발급 정책·키 이력), 크레딧 하위의 차감 정책·비용·사용 분석·단가표, 할당량의 볼륨, 데이터 분석(데이터 소스·데이터 분석 채팅).</li>
+                <li>이 계정에는 <b>워크스페이스·보안등급 설정·슈퍼 관리자·라이센스·환경 설정·일괄 제어·감사 로그·부하 테스트·AI 회의록</b> 메뉴가 보이지 않습니다. 문서와 릴리스 노트에는 있는 기능이므로 역할 권한 차이로 보입니다 <span class="stamp s-est">추정</span>. 로그인 직후 워크스페이스 목록 API가 호출되는 것은 확인했습니다. 메뉴가 안 보인다고 기능이 없다고 단정하면 안 되는 실제 사례입니다.</li>
+                <li>로그인 화면은 아이디·비밀번호 방식이고, 비밀번호 형식(대·소문자·숫자·특수문자, 8~20자)을 화면에서 먼저 검사합니다. 로그인 후 현재 접속 IP·최근 접속 IP·최근 로그인 일시를 보여 줍니다. SSO 선택지는 로그인 화면에 없습니다. 지원 여부는 <span class="stamp s-need">확인 필요</span>.</li>
+              </ul>
+            </div>
+            <h3 style="margin-top:8px">실제 메뉴 지도 (이 계정 기준)</h3>
+            <div class="tbl-wrap">
+              <table class="menu-map">
+                <thead><tr><th>구역</th><th>메뉴</th><th>관련 회차</th></tr></thead>
+                <tbody>
+                  <tr><td>대시보드</td><td>시스템 · 서비스 · GPU · 트레이너 · 커스텀 대시보드</td><td>2 · 8 · 9</td></tr>
+                  <tr><td>개발 › 데이터</td><td>데이터셋 · 벡터 DB · AI 드라이브 · 용어사전 · 자동 적재</td><td>3 · 9</td></tr>
+                  <tr><td>개발 › 개발·모델·트레이너</td><td>코드스페이스 · 공유 볼륨 · 모델 · 트레이너(LLM·VLM·임베딩·리랭킹)</td><td>5 · 7</td></tr>
+                  <tr><td>개발 › 평가·가드레일</td><td>리더보드(LLM·워크플로우) · 평가지표(LLM·워크플로우·Langfuse) · 가드레일 · 탐지 로그</td><td>6 · 9</td></tr>
+                  <tr><td>배포 › 도구</td><td>MCP 도구 · MCP 서버 · 프롬프트 라이브러리 · 스킬</td><td>4 · 5</td></tr>
+                  <tr><td>배포 › 서빙·전처리·라우터</td><td>모델 서빙 · 코드 서빙 · 전처리기 · 파이프라인 · 서비스 라우터 · Sandbox 관리(젠빌더)</td><td>2 · 3 · 5 · 8</td></tr>
+                  <tr><td>서비스 › 에이전트</td><td>워크플로우 · A2A 에이전트 · 에이전트 게이트웨이(접근 정책 관리·모니터링)</td><td>2 · 5</td></tr>
+                  <tr><td>서비스 › 앱</td><td>채팅 앱 · 보고서 생성 · 데이터 분석(데이터 소스·데이터 분석 채팅)</td><td>1 · 2</td></tr>
+                  <tr><td>운영</td><td>결재 · 크레딧(현황·차감 정책·비용·사용 분석·단가표) · 유량 제어(한도 정책·한도 현황) · 인증 키(전체 키·발급 정책·키 이력) · 할당량(GPU·볼륨)</td><td>6 · 8</td></tr>
+                  <tr><td>관리자 전용 › 관리</td><td>리소스(도커 이미지·PyPI·NPM·JAR·인스턴스 타입) · IAM(사용자·관리 그룹·정책·역할) · 알림(공지사항) · 확장 서비스(젠빌더)</td><td>6 · 7</td></tr>
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
@@ -546,7 +588,7 @@ footer li{break-inside:avoid}
 <script>
 const DATA = {"versions":[{"v":"v1.3.3","pages":22,"has":["vectordb","taskflow"]},{"v":"v1.4","pages":34,"has":["vectordb","taskflow","report"]},{"v":"v1.5","pages":42,"has":["vectordb","auto","taskflow","report"]},{"v":"v1.5.1","pages":42,"has":["vectordb","auto","taskflow","report"]},{"v":"v1.5.2","pages":57,"has":["vectordb","auto","taskflow","report"]},{"v":"v1.5.4.0","pages":103,"has":["vectordb","auto","mcp","taskflow","report"]},{"v":"v1.6.0","pages":93,"has":["vectordb","auto","taskflow","report"]},{"v":"v1.6.1","pages":93,"has":["vectordb","auto","taskflow","report"]},{"v":"v1.6.1-komipo","pages":92,"has":["vectordb","auto","taskflow","report"]},{"v":"v1.6.2","pages":94,"has":["vectordb","auto","taskflow","report"]},{"v":"v1.6.3.0","pages":126,"has":["vectordb","auto","mcp","af3","taskflow","dataapp","report"]},{"v":"v1.6.7","pages":92,"has":["vectordb","auto","taskflow","report"]},{"v":"v1.7.1","pages":146,"has":["vectordb","auto","mcp","multiagent","af3","taskflow","codeagent","dataapp","multitenant","report"]},{"v":"v1.7.5","pages":154,"has":["vectordb","auto","guardrail","mcp","multiagent","af3","taskflow","codeagent","dataapp","codeserving","multitenant","report"]},{"v":"v1.7.5.1","pages":154,"has":["vectordb","auto","guardrail","mcp","multiagent","af3","taskflow","codeagent","dataapp","codeserving","multitenant","report"]},{"v":"v1.7.6","pages":154,"has":["vectordb","auto","guardrail","mcp","multiagent","af3","taskflow","codeagent","dataapp","codeserving","multitenant","report"]},{"v":"v1.7.8","pages":150,"has":["vectordb","auto","guardrail","mcp","multiagent","af3","taskflow","codeagent","dataapp","codeserving","multitenant","report"]},{"v":"v1.8.0","pages":156,"has":["vectordb","auto","guardrail","mcp","multiagent","af3","taskflow","credit","codeagent","dataapp","codeserving","multitenant","report"]},{"v":"v1.8.3","pages":163,"has":["vectordb","auto","guardrail","mcp","a2a","multiagent","af3","taskflow","credit","codeagent","dataapp","codeserving","multitenant","report"]},{"v":"v1.8.4","pages":161,"has":["vectordb","auto","guardrail","mcp","a2a","multiagent","af3","taskflow","codeagent","dataapp","codeserving","multitenant","report"]},{"v":"v1.8.5","pages":171,"has":["vectordb","auto","guardrail","mcp","a2a","multiagent","af3","taskflow","credit","codeagent","dataapp","codeserving","multitenant","report"]},{"v":"v1.8.6","pages":165,"has":["vectordb","auto","guardrail","mcp","a2a","multiagent","af3","taskflow","codeagent","dataapp","codeserving","multitenant","report"]},{"v":"v1.8.7","pages":170,"has":["vectordb","auto","guardrail","mcp","a2a","multiagent","af3","taskflow","credit","codeagent","dataapp","router","codeserving","multitenant","meeting","report"]},{"v":"v1.8.8","pages":150,"has":["vectordb","auto","drive","guardrail","mcp","a2a","multiagent","af3","credit","codeagent","dataapp","router","codeserving","multitenant","meeting","report"]},{"v":"v1.9.0","pages":155,"has":["vectordb","auto","drive","glossary","guardrail","mcp","a2a","multiagent","af3","credit","security","codeagent","dataapp","router","hami","codeserving","multitenant","meeting","report"]},{"v":"v1.9.1","pages":168,"has":["vectordb","auto","drive","glossary","guardrail","mcp","a2a","multiagent","af3","credit","workspace","security","approval","codeagent","dataapp","leaderboard","router","hami","codeserving","multitenant","meeting","leadermetric","report"]},{"v":"v1.9.2","pages":171,"has":["vectordb","auto","drive","guardrail","mcp","a2a","multiagent","af3","credit","workspace","security","approval","codeagent","dataapp","leaderboard","router","ha","hami","codeserving","multitenant","meeting","leadermetric","report"]},{"v":"v1.9.3","pages":181,"has":["vectordb","auto","drive","glossary","guardrail","mcp","a2a","multiagent","af3","credit","workspace","security","approval","codeagent","dataapp","leaderboard","router","ha","hami","codeserving","multitenant","meeting","webhook","leadermetric","report"]},{"v":"v1.9.4","pages":189,"has":["vectordb","auto","drive","glossary","guardrail","mcp","a2a","multiagent","af3","credit","workspace","security","approval","codeagent","dataapp","leaderboard","wfquality","langfuse","router","ha","hami","codeserving","multitenant","meeting","webhook","leadermetric","report"]},{"v":"v1.9.5","pages":193,"has":["vectordb","auto","drive","glossary","guardrail","mcp","a2a","multiagent","af3","credit","workspace","security","approval","codeagent","dataapp","leaderboard","wfquality","langfuse","router","ha","hami","codeserving","multitenant","meeting","webhook","leadermetric","report"]},{"v":"v1.9.6","pages":195,"has":["vectordb","auto","drive","glossary","guardrail","mcp","a2a","multiagent","af3","credit","workspace","security","approval","codeagent","dataapp","leaderboard","wfquality","langfuse","router","ha","hami","codeserving","multitenant","meeting","webhook","leadermetric","report"]}],"features":[{"id":"vectordb","name":"벡터 DB 문서 적재"},{"id":"auto","name":"벡터 DB 자동 적재"},{"id":"drive","name":"AI 드라이브"},{"id":"glossary","name":"용어사전"},{"id":"guardrail","name":"가드레일"},{"id":"mcp","name":"MCP"},{"id":"a2a","name":"A2A 에이전트"},{"id":"multiagent","name":"멀티 에이전트플로우"},{"id":"af3","name":"Agentflow 3.0"},{"id":"taskflow","name":"태스크플로우"},{"id":"credit","name":"크레딧"},{"id":"workspace","name":"워크스페이스"},{"id":"security","name":"보안등급"},{"id":"approval","name":"결재"},{"id":"codeagent","name":"코딩 에이전트"},{"id":"dataapp","name":"데이터 분석 앱"},{"id":"leaderboard","name":"평가 리더보드"},{"id":"wfquality","name":"워크플로우 품질 평가"},{"id":"langfuse","name":"Langfuse 연동"},{"id":"router","name":"서비스 라우터"},{"id":"ha","name":"실행 확장(HA)"},{"id":"hami","name":"HAMi vGPU"},{"id":"codeserving","name":"코드 서빙"},{"id":"multitenant","name":"멀티터넌트 서빙(LoRA)"},{"id":"meeting","name":"AI 회의록"},{"id":"webhook","name":"이벤트 웹훅"},{"id":"leadermetric","name":"평가 지표"},{"id":"report","name":"보고서 앱"}],"lessons":[{"n":2,"title":"아키텍처와 두 흐름","judge":["화면·API·워크플로우·서빙·벡터 DB가 각각 무엇을 처리하는지 설명한다","문서 등록 흐름과 질문 응답 흐름에서 장애가 나면 어디부터 볼지 정한다","외부 시스템이 GenOS를 호출하는 경로(워크플로우 API·채팅 API·서빙 API)를 구분한다"],"docs":[{"t":"채팅 앱 만들기","u":"https://genos-docs.gitbook.io/default/basic-tutorials/guides/application/dev-chat"},{"t":"워크플로우 API 사용","u":"https://genos-docs.gitbook.io/default/advanced-tutorials/guides/api/workflow"},{"t":"채팅 API 사용","u":"https://genos-docs.gitbook.io/default/advanced-tutorials/guides/api/chat"},{"t":"LLM 서빙 API 사용","u":"https://genos-docs.gitbook.io/default/advanced-tutorials/guides/api/llm"},{"t":"서비스 라우터","u":"https://genos-docs.gitbook.io/default/advanced-tutorials/guides/serving/service-router"},{"t":"서빙 로그 확인","u":"https://genos-docs.gitbook.io/default/advanced-tutorials/guides/serving/api-log"},{"t":"워크플로우 전파 헤더","u":"https://genos-docs.gitbook.io/default/admin-management/settings/workflow-forward-headers"}],"cases":["특정 요청 또는 동시 요청이 늘 때 답변이 느려지는 경우 (원인 위치만 미리 보기)"],"unknown":["공식 시스템 구성도와 내부 컴포넌트 목록(벡터 DB 엔진, 서빙 엔진, 게이트웨이)","관리자 화면과 사용자 포털이 같은 서버인지, 망분리 시 배치 방식"]},{"n":3,"title":"문서 적재와 지식 관리","judge":["고객 문서 포맷에 맞는 전처리기를 고르고 그 이유를 설명한다","문서 수정·삭제·재적재가 답변에 반영되는 시점을 판단한다","자동 적재·AI 드라이브·수동 적재 중 운영 방식을 제안한다"],"docs":[{"t":"DB 문서 적재","u":"https://genos-docs.gitbook.io/default/basic-tutorials/guides/data/vectordb"},{"t":"벡터 DB 자동 적재","u":"https://genos-docs.gitbook.io/default/basic-tutorials/guides/data/auto_ingestion"},{"t":"AI 드라이브","u":"https://genos-docs.gitbook.io/default/basic-tutorials/guides/data/ai-drive"},{"t":"적재 방식","u":"https://genos-docs.gitbook.io/default/basic-tutorials/guides/data/ai-drive/ingestion-method"},{"t":"FAQ 메타데이터","u":"https://genos-docs.gitbook.io/default/basic-tutorials/guides/data/faq-metadata"},{"t":"용어사전","u":"https://genos-docs.gitbook.io/default/basic-tutorials/guides/data/glossary"},{"t":"Genos Doc Parser 개념 및 코드 소개","u":"https://genos-docs.gitbook.io/default/admin-management/settings/resource/basic_preprocessor_for_rag/intro"},{"t":"적재용 전처리기 코드 상세 설명","u":"https://genos-docs.gitbook.io/default/admin-management/settings/resource/basic_preprocessor_for_rag/intelligent_processor"},{"t":"전처리기 관리","u":"https://genos-docs.gitbook.io/default/admin-management/settings/resource/preprocessor"},{"t":"파이프라인 관리","u":"https://genos-docs.gitbook.io/default/admin-management/settings/resource/pipeline"}],"cases":["문서를 등록했는데 검색되지 않거나 답변이 틀린 경우","문서를 수정·삭제했는데 과거 내용이 계속 답변에 쓰이는 경우"],"unknown":["문서 삭제 시 벡터가 바로 지워지는지, 재적재 정책","청크 크기·겹침을 어디서 설정하는지","HWP·스캔 PDF 실제 처리 품질 검증 결과"]},{"n":4,"title":"검색과 답변 생성","judge":["검색 실패와 생성 실패를 구분해 원인을 좁힌다","메타 정보 필터·FAQ·재정렬이 품질에 주는 영향을 설명한다","출처 표시를 검수 항목으로 쓰는 방법과 한계를 안다"],"docs":[{"t":"RAG 워크플로우 만들기","u":"https://genos-docs.gitbook.io/default/basic-tutorials/guides/workflow/openapi"},{"t":"Search Filter을 적용한 RAG 워크플로우 만들기","u":"https://genos-docs.gitbook.io/default/basic-tutorials/guides/workflow/rag_with_search_filter"},{"t":"FAQ가 있는 RAG 구성 (v1.6.3~)","u":"https://genos-docs.gitbook.io/default/basic-tutorials/guides/workflow/faq-rag-v1.6.3.0"},{"t":"RAG 워크플로우 만들기 (Agentflow 3.0.0)","u":"https://genos-docs.gitbook.io/default/basic-tutorials/guides/workflow/agentflow3-2-rag"},{"t":"Genos VectorDB","u":"https://genos-docs.gitbook.io/default/flowise-nodes/components/deepsearfing"},{"t":"검색 시 특정 페이지만 한정하기","u":"https://genos-docs.gitbook.io/default/flowise-nodes/components/deepsearfing/search-filter"},{"t":"Genos Merge Retriever","u":"https://genos-docs.gitbook.io/default/flowise-nodes/components/mnc-merge-retriever"},{"t":"Genos Unified RAG Chain","u":"https://genos-docs.gitbook.io/default/flowise-nodes/components/mnc-unified-rag-chain"},{"t":"MNC Verified RAG Chain Single Turn","u":"https://genos-docs.gitbook.io/default/flowise-nodes/components/mnc-verified-rag-chain-single-turn"},{"t":"메타 정보 활용 에이전트플로우 만들기","u":"https://genos-docs.gitbook.io/default/advanced-tutorials/guides/workflow/meta-info-workflow"},{"t":"Agentic RAG","u":"https://genos-docs.gitbook.io/default/advanced-tutorials/guides/workflow/agentic_rag"},{"t":"프롬프트 엔지니어링","u":"https://genos-docs.gitbook.io/default/basic-tutorials/guides/prompt"},{"t":"리랭킹 모델 학습","u":"https://genos-docs.gitbook.io/default/advanced-tutorials/guides/trainer/reranking"}],"cases":["문서를 등록했는데 답변이 틀린 경우"],"unknown":["키워드+벡터 하이브리드 검색을 기본 노드가 지원하는지","재정렬(리랭킹)이 기본 적용인지 선택인지"]},{"n":5,"title":"모델과 에이전트","judge":["자체 서빙과 외부 API 중 고객 조건에 맞는 쪽을 근거와 함께 고른다","모델 교체 시 필요한 검증 범위를 정한다","에이전트가 외부 시스템을 호출할 때 실패·중복 실행 대응을 요구사항으로 적는다"],"docs":[{"t":"모델 관리","u":"https://genos-docs.gitbook.io/default/basic-tutorials/guides/model"},{"t":"모델 서빙","u":"https://genos-docs.gitbook.io/default/basic-tutorials/guides/llm/model-serving"},{"t":"외부 API 추가","u":"https://genos-docs.gitbook.io/default/basic-tutorials/guides/llm/external-api"},{"t":"LLM 모델 서빙 시 권장 옵션","u":"https://genos-docs.gitbook.io/default/basic-tutorials/guides/llm/serving-info"},{"t":"MCP 도구 만들기","u":"https://genos-docs.gitbook.io/default/basic-tutorials/guides/mcp/mcp-tool"},{"t":"MCP 서버 만들기","u":"https://genos-docs.gitbook.io/default/basic-tutorials/guides/mcp/mcp-server"},{"t":"MCP 도구 카탈로그","u":"https://genos-docs.gitbook.io/default/basic-tutorials/guides/mcp/mcp-tool-catalog"},{"t":"MCP 도구로 노출 설정하기","u":"https://genos-docs.gitbook.io/default/basic-tutorials/guides/mcp/mcp-expose-workflow"},{"t":"A2A 에이전트","u":"https://genos-docs.gitbook.io/default/basic-tutorials/guides/a2a"},{"t":"에이전트 게이트웨이","u":"https://genos-docs.gitbook.io/default/basic-tutorials/guides/a2a/gateway"},{"t":"멀티 에이전트플로우 만들기","u":"https://genos-docs.gitbook.io/default/advanced-tutorials/guides/workflow/create_multi_agentflow"},{"t":"리서치 에이전트","u":"https://genos-docs.gitbook.io/default/advanced-tutorials/guides/workflow/research-agent"},{"t":"코딩 에이전트 사용","u":"https://genos-docs.gitbook.io/default/getting-started/application-use/code-agent-use"}],"cases":["에이전트가 외부 시스템을 호출하다 실패하거나 중복 실행하는 경우"],"unknown":["도구 호출 재시도·멱등성 처리 방식","사람 승인 단계(Human-in-the-loop) 지원 여부"]},{"n":6,"title":"권한과 보안","judge":["고객 조직·문서 분류 체계를 관리 그룹·역할·보안등급·워크스페이스에 매핑한다","권한 노출을 검수할 시나리오를 만든다","데이터가 플랫폼 밖으로 나가는 지점을 설명한다"],"docs":[{"t":"사용자 관리","u":"https://genos-docs.gitbook.io/default/admin-management/settings/iam/user"},{"t":"관리 그룹 관리","u":"https://genos-docs.gitbook.io/default/admin-management/settings/iam/group"},{"t":"정책 관리","u":"https://genos-docs.gitbook.io/default/admin-management/settings/iam/policy"},{"t":"역할 관리","u":"https://genos-docs.gitbook.io/default/admin-management/settings/iam/role"},{"t":"워크스페이스 관리","u":"https://genos-docs.gitbook.io/default/admin-management/settings/iam/workspace"},{"t":"슈퍼 관리자 관리","u":"https://genos-docs.gitbook.io/default/admin-management/settings/iam/super-admin"},{"t":"보안등급 관리","u":"https://genos-docs.gitbook.io/default/admin-management/settings/iam/security-level"},{"t":"결재","u":"https://genos-docs.gitbook.io/default/admin-management/settings/approval"},{"t":"가드레일 필터 만들기/적용하기","u":"https://genos-docs.gitbook.io/default/basic-tutorials/guides/guardrail/guardrail_guide"},{"t":"탐지 로그","u":"https://genos-docs.gitbook.io/default/basic-tutorials/guides/guardrail/detect-log"},{"t":"인증 키 없이 호출","u":"https://genos-docs.gitbook.io/default/admin-management/settings/anonymous-call"}],"cases":["사용자마다 볼 수 있는 문서가 다르거나 권한 없는 정보가 노출되는 경우"],"unknown":["SSO·LDAP 등 외부 인증 연동","감사로그 범위와 보관 기간","개인정보 마스킹 기능","외부 API 사용 시 전송 데이터 범위"]},{"n":7,"title":"구축과 연동","judge":["고객 요청을 설정·추가 개발·외부 연동으로 분류한다","개발망→운영망 이관 절차가 일정에 주는 영향을 설명한다","폐쇄망 구축에서 미리 확보할 것(패키지·이미지·모델 파일)을 나열한다"],"docs":[{"t":"코드 스페이스","u":"https://genos-docs.gitbook.io/default/basic-tutorials/guides/development/code_space"},{"t":"코드 서빙","u":"https://genos-docs.gitbook.io/default/basic-tutorials/guides/development/code_serving"},{"t":"코드 서빙 이관","u":"https://genos-docs.gitbook.io/default/basic-tutorials/guides/development/code_serving/promotion_code_serving"},{"t":"GenOS 라이브러리","u":"https://genos-docs.gitbook.io/default/basic-tutorials/guides/development/import-genos"},{"t":"워크플로우 이관","u":"https://genos-docs.gitbook.io/default/basic-tutorials/guides/workflow/promotion"},{"t":"이벤트 웹훅","u":"https://genos-docs.gitbook.io/default/admin-management/settings/event-webhook"},{"t":"환경 설정","u":"https://genos-docs.gitbook.io/default/admin-management/settings/genos-config"},{"t":"도커 이미지 관리","u":"https://genos-docs.gitbook.io/default/admin-management/settings/resource/docker"},{"t":"PypI 패키지 관리","u":"https://genos-docs.gitbook.io/default/admin-management/settings/resource/pypi"},{"t":"파이썬 코드 기반 FastAPI 앱과 GenOS 채팅 연동하기","u":"https://genos-docs.gitbook.io/default/advanced-tutorials/guides/workflow/mocking-flowise"}],"cases":["고객의 기능 요청이 설정 변경인지 추가 개발인지 불분명한 경우"],"unknown":["설치 가이드·최소/권장 H/W·OS·Kubernetes 요구사항","폐쇄망 설치·업그레이드 절차","표준 구축 WBS와 투입 인력"]},{"n":8,"title":"성능·용량·비용","judge":["\"동시 사용자 100명\" 요구를 측정 가능한 조건으로 바꾼다","GPU·외부 API·크레딧 중 비용을 좌우하는 요소를 설명한다","부하시험 계획에 들어갈 항목을 정한다"],"docs":[{"t":"모델 서빙 스케일 아웃","u":"https://genos-docs.gitbook.io/default/basic-tutorials/guides/llm/serving-scaleout"},{"t":"모델 서빙 실행 확장(HA)","u":"https://genos-docs.gitbook.io/default/basic-tutorials/guides/llm/model-serving-ha"},{"t":"LLM 모델 서빙 시 권장 옵션","u":"https://genos-docs.gitbook.io/default/basic-tutorials/guides/llm/serving-info"},{"t":"서빙 리비전 월 예산","u":"https://genos-docs.gitbook.io/default/basic-tutorials/guides/llm/revision-budget"},{"t":"멀티터넌트 서빙","u":"https://genos-docs.gitbook.io/default/advanced-tutorials/guides/serving/multitenancy"},{"t":"GPU 할당량","u":"https://genos-docs.gitbook.io/default/admin-management/settings/quota-gpu"},{"t":"HAMi vGPU 모드","u":"https://genos-docs.gitbook.io/default/admin-management/settings/resource/hami-vgpu"},{"t":"인스턴스 타입 관리","u":"https://genos-docs.gitbook.io/default/admin-management/settings/resource/instance"},{"t":"크레딧 설명 및 정책","u":"https://genos-docs.gitbook.io/default/credit/manual"},{"t":"차감 크레딧 및 토큰 요금 설정","u":"https://genos-docs.gitbook.io/default/credit/manual/pricing"},{"t":"주요 사용 시나리오","u":"https://genos-docs.gitbook.io/default/credit/manual/usage-scenarios"},{"t":"GPU","u":"https://genos-docs.gitbook.io/default/dashboard/overview/gpu"}],"cases":["특정 요청 또는 동시 요청이 늘 때 답변이 느려지는 경우"],"unknown":["표준 부하시험 결과와 시험 조건","GPU 1장당 동시 처리량 기준","라이선스 단가·과금 체계"]},{"n":9,"title":"품질과 운영","judge":["\"정확도 95%\" 같은 요구를 평가 데이터·지표·판정 기준으로 구체화한다","운영 중 품질 저하를 어디서 발견하는지 설명한다","변경(모델·문서·워크플로우) 후 재검증 기준을 정한다"],"docs":[{"t":"평가 리더보드","u":"https://genos-docs.gitbook.io/default/basic-tutorials/guides/leaderboard"},{"t":"평가 지표","u":"https://genos-docs.gitbook.io/default/basic-tutorials/guides/metric"},{"t":"워크플로우 품질 평가","u":"https://genos-docs.gitbook.io/default/basic-tutorials/guides/workflow-quality"},{"t":"데이터셋","u":"https://genos-docs.gitbook.io/default/basic-tutorials/guides/data/dataset"},{"t":"데이터셋 자동 생성","u":"https://genos-docs.gitbook.io/default/basic-tutorials/guides/data/dataset/auto-generation"},{"t":"데이터셋 근거 재검증","u":"https://genos-docs.gitbook.io/default/basic-tutorials/guides/data/dataset/revalidation"},{"t":"LLM 모델 평가 하기","u":"https://genos-docs.gitbook.io/default/advanced-tutorials/guides/trainer/llm-eval"},{"t":"시스템","u":"https://genos-docs.gitbook.io/default/dashboard/overview/system"},{"t":"서비스","u":"https://genos-docs.gitbook.io/default/dashboard/overview/service"},{"t":"Langfuse 연동","u":"https://genos-docs.gitbook.io/default/advanced-tutorials/guides/langfuse"},{"t":"피드백 사유 수집","u":"https://genos-docs.gitbook.io/default/basic-tutorials/guides/application/dev-chat/feedback-collection"}],"cases":["\"정확도 95%\" 요구를 바로 수락하지 않고 측정 정의부터 합의하는 경우"],"unknown":["백업·복구 절차와 RPO/RTO","장애 대응 체계와 로그 보관 위치","릴리스 노트와 버전 지원 정책"]},{"n":10,"title":"프로젝트 적용","judge":["고객 요구사항을 기능 대응표로 정리한다","PoC 범위·성공 기준·일정을 제안한다","검수 기준과 운영 인수인계 항목을 정한다"],"docs":[{"t":"GenOS 소개","u":"https://genos-docs.gitbook.io/default/readme"},{"t":"주요 사용 시나리오","u":"https://genos-docs.gitbook.io/default/credit/manual/usage-scenarios"},{"t":"워크플로우 이관","u":"https://genos-docs.gitbook.io/default/basic-tutorials/guides/workflow/promotion"}],"cases":["여섯 가지 실무 사례 종합 점검"],"unknown":["표준 PoC 템플릿과 기간","역할·책임(R&R) 기준"]}]};
 const BASE = "https://genos-docs.gitbook.io/default/";
-const STAMP = {ok:'<span class="stamp s-ok">확인</span>', gen:'<span class="stamp s-gen">원리</span>', est:'<span class="stamp s-est">추정</span>', need:'<span class="stamp s-need">확인 필요</span>'};
+const STAMP = {ok:'<span class="stamp s-ok">확인</span>', gen:'<span class="stamp s-gen">원리</span>', est:'<span class="stamp s-est">추정</span>', need:'<span class="stamp s-need">확인 필요</span>', live:'<span class="stamp s-live">실환경</span>'};
 const link = (t, p) => `<a href="${BASE + p}" target="_blank" rel="noopener">${t}</a>`;
 
 /* ---------- 기능 지도 ---------- */
@@ -1084,6 +1126,13 @@ const L2 = {
   n: 2, title: `아키텍처와 두 흐름`,
   basis: `워크플로우 API 사용, 채팅 API 사용, LLM 서빙 API 사용, 서비스 라우터, 모델 서빙, 인증 키 없이 호출, 대시보드, 이용 로그 사용자 지정 검색`,
   figs: {explain: ["l2"]},
+  live: [
+    `관리자 화면 로그인은 <code>POST /api/admin/auth/login</code>이고 관리자 API는 <code>/api/admin/…</code> 아래에 있습니다. 채팅 API(<code>/api/genportal</code>)·게이트웨이 API(<code>/api/gateway</code>)와 경로가 다릅니다.`,
+    `대시보드 › 시스템 탭: 클러스터 리소스 · 서버 정보 · <b>파드 정보</b> · GPU 메모리 정보 · 네트워크 I/O 정보 · 클러스터 이벤트 정보. 파드 정보 탭이 있으므로 컨테이너 오케스트레이션 위에서 동작한다는 추정이 거의 확인됩니다.`,
+    `릴리스 노트: v1.9.4에 채팅 스트리밍 버퍼를 Redis 스트림으로, 채팅 첨부 이미지 저장소를 MinIO로 옮겼다고 적혀 있습니다. 서비스 라우터는 v1.9.4부터 Triton gRPC도 지원합니다.`,
+    `서비스 라우터 목록 컬럼: ID · 이름 · 엔드포인트 · 유형(예: 서빙 - LLM) · 제작자 · 관리 그룹 · 등록일시. 모델 서빙 상세 탭: 기본 정보 · 리비전 목록 · 컨테이너 상태 · 플러그인, 배포 이력에 요청 수·입력 토큰 수·출력 토큰 수가 남습니다.`,
+    `공식 구성도와 노드 구성은 여전히 {need}.`,
+  ],
   goals: [
     `화면·게이트웨이·워크플로우·서빙·벡터 DB가 각각 무엇을 처리하는지 설명한다.`,
     `외부 시스템이 GenOS를 부르는 세 입구(채팅 API·워크플로우 API·서빙 API)를 구분하고 상황에 맞게 고른다.`,
@@ -1198,6 +1247,12 @@ const L3 = {
   n: 3, title: `문서 적재와 지식 관리`,
   basis: `DB 문서 적재, AI 드라이브, 적재 방식, 벡터 DB 자동 적재, 전처리기 관리, 파이프라인 관리, 적재용 전처리기 코드 상세 설명, FAQ 메타데이터, 용어사전`,
   figs: {"apply:1": ["l3a"], "apply:2": ["l3b"]},
+  live: [
+    `벡터 DB 상세 › 기본 정보의 <b>벡터 DB 종류 = Weaviate</b>. 기본 속성 20개 중 예: doc_id, text, summary, chunk_bboxes, n_lines, file_hash, n_words, i_page, n_chunk_of_pages, i_chunk_on_doc. 검색 필터에 쓸 수 있는 메타 항목이 이것들입니다.`,
+    `전처리기 목록 컬럼: 제목 · 확장자 · 타입(전처리기 패키지) · 연결 상태(온라인/오프라인) · 배포 상태. 고객·과제별 맞춤 전처리기가 여러 개 등록돼 있고, 확장자에 <b>hwp, hwpx</b>를 포함한 것도 있습니다. HWP는 맞춤 전처리기로 처리한 사례가 있다는 뜻이며, 표준 경로와 품질은 여전히 {need}.`,
+    `릴리스 노트 v1.9.6: '재적재 시 이전 적재 청크가 누적되는 현상 수정', 'API 업로드 시 보안 등급 미지정이면 0등급(공개)으로 저장되도록 수정', '적재가 1시간을 넘기면 사용자 취소로 중단되는 현상 수정', 전처리기 기본 코드 2.2.5 반영. 이전 버전 고객은 이 세 가지가 실무 사례의 원인 후보에 들어갑니다.`,
+    `릴리스 노트 v1.9.5: AI 드라이브 파이프라인 전처리기, 인증 키로 벡터 DB·AI 드라이브 외부 호출, 외부 호출 로그 탭. v1.9.4: FAQ 등록 시 Weaviate 메타데이터 동시 등록.`,
+  ],
   goals: [
     `고객 문서 포맷에 맞는 전처리기를 고르고 그 이유를 설명한다.`,
     `문서를 고치거나 지웠을 때 답변에 반영되는 시점과 조건을 판단한다.`,
@@ -1326,6 +1381,11 @@ const L4 = {
   n: 4, title: `검색과 답변 생성`,
   basis: `Genos VectorDB, 검색 시 특정 페이지만 한정하기, Genos Merge Retriever, Genos Unified RAG Chain, MNC Verified RAG Chain, FAQ가 있는 RAG 구성, Agentic RAG, 프롬프트 엔지니어링`,
   figs: {explain: ["l4"]},
+  live: [
+    `릴리스 노트 v1.9.4: 채팅 앱 회귀 실행기와 '피드백→회귀 케이스 복원' 기능, 평가 대상 노드 지정. 출처가 맞는데 답이 틀린 사례를 회귀 케이스로 남겨 재검증할 수 있는 도구가 있다는 뜻입니다.`,
+    `프롬프트 테스트에서 요청 본문(JSON)으로 임의 파라미터를 보낼 수 있습니다(v1.9.6). 도구 › 프롬프트 라이브러리 메뉴가 실제로 있습니다.`,
+    `기본 RAG 템플릿의 Search Type·Top K·리랭킹 기본값은 워크플로우 편집 화면을 열어야 보이므로 이번 읽기 전용 점검에서는 확인하지 않았습니다. {need}`,
+  ],
   goals: [
     `검색 실패와 생성 실패를 구분해 원인을 좁힌다.`,
     `검색 방식(유사도·하이브리드·MMR), 메타 정보 필터, FAQ, 재정렬이 품질에 주는 영향을 설명한다.`,
@@ -1435,6 +1495,13 @@ const L5 = {
   n: 5, title: `모델과 에이전트`,
   basis: `모델 관리, 모델 서빙, 외부 API 추가, LLM 모델 서빙 시 권장 옵션, MCP 도구·서버 만들기, MCP 도구 라벨링, A2A 에이전트, 에이전트 게이트웨이, 이벤트 웹훅, 코딩 에이전트 사용`,
   figs: {"apply:1": ["l5"]},
+  live: [
+    `모델 서빙 목록에 서빙 122개가 있고 '모델 소스' 컬럼이 <b>외부</b>인 것이 대부분입니다. 즉 이 환경은 외부 API 모델을 주로 쓰고, 자체 GPU에는 STT(whisper)·임베딩(snowflake-arctic, bge-m3) 같은 작은 모델을 띄웁니다.`,
+    `에이전트 게이트웨이 › 접근 정책 관리 목록 컬럼: 이름 · 유형 · 도구·기능 · 호출자 정책 · 배포 상태 · 차단 상태. '배포된 대상만 보기', '비상 차단 중인 대상만 보기' 필터가 있습니다. 웹 검색 MCP 서버가 등록돼 있습니다.`,
+    `도구 › <b>스킬</b> 메뉴(SKILL.md 패키지 등록·스크립트 실행, v1.9.5)가 있습니다. 공식 문서 목차에는 아직 없습니다.`,
+    `릴리스 노트 v1.9.6: 서빙 엔진에 SGLang·커스텀 엔진 추가, PD(prefill·decode) 분리 서빙, 멀티노드 서빙, 노드 배치·GPU 카드 지정. v1.9.4: MCP 신규 사양(2026-07-28 스펙) 지원.`,
+    `도구 호출 재시도·멱등 처리 주체와 사람 승인 단계는 화면만으로는 알 수 없습니다. {need}`,
+  ],
   goals: [
     `자체 서빙과 외부 API 중 고객 조건에 맞는 쪽을 근거와 함께 고른다.`,
     `모델을 바꿀 때 필요한 검증 범위와 교체 방식을 정한다.`,
@@ -1540,6 +1607,13 @@ const L6 = {
   n: 6, title: `권한과 보안`,
   basis: `사용자·관리 그룹·정책·역할 관리, 워크스페이스 관리, 슈퍼 관리자 관리, 보안등급 관리, AI 드라이브(RAG 검색 시 등급 통제), 결재, 가드레일, 인증 키 없이 호출, 채팅 API 사용`,
   figs: {"apply:1": ["l6a"], "apply:3": ["l6b"]},
+  live: [
+    `<b>감사 로그가 있습니다.</b> 릴리스 노트 v1.9.4: 감사 로그(Audit Log) 신규(감사 원천 16종, 워크스페이스 분류, CSV 다운로드, 사이트별 활성화), v1.9.5: 권한 부여·회수·변경 이력 기록. 이 계정 메뉴에는 보이지 않으므로 보관 기간·활성화 여부는 {need}.`,
+    `릴리스 노트 v1.9.1: 개인정보 비식별화(PII 마스킹) 지원. v1.9.6 보안 수정: 외부 인증 키로 서빙 직접 호출 시 가드레일 미적용 수정, 결재 승인·반려 권한 검증 강화, 채팅 임시 문서 접근 권한 검증 강화.`,
+    `운영 › 인증 키 › 전체 키 컬럼: 상태 · 키 유형 · 호출 범위 · 허용 IP 대역 · 만료 일자 · 분당 요청 한도(RPM) · 소유자 · 담당자 · 요청 수 · 마지막 사용. 필터에 만료 예정·장기 미사용·삭제된 계정이 있어 키 위생 점검을 화면에서 할 수 있습니다.`,
+    `IAM › 역할 목록 예: '공용 리소스 읽기 (전체 사용자 기본)', '커스텀 대시보드 RW'처럼 리소스 단위 역할로 운영하고 있습니다. 결재 목록은 리소스 · 결재 대상 · 결재 유형 · 신청자 · 결재자 · 결재 상태 구조입니다.`,
+    `로그인은 아이디·비밀번호이며 접속 IP와 최근 로그인 일시를 표시합니다. SSO·LDAP는 화면에 없으므로 {need}.`,
+  ],
   goals: [
     `고객 조직과 문서 분류 체계를 관리 그룹·역할·보안등급·워크스페이스에 매핑한다.`,
     `권한 노출을 검수할 시나리오를 만든다.`,
@@ -1556,9 +1630,9 @@ const L6 = {
           [`사용자`, `로그인 ID, 소속 관리 그룹, 활성화 Y/N {ok}`, `[[사용자 관리|admin-management/settings/iam/user]]`],
           [`관리 그룹`, `부서와 비슷한 사용자 묶음. 상위 그룹 계층, 기본 그룹(일반 사용자 그룹, 관리자용 관리 그룹) {ok}`, `[[관리 그룹 관리|admin-management/settings/iam/group]]`],
           [`정책 · 역할`, `리소스별 읽기(R)·읽기/쓰기(RW) 규칙 · 그 정책들의 묶음 {ok}`, `[[정책 관리|admin-management/settings/iam/policy]], [[역할 관리|admin-management/settings/iam/role]]`],
-          [`워크스페이스`, `회사·조직·테넌트 단위 범위. 역할은 소유자·관리자·멤버. 공유는 멤버십과 별개로 비멤버에게도 가능 (문서 v1.9.1+) {ok}`, `[[워크스페이스 관리|admin-management/settings/iam/workspace]]`],
+          [`워크스페이스`, `회사·조직·테넌트 단위 범위. 역할은 소유자·관리자·멤버. 공유는 멤버십과 별개로 비멤버에게도 가능 (릴리스 v1.9.0 추가, v1.9.1 권한 체계 확대) {ok}`, `[[워크스페이스 관리|admin-management/settings/iam/workspace]]`],
           [`슈퍼 관리자`, `전역 전권. IAM &gt; 사용자 &gt; 상세에서 슈퍼 관리자만 승격·해제 {ok}`, `[[슈퍼 관리자 관리|admin-management/settings/iam/super-admin]]`],
-          [`보안등급`, `문서 등급(레벨 0 공개 + 최대 10개)과 열람 대상(관리 그룹·역할·사용자). 상위 등급은 하위 문서도 열람 (문서 v1.9.0+) {ok}`, `[[보안등급 관리|admin-management/settings/iam/security-level]]`],
+          [`보안등급`, `문서 등급(레벨 0 공개 + 최대 10개)과 열람 대상(관리 그룹·역할·사용자). 상위 등급은 하위 문서도 열람 (릴리스 v1.9.0 추가) {ok}`, `[[보안등급 관리|admin-management/settings/iam/security-level]]`],
           [`채팅 앱 사용 권한`, `모든 사용자 또는 지정 대상(사용자·관리 그룹·역할) {ok}`, `[[채팅 앱 만들기|basic-tutorials/guides/application/dev-chat]]`],
           [`결재`, `배포, 인증 키, 공유, 이관 같은 신청을 승인·반려. 운영 &gt; 결재 {ok}`, `[[결재|admin-management/settings/approval]]`]
         ] } },
@@ -1614,8 +1688,8 @@ const L6 = {
       [`리스크`, `예전 권한 모델(관리 그룹 전권 정책)로 쓰던 계정은 새 모델로 자동 전환되지 않아 로그인 후 메뉴가 비어 보일 수 있습니다. {ok}`, `업그레이드 고객 확인`]
     ],
     devq: [
-      [`SSO(SAML·OIDC)나 LDAP 연동을 지원하나요? 방식과 개발 범위는?`, `공공·금융 고객의 필수 요구입니다.`],
-      [`감사 로그 범위(로그인, 권한 변경, 문서 열람, 답변)와 보관 기간·반출 방법은?`, `보안 심사 체크리스트 항목입니다.`],
+      [`SSO(SAML·OIDC)나 LDAP 연동을 지원하나요? 방식과 개발 범위는?`, `공공·금융 고객의 필수 요구입니다. 로그인 화면에는 아이디·비밀번호만 있습니다.`],
+      [`감사 로그(v1.9.4 신규)의 활성화 조건, 범위 16종, 보관 기간, 반출 방법은?`, `기능은 있다고 릴리스 노트에 있지만 사이트별 활성화라고 적혀 있습니다.`],
       [`워크플로우 API 호출에서 보안등급은 누구 기준으로 적용되나요?`, `포털 연동 시 권한 우회가 생기는지 판단합니다.`]
     ]
   },
@@ -1634,24 +1708,24 @@ const L6 = {
     { id: `q2`, k: `원인 분석`, t: `임원 전용 문서에 높은 보안등급을 지정했는데, 일부 사원의 답변에 그 문서의 핵심 수치가 여전히 나옵니다. 출처 목록에는 그 문서가 없습니다. 가능한 원인과 확인 순서를 적어 보세요.`,
       rubric: `출처에 없음 → 그 문서가 아닌 다른 경로일 가능성: 같은 수치가 공개 문서·구판 사본·FAQ(모델 미경유 답 가능)·용어사전(출처에 안 보임)에 있음, 사원 본인이 채팅에 첨부한 파일, 이전 대화 맥락이나 개인화 장기 메모리, 모델이 일반 지식으로 추측. 또 등급 지정 전에 만든 데이터셋·FAQ. 확인: 같은 질문을 등급 높은 계정과 비교, 출처 문서들의 내용 검색, FAQ·용어사전 검색, 채팅 문서함, 등급 지정 시점과 문서 버전. 하나로 확정하지 않을 것.` },
     { id: `q3`, k: `PM 판단`, t: `그룹사 3개 법인이 GenOS 하나를 함께 쓰되, 서로의 문서와 앱이 보이면 안 된다는 요구입니다. 어떻게 구성하고, 무엇을 확인하며, 어떻게 검수하겠습니까?`,
-      rubric: `구성: 법인별 워크스페이스(문서 v1.9.1+ → 현장 버전 확인), 법인별 관리 그룹 계층, 필요 시 보안등급, 법인별 크레딧·GPU 할당량. 확인: 공유가 멤버십과 독립이라 비멤버에게도 공유 가능 → 법인 간 공유 통제 정책 필요, 플랫폼 공용 리소스와 AI 회의록 서비스는 워크스페이스를 넘어 보임, 슈퍼 관리자 운영 주체, 결재자 분리, 로그 분리 요구. 검수: 법인 A 계정으로 법인 B 앱·문서·답변 노출 시나리오, 공유 시도 시나리오. 기준 합의.` }
+      rubric: `구성: 법인별 워크스페이스(릴리스 v1.9.0 → 현장 버전 확인), 법인별 관리 그룹 계층, 필요 시 보안등급, 법인별 크레딧·GPU 할당량. 확인: 공유가 멤버십과 독립이라 비멤버에게도 공유 가능 → 법인 간 공유 통제 정책 필요, 플랫폼 공용 리소스와 AI 회의록 서비스는 워크스페이스를 넘어 보임, 슈퍼 관리자 운영 주체, 결재자 분리, 로그 분리 요구. 검수: 법인 A 계정으로 법인 B 앱·문서·답변 노출 시나리오, 공유 시도 시나리오. 기준 합의.` }
   ],
   facts: [
     `사용자: 로그인 ID, 관리 그룹, 활성화 Y/N. 관리 그룹: 상위 계층, 기본 그룹(일반 사용자 그룹, 관리자용 관리 그룹). 정책: 리소스별 R/RW. 역할: 정책 묶음.`,
-    `워크스페이스(문서 v1.9.1+): 회사·조직·테넌트 단위 범위, 역할 소유자·관리자·멤버, 공유는 멤버십과 독립(비멤버 공유 가능), 플랫폼 공용 리소스와 AI 회의록은 워크스페이스를 넘어 보임. 예전 관리 그룹 전권 정책 계정은 자동 전환 안 됨.`,
+    `워크스페이스(릴리스 v1.9.0 추가, 문서 목차는 v1.9.1부터): 회사·조직·테넌트 단위 범위, 역할 소유자·관리자·멤버, 공유는 멤버십과 독립(비멤버 공유 가능), 플랫폼 공용 리소스와 AI 회의록은 워크스페이스를 넘어 보임. 예전 관리 그룹 전권 정책 계정은 자동 전환 안 됨.`,
     `슈퍼 관리자: 전역 전권, IAM > 사용자 > 상세에서 슈퍼 관리자만 승격·해제.`,
-    `보안등급(문서 v1.9.0+): 레벨 0 공개 + 최대 10개, 열람 대상 관리 그룹·역할·사용자, 상위 등급은 하위 문서 열람, 유효 등급은 가장 높은 등급, 검색·컨텍스트 주입 단계에서 제외, 등급 삭제 시 문서는 공개로 변경, v1.9.1에서 AgentFlow 경로 등급 필터 누락 수정.`,
+    `보안등급(릴리스 v1.9.0 추가): 레벨 0 공개 + 최대 10개, 열람 대상 관리 그룹·역할·사용자, 상위 등급은 하위 문서 열람, 유효 등급은 가장 높은 등급, 검색·컨텍스트 주입 단계에서 제외, 등급 삭제 시 문서는 공개로 변경, v1.9.1에서 AgentFlow 경로 등급 필터 누락 수정.`,
     `가드레일: 차단 방식 워크플로우·정규식, 응답 안내 메시지·마스킹, 탐지 로그(가드레일·워크플로우·서빙·사용자·인증 키별).`,
     `결재: 운영 > 결재, 리소스·리소스 이름·결재 대상·결재 유형 구조(v1.9.5).`,
     `인증 키: 허용 IP, 만료일, RPM. 인증 키 없이 호출은 결재 필요, 호출자 통제·사용량 집계 불가.`,
     `채팅 API 로그인: 관리자 로그인 제한·장기 미로그인 잠금 응답 존재. AI 드라이브 활동 내역은 감사 로그와 다르다고 명시.`,
-    `SSO·LDAP, 플랫폼 감사 로그, 암호화는 공개 문서에 없음(확인 필요).`,
+    `감사 로그는 릴리스 노트 v1.9.4 신규(감사 원천 16종, CSV), v1.9.5 권한 변경 이력(실제 환경 확인). PII 마스킹 v1.9.1. SSO·LDAP, 암호화는 확인 필요.`,
     `용어사전 검색 내용은 답변 근거로 쓰이지만 출처 목록에 나오지 않음. FAQ는 Verified RAG에서 모델 없이 답할 수 있음.`
   ],
   gloss: [
     [`관리 그룹`, `부서처럼 사람을 묶은 단위`, `리소스 소유와 정책 적용의 기준, 상위 계층`, `고객 조직도와 어떻게 맞출지`],
     [`정책 · 역할`, `리소스별 읽기·쓰기 규칙 · 그 규칙 묶음`, `IAM &gt; 정책, 역할`, `역할 몇 개로 운영할지`],
-    [`워크스페이스`, `조직·테넌트 단위의 가장 큰 칸막이`, `문서 v1.9.1+, 소유자·관리자·멤버`, `멀티 법인 요구, 공유 정책`],
+    [`워크스페이스`, `조직·테넌트 단위의 가장 큰 칸막이`, `릴리스 v1.9.0 추가, 소유자·관리자·멤버`, `멀티 법인 요구, 공유 정책`],
     [`유효 보안등급`, `여러 경로로 받은 등급 중 가장 높은 것`, `내 권한 정보에서 확인`, `등급 중복 부여 관리`],
     [`가드레일`, `위험한 입력·출력을 걸러 내는 필터`, `워크플로우·정규식 필터, 탐지 로그`, `금칙어·개인정보 규칙 정의 주체`],
     [`결재`, `중요한 변경 전에 승인받는 절차`, `운영 &gt; 결재`, `결재자와 리드타임`],
@@ -1663,6 +1737,11 @@ const L7 = {
   n: 7, title: `구축과 연동`,
   basis: `코드 스페이스, 코드 서빙(생성·배포·이관), GenOS 라이브러리, 워크플로우 이관, 이벤트 웹훅, 환경 설정, 워크플로우 전파 헤더, 도커 이미지·PyPI 패키지 관리, FastAPI 앱과 채팅 연동`,
   figs: {"apply:1": ["l7a"], "apply:3": ["l7b"]},
+  live: [
+    `전처리기 목록에 고객·과제별 맞춤 전처리기가 다수 등록돼 있습니다. '추가 개발'로 분류한 전처리기 맞춤이 실제로 흔한 작업이라는 뜻입니다.`,
+    `릴리스 노트 v1.9.6: 코드 서빙 리비전에 NFS 루트 마운트 옵션, 모델 서빙·Triton 리비전에 고정 마운트·포트·런타임 한도 설정. v1.9.4: 젠빌더(GitHub 복수 계정 연동, 배포 게이트) 통합.`,
+    `관리자 전용 › 리소스에 도커 이미지·PyPI·NPM·JAR·인스턴스 타입 메뉴가 그대로 있습니다. 설치 사양·폐쇄망 반입 절차는 화면에 없으므로 {need}.`,
+  ],
   goals: [
     `고객 요청을 기본 제공·설정·추가 개발·외부 연동·확인 필요로 분류한다.`,
     `개발망에서 운영망으로 옮기는 이관 절차가 일정에 주는 영향을 설명한다.`,
@@ -1787,6 +1866,13 @@ const L8 = {
   n: 8, title: `성능·용량·비용`,
   basis: `모델 서빙 스케일 아웃, 모델 서빙 실행 확장(HA), LLM 모델 서빙 시 권장 옵션, 서빙 리비전 월 예산, 멀티터넌트 서빙, GPU 할당량, HAMi vGPU 모드, 인스턴스 타입, 크레딧, 대시보드 GPU`,
   figs: {"apply:0": ["l8a", "l8b"]},
+  live: [
+    `대시보드 › GPU: 이 환경은 노드 2대(각 T4 4장, GPU당 14.6GB)이고 vGPU 코어·메모리 예약량이 표시됩니다. 대형 LLM은 외부 API로 쓰고 있습니다. 고객 제안 시 '우리 데모 환경의 성능'을 그대로 말하면 안 되는 이유입니다.`,
+    `<b>부하 테스트 기능이 있습니다.</b> 릴리스 노트 v1.9.4: 에이전트(워크플로우)·코드 서빙 부하 테스트 신규(SLO 판정, 서빙 성능 지표), v1.9.6: 채팅 대상 부하 테스트, 부하 분석기. 관리 전용 메뉴라 이 계정에는 안 보입니다. 시험 조건 합의 후 이 도구로 측정하면 됩니다.`,
+    `운영 › 유량 제어 › 한도 정책(v1.9.6): 대상(전체·관리그룹·사용자·인증 키) · 적용 방식(구성원 각자) · 지표(예: 동시 진행 대화 수) · 값 · 모드(기록/집행). 동시 요청 한도를 플랫폼에서 걸 수 있습니다.`,
+    `운영 › 크레딧: 크레딧 현황 · 차감 정책 · 비용·사용 분석 · 단가표. 서빙 배포 이력에 요청 수와 입출력 토큰 수가 남아 비용 추정 근거가 됩니다.`,
+    `라이선스 과금 단위는 여전히 {need}.`,
+  ],
   goals: [
     `"동시 사용자 100명" 같은 요구를 측정 가능한 조건으로 바꾼다.`,
     `GPU·외부 API·크레딧 중 비용을 좌우하는 요소를 설명한다.`,
@@ -1862,7 +1948,7 @@ const L8 = {
     ],
     devq: [
       [`고객 GPU 기준으로 모델별 동시 처리량 실측치가 있나요?`, `제안 단계 산정의 근거입니다.`],
-      [`표준 부하시험 도구와 시나리오가 있나요?`, `검수 방법을 고객과 합의할 때 씁니다.`],
+      [`부하 테스트 기능(v1.9.4 신규)의 접근 권한, 표준 시나리오, 결과 보고 양식은?`, `도구가 있다는 것은 릴리스 노트로 확인했고, 검수 방법을 고객과 합의할 때 씁니다.`],
       [`라이선스 과금 단위는 서버, GPU, 사용자 중 무엇인가요?`, `라이선스 관리 화면에는 서버 ID만 보입니다.`]
     ]
   },
@@ -1910,6 +1996,11 @@ const L9 = {
   n: 9, title: `품질과 운영`,
   basis: `평가 리더보드, 평가 지표, 워크플로우 품질 평가, 데이터셋 자동 생성, 데이터셋 근거 재검증, LLM 모델 평가, 대시보드, Langfuse 연동, 피드백 사유 수집, 채팅 앱 다중 배포와 버전 관리, 이용 로그`,
   figs: {explain: ["l9"]},
+  live: [
+    `평가 메뉴: 리더보드(LLM·워크플로우), 평가지표(LLM·워크플로우·Langfuse). 릴리스 노트 v1.9.4: 워크플로우 품질 평가(골든 데이터셋, 배포 연동 자동 평가, 임계 판정, 품질저하 알림), 채팅 앱 회귀 실행기. v1.9.6: 데이터셋 근거 재검증, 조항 단위 청킹과 골든셋 자동 생성.`,
+    `워크플로우 이용 로그에서 실패 건만 골라 볼 수 있고, 서비스별 호출 건수에 인증 키 직접 호출이 구분됩니다(v1.9.6).`,
+    `버전이 약 2주마다 나옵니다. 백업·복구·업그레이드 절차는 릴리스 노트에 없으므로 {need}. 운영 계약에 업그레이드 주기와 회귀 테스트 책임을 넣어야 합니다.`,
+  ],
   goals: [
     `"정확도 95%" 같은 요구를 평가 데이터·지표·판정 기준으로 구체화한다.`,
     `운영 중 품질 저하를 어디서 어떻게 발견하는지 설명한다.`,
@@ -2031,6 +2122,10 @@ const L10 = {
   n: 10, title: `프로젝트 적용`,
   basis: `1~9회차 결과물, 크레딧 주요 사용 시나리오, 워크플로우 이관`,
   figs: {explain: ["l10"]},
+  live: [
+    `기능 대응표 갱신: 감사 로그 → 기본 제공(권한·활성화 확인), 부하 성능 → 부하 테스트 도구로 측정(수치는 합의), 동시 요청 통제 → 유량 제어 설정, PII 마스킹 → 기본 제공(v1.9.1). SSO·설치 사양·백업은 여전히 확인 필요.`,
+    `릴리스 노트가 관리자 화면에 있으므로 '고객 현장 버전에 이 기능이 있나'는 해당 버전의 릴리스 노트로 먼저 확인할 수 있습니다.`,
+  ],
   goals: [
     `고객 요구사항을 기능 대응표로 정리한다.`,
     `PoC 범위·성공 기준·일정 가정을 제안한다.`,
@@ -2047,13 +2142,14 @@ const L10 = {
         rows: [
           [`사내 규정 Q&amp;A, 출처 표시`, `AI 드라이브 + RAG 워크플로우 + 채팅 앱 출처 탭`, `기본 제공 + 설정`, `DB 문서 적재, 채팅 앱`, `문서 포맷별 전처리 시험`],
           [`부서별 문서 열람 제한`, `보안등급, 관리 그룹`, `설정`, `보안등급 관리(문서 v1.9.0+)`, `현장 버전, 분류 체계 매핑`],
-          [`법인별 분리`, `워크스페이스`, `설정`, `워크스페이스 관리(문서 v1.9.1+)`, `공유 정책`],
+          [`법인별 분리`, `워크스페이스`, `설정`, `워크스페이스(릴리스 v1.9.0)`, `공유 정책`],
           [`사내 포털에 AI 창`, `채팅 API 또는 워크플로우 API`, `외부 연동`, `채팅·워크플로우 API`, `포털 개발, SSO {need}`],
           [`결재 시스템 자동 등록`, `MCP 도구 + 에이전트 게이트웨이`, `추가 개발 + 외부 연동`, `MCP, 게이트웨이`, `고객 API, 멱등성, 확인 단계`],
           [`금리 질문 무오류`, `FAQ + Verified RAG`, `설정 + 고객 콘텐츠`, `Verified RAG Chain`, `FAQ 갱신 책임`],
-          [`동시 300명`, `HA, GPU 할당량`, `확인 필요`, `실행 확장(HA)`, `부하시험, GPU 수`],
+          [`동시 300명`, `HA, GPU 할당량, 유량 제어, 부하 테스트`, `확인 필요`, `실행 확장(HA), 릴리스 노트 v1.9.4·v1.9.6`, `부하시험으로 측정, GPU 수`],
           [`정확도 기준`, `리더보드, 품질 평가`, `설정 + 고객 협업`, `워크플로우 품질 평가`, `질문 세트 구축`],
-          [`SSO 로그인`, `-`, `확인 필요`, `공개 문서 없음`, `개발팀 확인`],
+          [`SSO 로그인`, `-`, `확인 필요`, `로그인 화면에 아이디·비밀번호만 있음`, `개발팀 확인`],
+          [`감사 로그 제출`, `감사 로그(CSV 다운로드)`, `기본 제공 + 확인 필요`, `릴리스 노트 v1.9.4·v1.9.5`, `사이트별 활성화, 보관 기간`],
           [`폐쇄망 구축`, `패키지 관리, 이관, import genos`, `확인 필요`, `이관, GenOS 라이브러리`, `설치 문서, 반입 절차`]
         ] } },
     { h: `PoC 설계 틀`,
@@ -2160,9 +2256,9 @@ const L10 = {
   ],
   facts: [
     `분류: 기본 제공, 설정, 추가 개발(GenOS 안 코드), 외부 연동(고객 시스템), 확인 필요.`,
-    `보안등급 문서 v1.9.0+, 워크스페이스 문서 v1.9.1+. 현장 버전에 따라 분류가 바뀜.`,
+    `보안등급·워크스페이스 모두 릴리스 v1.9.0 추가(문서 목차는 워크스페이스가 v1.9.1부터). 현장 버전에 따라 분류가 바뀜.`,
     `채팅·워크플로우 API, MCP 도구·게이트웨이, FAQ·Verified RAG, HA·GPU 할당량, 리더보드·품질 평가, 이관, import genos.`,
-    `공개 문서에 없는 것: SSO, 감사 로그, 설치 사양, 부하 성능 수치, 백업·복구, 릴리스 노트.`,
+    `실제 환경 확인: 릴리스 노트는 관리자 화면 /update/에 있음, 감사 로그는 v1.9.4 신규, 부하 테스트 도구는 v1.9.4 신규. 여전히 확인 필요: SSO, 설치 사양, 백업·복구, 라이선스 단위.`,
     `HA 콜드 스타트 6~8분, LLM 계열 큐 신호 한계. 지능형 전처리기는 PDF 전용.`,
     `검수 수치와 공수는 근거 없이 확정하지 않고 합의·가정으로 표시.`
   ],
@@ -2210,7 +2306,7 @@ const NUMS = Array.from({length: 10}, (_, i) => i + 1);
 function fmt(s){
   return String(s == null ? "" : s)
     .replace(/&(?![a-zA-Z]+;|#\d+;)/g, "&amp;")
-    .replace(/\{(ok|gen|est|need)\}/g, (_, k) => STAMP[k])
+    .replace(/\{(ok|gen|est|need|live)\}/g, (_, k) => STAMP[k])
     .replace(/\[\[([^|\]]+)\|([^\]]+)\]\]/g, (_, t, p) => link(t, p));
 }
 const bul = arr => `<ul class="bul">${arr.map(x => `<li>${fmt(x)}</li>`).join("")}</ul>`;
@@ -2262,7 +2358,7 @@ function lessonHTML(L){
     <div class="lesson-head"><div class="k">${n}회차 · 30분</div><h2>${fmt(L.title)}</h2><p class="meta">근거: ${fmt(L.basis)}</p></div>
     <div class="step"><div class="num">①</div><div class="body"><h3>오늘의 목표</h3><p class="muted small">수업을 마치고 스스로 설명할 수 있으면 체크하세요.</p>${checks(L.goals, "g")}</div></div>
     <div class="step"><div class="num">②</div><div class="body"><h3>쉬운 설명</h3><div class="prose">${L.explain.map(p => `<p>${fmt(p)}</p>`).join("")}</div>${figsAt("explain")}</div></div>
-    <div class="step"><div class="num">③</div><div class="body"><h3>자사 플랫폼 적용</h3>${L.apply.map(block).join("")}</div></div>
+    <div class="step"><div class="num">③</div><div class="body"><h3>자사 플랫폼 적용</h3>${L.apply.map(block).join("")}${L.live ? `<div class="live"><h4><span class="stamp s-live">실환경</span>실제 환경에서 확인 · genos.genon.ai v1.9.6 · 2026-11-03</h4>${bul(L.live)}</div>` : ""}</div></div>
     <div class="step"><div class="num">④</div><div class="body"><h3>직접 확인 (10분): ${fmt(L.task.title)}</h3>${checks(L.task.steps, "t")}
       <p class="small muted">찾은 값을 적어 두세요. 여기 적은 내용은 저장되고, 채팅에서 요청하면 Claude가 읽습니다.</p>
       <div class="ev">${L.task.evidence.map(([id, lab]) => `<label class="field"><span>${fmt(lab)}</span><input type="text" id="ev-${n}-${id}" data-bind="evidence.${id}" autocomplete="off"></label>`).join("")}</div>

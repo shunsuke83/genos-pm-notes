@@ -1,21 +1,26 @@
-# GenOS PM 학습 노트
+# GenOS · GenD PM 학습 노트
 
-GenOS 도입·제안을 맡은 PM을 위한 10회차 학습 노트입니다. 정적 HTML 한 장(`index.html`)으로 동작합니다.
+GenOS(AI 앱·에이전트 평면)와 GenD(데이터 평면) 도입·제안을 맡은 PM을 위한 학습 노트입니다. 정적 HTML 한 장(`index.html`)으로 동작하며, 대표 페이지에서 제품을 고른 뒤 회차를 진행합니다.
 
-- 근거: [GenOS 공식 문서](https://genos-docs.gitbook.io/default) v1.9.6 (확인일 2026-10-30)과 실제 환경 읽기 전용 점검(v1.9.6, 2026-11-03). 각 주장에 **확인 / 원리 / 추정 / 확인 필요 / 실환경** 표시를 붙였습니다.
+- 근거: [GenOS 공식 문서](https://genos-docs.gitbook.io/default) v1.9.6 (확인일 2026-10-30)과 실제 환경 읽기 전용 점검(v1.9.6, 2026-11-03). GenD는 [GenD 공식 가이드](https://gend-docs.genon.ai) v1.4.4 (확인일 2026-11-04, 문서 기준·운영 환경 미접속). 각 주장에 **확인 / 원리 / 추정 / 확인 필요 / 실환경** 표시를 붙였습니다.
 - 회차마다 쉬운 설명, 다이어그램, 자사 플랫폼 적용, 10분 직접 확인 과제, PM 판단, 실무 사례, 이해도 질문, 용어, 근거 문서 링크가 있습니다.
 - 답안·메모·체크 상태는 방문한 브라우저의 localStorage에만 저장됩니다(기기 간 동기화 없음).
-- 외부 요청은 Google Fonts와 GenOS 공식 문서 링크뿐입니다.
+- 외부 요청은 Google Fonts와 두 제품의 공식 문서 링크뿐입니다.
 
 ## 구성
 
 | 경로 | 내용 |
 |---|---|
-| `index.html` | 학습 페이지 (1~10회차 전체) |
-| `diagrams/*.svg` | 회차별 다이어그램 14개. 페이지에 인라인으로 들어 있고, 문서·슬라이드에 그대로 쓸 수 있게 따로 두었습니다 |
-| `docs/GenOS_학습노트.md` | 플랫폼 한 장 요약, 버전별 문서 변화, 확인 질문 목록, 용어집, 검수 예시 |
+| `index.html` | 학습 페이지 (대표 페이지 + GenOS 10회차 + GenD 6회차) |
+| `diagrams/*.svg` | 다이어그램 21개(GenOS 14, GenD 7). 페이지에 인라인으로 들어 있고, 문서·슬라이드에 그대로 쓸 수 있게 따로 두었습니다 |
+| `docs/GenOS_학습노트.md` | GenOS 한 장 요약, 버전별 문서 변화, 확인 질문 목록, 용어집, 검수 예시 |
+| `docs/GenD_학습노트.md` | GenD 한 장 요약, GenOS와의 비교·동거 설치 주의점, 버전·지원 정책, 아키텍처, 메뉴 지도, 주제별 상세와 실무 사례, 기능 대응표, 확인 질문, 용어집, 검수 예시 |
 
-## 회차
+## 대표 페이지
+
+제품 카드 두 장(진행률·이어서 보기·회차 목록)과 "요구를 들으면 어느 제품인지" 표가 있습니다. 왼쪽 레일의 GenOS / GenD 버튼으로 트랙을 바꿀 수 있고, 주소는 `#home`, `#genos-3`, `#gend-2` 형식입니다(이전 `#lesson-3`도 동작).
+
+## GenOS 회차
 
 | 회차 | 주제 | 다이어그램 |
 |---|---|---|
@@ -30,17 +35,28 @@ GenOS 도입·제안을 맡은 PM을 위한 10회차 학습 노트입니다. 정
 | 9 | 품질과 운영 | 품질 평가 루프 |
 | 10 | 프로젝트 적용 | 요구사항에서 인수인계까지 |
 
+## GenD 회차
+
+| 회차 | 주제 | 다이어그램 |
+|---|---|---|
+| D1 | GenD는 무엇이고, GenOS와 어떻게 나뉘는가 | 두 평면과 만나는 지점, GenD의 경계 |
+| D2 | 연합 SQL · 카탈로그 · 커넥터 | 네 입구 → gend-api → Trino → 카탈로그 경로 |
+| D3 | 적재 파이프라인과 벡터 · 그래프 | 파싱·청킹·임베딩 → PG·Vec·Graph 세 저장소 |
+| D4 | Text-to-SQL · RAG · MCP | 4단계 처리와 SqlGuard, 등급 결정 순서, Tier 안전장치 |
+| D5 | 권한 · 보안 · 거버넌스 | 2축 접근 모델 다섯 층과 열람 등급 관문, 증상별 진단 |
+| D6 | 설치 · 운영 · 버전 | 온프렘 동거 토폴로지와 충돌, 릴리스 사슬과 백업 시각 |
+
 ## 다이어그램 미리보기
 
 ![두 흐름](diagrams/01-two-flows.svg)
 
-![세 입구와 계층](diagrams/02-entrances-and-layers.svg)
+![GenOS와 GenD 두 평면](diagrams/gend-01-two-planes.svg)
 
 ![답변 경로](diagrams/04-answer-path.svg)
 
-![권한 계층](diagrams/06a-permission-layers.svg)
+![GenD 접근 모델](diagrams/gend-05-access-model.svg)
 
-![콜드 스타트](diagrams/08b-cold-start.svg)
+![온프렘 동거 토폴로지](diagrams/gend-06a-onprem-topology.svg)
 
 ## GitHub Pages 배포
 

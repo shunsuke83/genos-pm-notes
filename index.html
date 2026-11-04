@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>GenOS PM 학습 노트</title>
-<meta name="description" content="GenOS 도입·제안을 맡은 PM을 위한 10회차 학습 노트">
+<title>GenOS · GenD PM 학습 노트</title>
+<meta name="description" content="GenOS(AI 앱·에이전트 평면) 10회와 GenD(데이터 평면) 6회 — PM을 위한 학습 노트">
 <style>body{margin:0;padding:0}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -260,6 +260,34 @@ figcaption{font-size:var(--t-sm);color:var(--muted);max-width:72ch;line-height:1
 .lesson-nav{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;padding-top:24px;margin-top:8px;border-top:1px solid var(--line)}
 .lesson-nav .btn{max-width:100%;text-align:left}
 
+/* 대표 페이지 · 트랙 */
+.tracks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-bottom:8px}
+.track{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:20px 22px;display:grid;gap:10px;align-content:start;min-width:0}
+.track-head{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.track .ts{font-size:var(--t-sm);color:var(--muted)}
+.track .tn{font-family:var(--f-display);font-weight:700;font-size:var(--t-xl)}
+.track .td{line-height:1.6}
+.track .tw{line-height:1.6}
+.track .tb{font-size:var(--t-xs);color:var(--muted)}
+.track-meter .meter .bar{width:140px}
+.track-list{list-style:none;margin:6px 0 0;padding:8px 0 0;display:grid;gap:2px;border-top:1px solid var(--line)}
+.track-list button{width:100%;text-align:left;background:none;border:0;padding:5px 6px;display:grid;grid-template-columns:34px minmax(0,1fr) auto;gap:8px;font-size:var(--t-sm);color:var(--ink);cursor:pointer;border-radius:4px;align-items:baseline}
+.track-list button:hover{background:var(--sunk)}
+.track-list .n{font-family:var(--f-mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.track-list .s{font-size:var(--t-xs);color:var(--muted);white-space:nowrap}
+.track-list button[data-st="done"] .s{color:var(--ok)}
+.track-list button[data-st="active"] .s{color:var(--accent)}
+.track-tag{display:inline-block;font-size:var(--t-xs);font-weight:600;letter-spacing:.02em;padding:2px 8px;border-radius:999px;line-height:1.5;background:var(--sunk);color:var(--ink)}
+.track-tag[data-track-tag="genos"]{background:var(--accent-soft);color:var(--accent)}
+.track-tag[data-track-tag="gend"]{background:var(--gen-soft);color:var(--gen)}
+.track-switch{display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-bottom:12px}
+.track-switch button{border:1px solid var(--line);background:var(--surface);border-radius:6px;padding:6px 8px;font-size:var(--t-sm);cursor:pointer;color:var(--muted);display:flex;justify-content:space-between;gap:6px;align-items:center}
+.track-switch button .c{font-size:var(--t-xs);font-variant-numeric:tabular-nums;opacity:.8}
+.track-switch button[aria-selected="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.pick button{background:none;border:0;padding:0;color:var(--accent);text-decoration:underline;text-underline-offset:3px;cursor:pointer;font-size:inherit;white-space:nowrap}
+.pick td:first-child{font-weight:500}
+@media (max-width:900px){ .tracks{grid-template-columns:minmax(0,1fr)} .track-switch{max-width:360px} }
+
 footer{margin-top:48px;padding-top:20px;border-top:1px solid var(--line);font-size:var(--t-sm);color:var(--muted);display:grid;gap:8px}
 footer ul{margin:0;padding-left:1.1em;columns:2;column-gap:28px}
 footer li{break-inside:avoid}
@@ -289,19 +317,18 @@ footer li{break-inside:avoid}
 </style>
 </head>
 <body>
-
 <div class="wrap">
   <header class="top">
-    <div class="eyebrow">GenOS 공식 문서 v1.9.6 기준 · 확인일 2026-10-30 · 실제 환경 점검 2026-11-03</div>
-    <h1>GenOS PM 학습 노트</h1>
-    <p class="lede">고객 요구사항의 구현 가능성, 범위, 일정, 비용, 품질을 근거 있게 판단하기 위한 10회 과정입니다. 회차마다 쉬운 설명, 자사 플랫폼 적용, 직접 확인 과제, PM 판단, 실무 사례, 이해도 질문을 담았습니다.</p>
+    <div class="eyebrow" id="eyebrow">GenOS 공식 문서 v1.9.6 · GenD 공식 가이드 v1.4.4 · 확인일 2026-11-04</div>
+    <h1>GenOS · GenD PM 학습 노트</h1>
+    <p class="lede">고객 요구사항의 구현 가능성, 범위, 일정, 비용, 품질을 근거 있게 판단하기 위한 과정입니다. GenOS(AI 앱·에이전트 평면) 10회와 GenD(데이터 평면) 6회로 나뉩니다. 대표 페이지에서 제품을 고르세요. 회차마다 쉬운 설명, 다이어그램, 자사 플랫폼 적용, 직접 확인 과제, PM 판단, 실무 사례, 이해도 질문을 담았습니다.</p>
     <div class="top-row">
       <div class="legend" aria-label="근거 표시">
         <span class="item"><span class="stamp s-ok">확인</span>자사 문서에서 확인</span>
         <span class="item"><span class="stamp s-gen">원리</span>일반적인 AI 원리</span>
         <span class="item"><span class="stamp s-est">추정</span>단서로 짐작</span>
         <span class="item"><span class="stamp s-need">확인 필요</span>개발·구축팀에 물어볼 것</span>
-        <span class="item"><span class="stamp s-live">실환경</span>실제 환경(v1.9.6)에서 확인</span>
+        <span class="item"><span class="stamp s-live">실환경</span>실제 환경에서 확인 (GenOS v1.9.6만 · GenD는 문서 기준)</span>
       </div>
       <div class="status">
         <span class="meter"><span class="bar"><i id="meter-fill"></i></span><span id="meter-text">1회차 0%</span></span>
@@ -312,15 +339,52 @@ footer li{break-inside:avoid}
 
   <div class="layout">
     <nav class="rail" aria-label="회차">
+      <div class="track-switch" id="track-switch" role="tablist" aria-label="제품 선택"></div>
       <div class="rail-label">회차</div>
       <ol id="rail"></ol>
     </nav>
 
     <main id="main">
-      <!-- ===================== 1회차 ===================== -->
-      <section id="view-1" data-view="1">
+      <!-- ===================== 대표 페이지 ===================== -->
+      <section id="view-home" data-view="home">
         <div class="lesson-head">
-          <div class="k">1회차 · 30분</div>
+          <div class="k">대표 페이지</div>
+          <h2>어느 제품을 공부할까요</h2>
+          <p class="meta">두 제품은 역할이 다릅니다. 고객 요구가 "AI 앱·에이전트"면 GenOS, "여러 DB를 한 번에 조회하고 통제"면 GenD입니다. 통합 사업이면 둘 다 보되, 두 제품이 만나는 지점은 GenD 1회차와 6회차에 있습니다.</p>
+        </div>
+        <div class="tracks" id="tracks"></div>
+        <div class="step">
+          <div class="num">?</div>
+          <div class="body">
+            <h3>요구를 들으면 어느 제품인지</h3>
+            <div class="tbl-wrap"><table class="pick"><thead><tr><th>고객 요구</th><th>제품</th><th>먼저 볼 회차</th></tr></thead><tbody>
+              <tr><td>사내 문서로 질문에 답하는 챗봇·업무 비서</td><td>GenOS — 채팅 앱·워크플로우·벡터 DB</td><td><button type="button" data-go="1">GenOS 1회차</button> · <button type="button" data-go="3">3회차</button> · <button type="button" data-go="4">4회차</button></td></tr>
+              <tr><td>여러 DB·레이크를 한 SQL로 조회, 자연어로 SQL 생성</td><td>GenD — Trino 연합 SQL · Text-to-SQL</td><td><button type="button" data-go="12">GenD 2회차</button> · <button type="button" data-go="14">4회차</button></td></tr>
+              <tr><td>누가 어떤 데이터를 보는지 통제, PII·품질·계보 증빙</td><td>GenD — 거버넌스</td><td><button type="button" data-go="15">GenD 5회차</button></td></tr>
+              <tr><td>에이전트가 사내 데이터를 도구로 쓰게 하기</td><td>GenOS 에이전트 + GenD MCP 서버</td><td><button type="button" data-go="5">GenOS 5회차</button> · <button type="button" data-go="14">GenD 4회차</button></td></tr>
+              <tr><td>모델 서빙·GPU·크레딧·동시 사용자</td><td>GenOS</td><td><button type="button" data-go="5">GenOS 5회차</button> · <button type="button" data-go="8">8회차</button></td></tr>
+              <tr><td>폐쇄망에 둘 다 설치, 같은 GPU 노드 공유</td><td>둘 다 — 동거 설치 주의</td><td><button type="button" data-go="7">GenOS 7회차</button> · <button type="button" data-go="11">GenD 1회차</button> · <button type="button" data-go="16">6회차</button></td></tr>
+            </tbody></table></div>
+            <p class="small muted prose">두 제품은 MCP와 REST로 연결되고, GenD의 임베딩·LLM 공급자로 GenOS 서비스 라우터를 등록할 수 있습니다. 온프렘 통합 사업의 동거 설치는 ADR-0048(제안)이 "분리를 기본값"으로 권고합니다. 공식 연동 규격은 "미정"이라고 GenD 문서에 적혀 있습니다.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="num">i</div>
+          <div class="body">
+            <h3>이 노트를 쓰는 법</h3>
+            <div class="prose">
+              <p>왼쪽 레일에서 제품을 바꾸고 회차를 고릅니다. 회차마다 ① 목표 → ② 쉬운 설명 → ③ 자사 플랫폼 적용 → ④ 직접 확인 → ⑤ PM 판단 → 실무 사례 → ⑥ 이해도 확인 → 학습 기록 → 용어 → 근거 문서 순서입니다.</p>
+              <p>모든 주장에는 근거 표시가 붙습니다. <span class="stamp s-ok">확인</span>은 자사 문서에서 확인한 것, <span class="stamp s-live">실환경</span>은 실제 GenOS 환경에서 본 것(GenD는 아직 문서 기준), <span class="stamp s-need">확인 필요</span>는 개발·구축팀에 물어볼 것입니다.</p>
+              <p>체크·답·메모는 자동 저장됩니다. claude.ai에서 열면 Claude 저장소에, 그 밖에서는 이 브라우저에만 저장됩니다. 채팅에서 "GenD 2회차 답 확인해줘"처럼 요청하면 저장된 답을 읽고 피드백합니다.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================== 1회차 ===================== -->
+      <section id="view-1" data-view="1" hidden>
+        <div class="lesson-head">
+          <div class="k"><span class="track-tag" data-track-tag="genos">GenOS</span>1회차 · 30분</div>
           <h2>GenOS는 무엇이고, 어디까지인가</h2>
           <p class="meta">근거: GenOS 소개, 애플리케이션 사용법, 관리 메뉴, 버전별 문서 목차(llms.txt)</p>
         </div>
@@ -555,17 +619,17 @@ footer li{break-inside:avoid}
           <div class="num">Aa</div>
           <div class="body">
             <h3>1회차 용어집</h3>
-            <label class="field" style="max-width:320px"><span>용어 찾기 (전체 회차)</span><input type="text" id="gloss-q" placeholder="예: 청크, 보안등급" autocomplete="off"></label>
+            <label class="field" style="max-width:320px"><span>용어 찾기 (전체 회차 · GenOS와 GenD)</span><input type="text" id="gloss-q" placeholder="예: 청크, 보안등급" autocomplete="off"></label>
             <dl class="gloss" id="gloss"></dl>
           </div>
         </div>
       </section>
 
-      <!-- 2~10회차는 스크립트가 채웁니다 -->
+      <!-- 2~10회차와 GenD 1~6회차는 스크립트가 채웁니다 -->
       <div id="lesson-views"></div>
 
       <footer>
-        <p>출처: GenOS 공식 문서(확인일 2026-10-30). 기본 경로는 v1.9.6입니다. 버전 비교는 문서 목차(llms.txt)의 페이지 경로를 기준으로 계산했습니다. 회차별 근거 문서는 각 회차 끝에 있고, 아래는 1회차 근거입니다.</p>
+        <p>출처: GenOS 공식 문서(확인일 2026-10-30, 기본 경로 v1.9.6)와 GenD 공식 가이드(확인일 2026-11-04, v1.4.4). 버전 비교는 문서 목차(llms.txt)의 페이지 경로를 기준으로 계산했습니다. 회차별 근거 문서는 각 회차 끝에 있고, 아래는 GenOS 1회차 근거입니다. GenD 근거는 <a href="https://gend-docs.genon.ai" target="_blank" rel="noopener">gend-docs.genon.ai</a>입니다.</p>
         <ul>
           <li><a href="https://genos-docs.gitbook.io/default" target="_blank" rel="noopener">GenOS 소개</a></li>
           <li><a href="https://genos-docs.gitbook.io/default/llms.txt" target="_blank" rel="noopener">전체 목차 llms.txt</a></li>
@@ -589,7 +653,8 @@ footer li{break-inside:avoid}
 const DATA = {"versions":[{"v":"v1.3.3","pages":22,"has":["vectordb","taskflow"]},{"v":"v1.4","pages":34,"has":["vectordb","taskflow","report"]},{"v":"v1.5","pages":42,"has":["vectordb","auto","taskflow","report"]},{"v":"v1.5.1","pages":42,"has":["vectordb","auto","taskflow","report"]},{"v":"v1.5.2","pages":57,"has":["vectordb","auto","taskflow","report"]},{"v":"v1.5.4.0","pages":103,"has":["vectordb","auto","mcp","taskflow","report"]},{"v":"v1.6.0","pages":93,"has":["vectordb","auto","taskflow","report"]},{"v":"v1.6.1","pages":93,"has":["vectordb","auto","taskflow","report"]},{"v":"v1.6.1-komipo","pages":92,"has":["vectordb","auto","taskflow","report"]},{"v":"v1.6.2","pages":94,"has":["vectordb","auto","taskflow","report"]},{"v":"v1.6.3.0","pages":126,"has":["vectordb","auto","mcp","af3","taskflow","dataapp","report"]},{"v":"v1.6.7","pages":92,"has":["vectordb","auto","taskflow","report"]},{"v":"v1.7.1","pages":146,"has":["vectordb","auto","mcp","multiagent","af3","taskflow","codeagent","dataapp","multitenant","report"]},{"v":"v1.7.5","pages":154,"has":["vectordb","auto","guardrail","mcp","multiagent","af3","taskflow","codeagent","dataapp","codeserving","multitenant","report"]},{"v":"v1.7.5.1","pages":154,"has":["vectordb","auto","guardrail","mcp","multiagent","af3","taskflow","codeagent","dataapp","codeserving","multitenant","report"]},{"v":"v1.7.6","pages":154,"has":["vectordb","auto","guardrail","mcp","multiagent","af3","taskflow","codeagent","dataapp","codeserving","multitenant","report"]},{"v":"v1.7.8","pages":150,"has":["vectordb","auto","guardrail","mcp","multiagent","af3","taskflow","codeagent","dataapp","codeserving","multitenant","report"]},{"v":"v1.8.0","pages":156,"has":["vectordb","auto","guardrail","mcp","multiagent","af3","taskflow","credit","codeagent","dataapp","codeserving","multitenant","report"]},{"v":"v1.8.3","pages":163,"has":["vectordb","auto","guardrail","mcp","a2a","multiagent","af3","taskflow","credit","codeagent","dataapp","codeserving","multitenant","report"]},{"v":"v1.8.4","pages":161,"has":["vectordb","auto","guardrail","mcp","a2a","multiagent","af3","taskflow","codeagent","dataapp","codeserving","multitenant","report"]},{"v":"v1.8.5","pages":171,"has":["vectordb","auto","guardrail","mcp","a2a","multiagent","af3","taskflow","credit","codeagent","dataapp","codeserving","multitenant","report"]},{"v":"v1.8.6","pages":165,"has":["vectordb","auto","guardrail","mcp","a2a","multiagent","af3","taskflow","codeagent","dataapp","codeserving","multitenant","report"]},{"v":"v1.8.7","pages":170,"has":["vectordb","auto","guardrail","mcp","a2a","multiagent","af3","taskflow","credit","codeagent","dataapp","router","codeserving","multitenant","meeting","report"]},{"v":"v1.8.8","pages":150,"has":["vectordb","auto","drive","guardrail","mcp","a2a","multiagent","af3","credit","codeagent","dataapp","router","codeserving","multitenant","meeting","report"]},{"v":"v1.9.0","pages":155,"has":["vectordb","auto","drive","glossary","guardrail","mcp","a2a","multiagent","af3","credit","security","codeagent","dataapp","router","hami","codeserving","multitenant","meeting","report"]},{"v":"v1.9.1","pages":168,"has":["vectordb","auto","drive","glossary","guardrail","mcp","a2a","multiagent","af3","credit","workspace","security","approval","codeagent","dataapp","leaderboard","router","hami","codeserving","multitenant","meeting","leadermetric","report"]},{"v":"v1.9.2","pages":171,"has":["vectordb","auto","drive","guardrail","mcp","a2a","multiagent","af3","credit","workspace","security","approval","codeagent","dataapp","leaderboard","router","ha","hami","codeserving","multitenant","meeting","leadermetric","report"]},{"v":"v1.9.3","pages":181,"has":["vectordb","auto","drive","glossary","guardrail","mcp","a2a","multiagent","af3","credit","workspace","security","approval","codeagent","dataapp","leaderboard","router","ha","hami","codeserving","multitenant","meeting","webhook","leadermetric","report"]},{"v":"v1.9.4","pages":189,"has":["vectordb","auto","drive","glossary","guardrail","mcp","a2a","multiagent","af3","credit","workspace","security","approval","codeagent","dataapp","leaderboard","wfquality","langfuse","router","ha","hami","codeserving","multitenant","meeting","webhook","leadermetric","report"]},{"v":"v1.9.5","pages":193,"has":["vectordb","auto","drive","glossary","guardrail","mcp","a2a","multiagent","af3","credit","workspace","security","approval","codeagent","dataapp","leaderboard","wfquality","langfuse","router","ha","hami","codeserving","multitenant","meeting","webhook","leadermetric","report"]},{"v":"v1.9.6","pages":195,"has":["vectordb","auto","drive","glossary","guardrail","mcp","a2a","multiagent","af3","credit","workspace","security","approval","codeagent","dataapp","leaderboard","wfquality","langfuse","router","ha","hami","codeserving","multitenant","meeting","webhook","leadermetric","report"]}],"features":[{"id":"vectordb","name":"벡터 DB 문서 적재"},{"id":"auto","name":"벡터 DB 자동 적재"},{"id":"drive","name":"AI 드라이브"},{"id":"glossary","name":"용어사전"},{"id":"guardrail","name":"가드레일"},{"id":"mcp","name":"MCP"},{"id":"a2a","name":"A2A 에이전트"},{"id":"multiagent","name":"멀티 에이전트플로우"},{"id":"af3","name":"Agentflow 3.0"},{"id":"taskflow","name":"태스크플로우"},{"id":"credit","name":"크레딧"},{"id":"workspace","name":"워크스페이스"},{"id":"security","name":"보안등급"},{"id":"approval","name":"결재"},{"id":"codeagent","name":"코딩 에이전트"},{"id":"dataapp","name":"데이터 분석 앱"},{"id":"leaderboard","name":"평가 리더보드"},{"id":"wfquality","name":"워크플로우 품질 평가"},{"id":"langfuse","name":"Langfuse 연동"},{"id":"router","name":"서비스 라우터"},{"id":"ha","name":"실행 확장(HA)"},{"id":"hami","name":"HAMi vGPU"},{"id":"codeserving","name":"코드 서빙"},{"id":"multitenant","name":"멀티터넌트 서빙(LoRA)"},{"id":"meeting","name":"AI 회의록"},{"id":"webhook","name":"이벤트 웹훅"},{"id":"leadermetric","name":"평가 지표"},{"id":"report","name":"보고서 앱"}],"lessons":[{"n":2,"title":"아키텍처와 두 흐름","judge":["화면·API·워크플로우·서빙·벡터 DB가 각각 무엇을 처리하는지 설명한다","문서 등록 흐름과 질문 응답 흐름에서 장애가 나면 어디부터 볼지 정한다","외부 시스템이 GenOS를 호출하는 경로(워크플로우 API·채팅 API·서빙 API)를 구분한다"],"docs":[{"t":"채팅 앱 만들기","u":"https://genos-docs.gitbook.io/default/basic-tutorials/guides/application/dev-chat"},{"t":"워크플로우 API 사용","u":"https://genos-docs.gitbook.io/default/advanced-tutorials/guides/api/workflow"},{"t":"채팅 API 사용","u":"https://genos-docs.gitbook.io/default/advanced-tutorials/guides/api/chat"},{"t":"LLM 서빙 API 사용","u":"https://genos-docs.gitbook.io/default/advanced-tutorials/guides/api/llm"},{"t":"서비스 라우터","u":"https://genos-docs.gitbook.io/default/advanced-tutorials/guides/serving/service-router"},{"t":"서빙 로그 확인","u":"https://genos-docs.gitbook.io/default/advanced-tutorials/guides/serving/api-log"},{"t":"워크플로우 전파 헤더","u":"https://genos-docs.gitbook.io/default/admin-management/settings/workflow-forward-headers"}],"cases":["특정 요청 또는 동시 요청이 늘 때 답변이 느려지는 경우 (원인 위치만 미리 보기)"],"unknown":["공식 시스템 구성도와 내부 컴포넌트 목록(벡터 DB 엔진, 서빙 엔진, 게이트웨이)","관리자 화면과 사용자 포털이 같은 서버인지, 망분리 시 배치 방식"]},{"n":3,"title":"문서 적재와 지식 관리","judge":["고객 문서 포맷에 맞는 전처리기를 고르고 그 이유를 설명한다","문서 수정·삭제·재적재가 답변에 반영되는 시점을 판단한다","자동 적재·AI 드라이브·수동 적재 중 운영 방식을 제안한다"],"docs":[{"t":"DB 문서 적재","u":"https://genos-docs.gitbook.io/default/basic-tutorials/guides/data/vectordb"},{"t":"벡터 DB 자동 적재","u":"https://genos-docs.gitbook.io/default/basic-tutorials/guides/data/auto_ingestion"},{"t":"AI 드라이브","u":"https://genos-docs.gitbook.io/default/basic-tutorials/guides/data/ai-drive"},{"t":"적재 방식","u":"https://genos-docs.gitbook.io/default/basic-tutorials/guides/data/ai-drive/ingestion-method"},{"t":"FAQ 메타데이터","u":"https://genos-docs.gitbook.io/default/basic-tutorials/guides/data/faq-metadata"},{"t":"용어사전","u":"https://genos-docs.gitbook.io/default/basic-tutorials/guides/data/glossary"},{"t":"Genos Doc Parser 개념 및 코드 소개","u":"https://genos-docs.gitbook.io/default/admin-management/settings/resource/basic_preprocessor_for_rag/intro"},{"t":"적재용 전처리기 코드 상세 설명","u":"https://genos-docs.gitbook.io/default/admin-management/settings/resource/basic_preprocessor_for_rag/intelligent_processor"},{"t":"전처리기 관리","u":"https://genos-docs.gitbook.io/default/admin-management/settings/resource/preprocessor"},{"t":"파이프라인 관리","u":"https://genos-docs.gitbook.io/default/admin-management/settings/resource/pipeline"}],"cases":["문서를 등록했는데 검색되지 않거나 답변이 틀린 경우","문서를 수정·삭제했는데 과거 내용이 계속 답변에 쓰이는 경우"],"unknown":["문서 삭제 시 벡터가 바로 지워지는지, 재적재 정책","청크 크기·겹침을 어디서 설정하는지","HWP·스캔 PDF 실제 처리 품질 검증 결과"]},{"n":4,"title":"검색과 답변 생성","judge":["검색 실패와 생성 실패를 구분해 원인을 좁힌다","메타 정보 필터·FAQ·재정렬이 품질에 주는 영향을 설명한다","출처 표시를 검수 항목으로 쓰는 방법과 한계를 안다"],"docs":[{"t":"RAG 워크플로우 만들기","u":"https://genos-docs.gitbook.io/default/basic-tutorials/guides/workflow/openapi"},{"t":"Search Filter을 적용한 RAG 워크플로우 만들기","u":"https://genos-docs.gitbook.io/default/basic-tutorials/guides/workflow/rag_with_search_filter"},{"t":"FAQ가 있는 RAG 구성 (v1.6.3~)","u":"https://genos-docs.gitbook.io/default/basic-tutorials/guides/workflow/faq-rag-v1.6.3.0"},{"t":"RAG 워크플로우 만들기 (Agentflow 3.0.0)","u":"https://genos-docs.gitbook.io/default/basic-tutorials/guides/workflow/agentflow3-2-rag"},{"t":"Genos VectorDB","u":"https://genos-docs.gitbook.io/default/flowise-nodes/components/deepsearfing"},{"t":"검색 시 특정 페이지만 한정하기","u":"https://genos-docs.gitbook.io/default/flowise-nodes/components/deepsearfing/search-filter"},{"t":"Genos Merge Retriever","u":"https://genos-docs.gitbook.io/default/flowise-nodes/components/mnc-merge-retriever"},{"t":"Genos Unified RAG Chain","u":"https://genos-docs.gitbook.io/default/flowise-nodes/components/mnc-unified-rag-chain"},{"t":"MNC Verified RAG Chain Single Turn","u":"https://genos-docs.gitbook.io/default/flowise-nodes/components/mnc-verified-rag-chain-single-turn"},{"t":"메타 정보 활용 에이전트플로우 만들기","u":"https://genos-docs.gitbook.io/default/advanced-tutorials/guides/workflow/meta-info-workflow"},{"t":"Agentic RAG","u":"https://genos-docs.gitbook.io/default/advanced-tutorials/guides/workflow/agentic_rag"},{"t":"프롬프트 엔지니어링","u":"https://genos-docs.gitbook.io/default/basic-tutorials/guides/prompt"},{"t":"리랭킹 모델 학습","u":"https://genos-docs.gitbook.io/default/advanced-tutorials/guides/trainer/reranking"}],"cases":["문서를 등록했는데 답변이 틀린 경우"],"unknown":["키워드+벡터 하이브리드 검색을 기본 노드가 지원하는지","재정렬(리랭킹)이 기본 적용인지 선택인지"]},{"n":5,"title":"모델과 에이전트","judge":["자체 서빙과 외부 API 중 고객 조건에 맞는 쪽을 근거와 함께 고른다","모델 교체 시 필요한 검증 범위를 정한다","에이전트가 외부 시스템을 호출할 때 실패·중복 실행 대응을 요구사항으로 적는다"],"docs":[{"t":"모델 관리","u":"https://genos-docs.gitbook.io/default/basic-tutorials/guides/model"},{"t":"모델 서빙","u":"https://genos-docs.gitbook.io/default/basic-tutorials/guides/llm/model-serving"},{"t":"외부 API 추가","u":"https://genos-docs.gitbook.io/default/basic-tutorials/guides/llm/external-api"},{"t":"LLM 모델 서빙 시 권장 옵션","u":"https://genos-docs.gitbook.io/default/basic-tutorials/guides/llm/serving-info"},{"t":"MCP 도구 만들기","u":"https://genos-docs.gitbook.io/default/basic-tutorials/guides/mcp/mcp-tool"},{"t":"MCP 서버 만들기","u":"https://genos-docs.gitbook.io/default/basic-tutorials/guides/mcp/mcp-server"},{"t":"MCP 도구 카탈로그","u":"https://genos-docs.gitbook.io/default/basic-tutorials/guides/mcp/mcp-tool-catalog"},{"t":"MCP 도구로 노출 설정하기","u":"https://genos-docs.gitbook.io/default/basic-tutorials/guides/mcp/mcp-expose-workflow"},{"t":"A2A 에이전트","u":"https://genos-docs.gitbook.io/default/basic-tutorials/guides/a2a"},{"t":"에이전트 게이트웨이","u":"https://genos-docs.gitbook.io/default/basic-tutorials/guides/a2a/gateway"},{"t":"멀티 에이전트플로우 만들기","u":"https://genos-docs.gitbook.io/default/advanced-tutorials/guides/workflow/create_multi_agentflow"},{"t":"리서치 에이전트","u":"https://genos-docs.gitbook.io/default/advanced-tutorials/guides/workflow/research-agent"},{"t":"코딩 에이전트 사용","u":"https://genos-docs.gitbook.io/default/getting-started/application-use/code-agent-use"}],"cases":["에이전트가 외부 시스템을 호출하다 실패하거나 중복 실행하는 경우"],"unknown":["도구 호출 재시도·멱등성 처리 방식","사람 승인 단계(Human-in-the-loop) 지원 여부"]},{"n":6,"title":"권한과 보안","judge":["고객 조직·문서 분류 체계를 관리 그룹·역할·보안등급·워크스페이스에 매핑한다","권한 노출을 검수할 시나리오를 만든다","데이터가 플랫폼 밖으로 나가는 지점을 설명한다"],"docs":[{"t":"사용자 관리","u":"https://genos-docs.gitbook.io/default/admin-management/settings/iam/user"},{"t":"관리 그룹 관리","u":"https://genos-docs.gitbook.io/default/admin-management/settings/iam/group"},{"t":"정책 관리","u":"https://genos-docs.gitbook.io/default/admin-management/settings/iam/policy"},{"t":"역할 관리","u":"https://genos-docs.gitbook.io/default/admin-management/settings/iam/role"},{"t":"워크스페이스 관리","u":"https://genos-docs.gitbook.io/default/admin-management/settings/iam/workspace"},{"t":"슈퍼 관리자 관리","u":"https://genos-docs.gitbook.io/default/admin-management/settings/iam/super-admin"},{"t":"보안등급 관리","u":"https://genos-docs.gitbook.io/default/admin-management/settings/iam/security-level"},{"t":"결재","u":"https://genos-docs.gitbook.io/default/admin-management/settings/approval"},{"t":"가드레일 필터 만들기/적용하기","u":"https://genos-docs.gitbook.io/default/basic-tutorials/guides/guardrail/guardrail_guide"},{"t":"탐지 로그","u":"https://genos-docs.gitbook.io/default/basic-tutorials/guides/guardrail/detect-log"},{"t":"인증 키 없이 호출","u":"https://genos-docs.gitbook.io/default/admin-management/settings/anonymous-call"}],"cases":["사용자마다 볼 수 있는 문서가 다르거나 권한 없는 정보가 노출되는 경우"],"unknown":["SSO·LDAP 등 외부 인증 연동","감사로그 범위와 보관 기간","개인정보 마스킹 기능","외부 API 사용 시 전송 데이터 범위"]},{"n":7,"title":"구축과 연동","judge":["고객 요청을 설정·추가 개발·외부 연동으로 분류한다","개발망→운영망 이관 절차가 일정에 주는 영향을 설명한다","폐쇄망 구축에서 미리 확보할 것(패키지·이미지·모델 파일)을 나열한다"],"docs":[{"t":"코드 스페이스","u":"https://genos-docs.gitbook.io/default/basic-tutorials/guides/development/code_space"},{"t":"코드 서빙","u":"https://genos-docs.gitbook.io/default/basic-tutorials/guides/development/code_serving"},{"t":"코드 서빙 이관","u":"https://genos-docs.gitbook.io/default/basic-tutorials/guides/development/code_serving/promotion_code_serving"},{"t":"GenOS 라이브러리","u":"https://genos-docs.gitbook.io/default/basic-tutorials/guides/development/import-genos"},{"t":"워크플로우 이관","u":"https://genos-docs.gitbook.io/default/basic-tutorials/guides/workflow/promotion"},{"t":"이벤트 웹훅","u":"https://genos-docs.gitbook.io/default/admin-management/settings/event-webhook"},{"t":"환경 설정","u":"https://genos-docs.gitbook.io/default/admin-management/settings/genos-config"},{"t":"도커 이미지 관리","u":"https://genos-docs.gitbook.io/default/admin-management/settings/resource/docker"},{"t":"PypI 패키지 관리","u":"https://genos-docs.gitbook.io/default/admin-management/settings/resource/pypi"},{"t":"파이썬 코드 기반 FastAPI 앱과 GenOS 채팅 연동하기","u":"https://genos-docs.gitbook.io/default/advanced-tutorials/guides/workflow/mocking-flowise"}],"cases":["고객의 기능 요청이 설정 변경인지 추가 개발인지 불분명한 경우"],"unknown":["설치 가이드·최소/권장 H/W·OS·Kubernetes 요구사항","폐쇄망 설치·업그레이드 절차","표준 구축 WBS와 투입 인력"]},{"n":8,"title":"성능·용량·비용","judge":["\"동시 사용자 100명\" 요구를 측정 가능한 조건으로 바꾼다","GPU·외부 API·크레딧 중 비용을 좌우하는 요소를 설명한다","부하시험 계획에 들어갈 항목을 정한다"],"docs":[{"t":"모델 서빙 스케일 아웃","u":"https://genos-docs.gitbook.io/default/basic-tutorials/guides/llm/serving-scaleout"},{"t":"모델 서빙 실행 확장(HA)","u":"https://genos-docs.gitbook.io/default/basic-tutorials/guides/llm/model-serving-ha"},{"t":"LLM 모델 서빙 시 권장 옵션","u":"https://genos-docs.gitbook.io/default/basic-tutorials/guides/llm/serving-info"},{"t":"서빙 리비전 월 예산","u":"https://genos-docs.gitbook.io/default/basic-tutorials/guides/llm/revision-budget"},{"t":"멀티터넌트 서빙","u":"https://genos-docs.gitbook.io/default/advanced-tutorials/guides/serving/multitenancy"},{"t":"GPU 할당량","u":"https://genos-docs.gitbook.io/default/admin-management/settings/quota-gpu"},{"t":"HAMi vGPU 모드","u":"https://genos-docs.gitbook.io/default/admin-management/settings/resource/hami-vgpu"},{"t":"인스턴스 타입 관리","u":"https://genos-docs.gitbook.io/default/admin-management/settings/resource/instance"},{"t":"크레딧 설명 및 정책","u":"https://genos-docs.gitbook.io/default/credit/manual"},{"t":"차감 크레딧 및 토큰 요금 설정","u":"https://genos-docs.gitbook.io/default/credit/manual/pricing"},{"t":"주요 사용 시나리오","u":"https://genos-docs.gitbook.io/default/credit/manual/usage-scenarios"},{"t":"GPU","u":"https://genos-docs.gitbook.io/default/dashboard/overview/gpu"}],"cases":["특정 요청 또는 동시 요청이 늘 때 답변이 느려지는 경우"],"unknown":["표준 부하시험 결과와 시험 조건","GPU 1장당 동시 처리량 기준","라이선스 단가·과금 체계"]},{"n":9,"title":"품질과 운영","judge":["\"정확도 95%\" 같은 요구를 평가 데이터·지표·판정 기준으로 구체화한다","운영 중 품질 저하를 어디서 발견하는지 설명한다","변경(모델·문서·워크플로우) 후 재검증 기준을 정한다"],"docs":[{"t":"평가 리더보드","u":"https://genos-docs.gitbook.io/default/basic-tutorials/guides/leaderboard"},{"t":"평가 지표","u":"https://genos-docs.gitbook.io/default/basic-tutorials/guides/metric"},{"t":"워크플로우 품질 평가","u":"https://genos-docs.gitbook.io/default/basic-tutorials/guides/workflow-quality"},{"t":"데이터셋","u":"https://genos-docs.gitbook.io/default/basic-tutorials/guides/data/dataset"},{"t":"데이터셋 자동 생성","u":"https://genos-docs.gitbook.io/default/basic-tutorials/guides/data/dataset/auto-generation"},{"t":"데이터셋 근거 재검증","u":"https://genos-docs.gitbook.io/default/basic-tutorials/guides/data/dataset/revalidation"},{"t":"LLM 모델 평가 하기","u":"https://genos-docs.gitbook.io/default/advanced-tutorials/guides/trainer/llm-eval"},{"t":"시스템","u":"https://genos-docs.gitbook.io/default/dashboard/overview/system"},{"t":"서비스","u":"https://genos-docs.gitbook.io/default/dashboard/overview/service"},{"t":"Langfuse 연동","u":"https://genos-docs.gitbook.io/default/advanced-tutorials/guides/langfuse"},{"t":"피드백 사유 수집","u":"https://genos-docs.gitbook.io/default/basic-tutorials/guides/application/dev-chat/feedback-collection"}],"cases":["\"정확도 95%\" 요구를 바로 수락하지 않고 측정 정의부터 합의하는 경우"],"unknown":["백업·복구 절차와 RPO/RTO","장애 대응 체계와 로그 보관 위치","릴리스 노트와 버전 지원 정책"]},{"n":10,"title":"프로젝트 적용","judge":["고객 요구사항을 기능 대응표로 정리한다","PoC 범위·성공 기준·일정을 제안한다","검수 기준과 운영 인수인계 항목을 정한다"],"docs":[{"t":"GenOS 소개","u":"https://genos-docs.gitbook.io/default/readme"},{"t":"주요 사용 시나리오","u":"https://genos-docs.gitbook.io/default/credit/manual/usage-scenarios"},{"t":"워크플로우 이관","u":"https://genos-docs.gitbook.io/default/basic-tutorials/guides/workflow/promotion"}],"cases":["여섯 가지 실무 사례 종합 점검"],"unknown":["표준 PoC 템플릿과 기간","역할·책임(R&R) 기준"]}]};
 const BASE = "https://genos-docs.gitbook.io/default/";
 const STAMP = {ok:'<span class="stamp s-ok">확인</span>', gen:'<span class="stamp s-gen">원리</span>', est:'<span class="stamp s-est">추정</span>', need:'<span class="stamp s-need">확인 필요</span>', live:'<span class="stamp s-live">실환경</span>'};
-const link = (t, p) => `<a href="${BASE + p}" target="_blank" rel="noopener">${t}</a>`;
+const GBASE = "https://gend-docs.genon.ai/";
+const link = (t, p) => `<a href="${p.startsWith("gend:") ? GBASE + p.slice(5) : /^https?:/.test(p) ? p : BASE + p}" target="_blank" rel="noopener">${t}</a>`;
 
 /* ---------- 기능 지도 ---------- */
 const ROLES = {
@@ -1094,6 +1159,184 @@ const FIGS = {};
     note(709, 145, "4 · 6 · 8 · 9회차", "fig-m", "middle") + note(809, 145, "9회차", "fig-m", "middle") +
     arrow("l10", "388,60 388,36 281,36 281,60", "dash", "", 0, 0) +
     note(335, 28, "PoC 결과로 분류 갱신", "fig-lab", "middle")
+  );
+
+  /* ===== GenD ===== */
+  /* GenD 1회차: 두 평면과 경계 */
+  def("d1", 900, 375, "GenOS(AI 앱·에이전트 평면)와 GenD(데이터 평면)의 구성과 두 제품이 만나는 지점",
+    "왼쪽이 사람과 만나는 AI 서비스, 오른쪽이 데이터를 모아 통제하는 평면입니다. 둘은 MCP 호출과 임베딩 공급자 등록으로 만납니다. 아래 줄은 요구를 어느 제품으로 보낼지의 기준과 GenD가 하지 않는 일입니다.",
+    region(20, 30, 400, 258, "GenOS · AI 앱·에이전트 평면") +
+    box(40, 60, 160, 44, ["채팅 앱 · 워크플로우", "Flowise · 채팅 API"]) +
+    box(40, 120, 160, 44, ["에이전트", "MCP 노드 · A2A"], "hi") +
+    box(40, 180, 160, 44, ["모델 서빙 · 서비스 라우터", "vLLM · 임베딩 엔드포인트"]) +
+    box(230, 60, 170, 44, ["GenOS 벡터 DB", "Weaviate 기반 · 전처리기 3종"]) +
+    box(230, 236, 170, 44, ["GenOS IAM · 크레딧", "자체 사용자 · 보안등급 0~10"]) +
+    region(480, 30, 400, 258, "GenD · 데이터 평면") +
+    box(500, 60, 170, 44, ["SQL 편집기 · 카탈로그", "JDBC · CLI"]) +
+    box(500, 120, 170, 44, ["MCP 서버 /mcp · REST", "AI 어시스턴트 · Text-to-SQL"], "hi") +
+    box(500, 180, 170, 44, ["Trino · 파이프라인 · 거버넌스", "권한 · PII · 품질 · 계보"]) +
+    box(690, 60, 170, 44, ["저장소", "PostgreSQL · Weaviate · Iceberg"]) +
+    box(690, 120, 170, 44, ["Keycloak", "신원 정본 · SSO · 역할"]) +
+    box(690, 180, 170, 44, ["외부 DB", "Oracle · MSSQL · PostgreSQL …"]) +
+    box(500, 236, 360, 44, ["동거 설치 (온프렘 통합 사업)", "같은 클러스터·GPU 노드 — ADR-0048 '분리를 기본값' (제안)"]) +
+    arrow("d1", "200,142 500,142", "hi", "MCP 도구 호출 · JSON-RPC 2.0 (신원·워크스페이스·등급 그대로)", 350, 134) +
+    arrow("d1", "500,202 200,202", "dash", "임베딩·LLM 공급자로 GenOS 서비스 라우터 등록 (설치 §6.6·6.7)", 350, 218) +
+    box(20, 308, 420, 48, ["요구 분류", "챗봇·에이전트·앱 → GenOS · 여러 DB 조회·통제 → GenD · 통합이면 둘 다"]) +
+    box(460, 308, 420, 48, ["GenD의 경계 (범위 문서 §4)", "최종 사용자 챗봇 ✕ · 학습·서빙 프레임워크 ✕ · 마스터 데이터 관리 ✕ · 계정 관리 ✕"], "bad")
+  );
+
+  /* GenD 2회차: 연합 질의 경로 */
+  def("d2", 900, 300, "네 입구에서 들어온 질의가 gend-api와 Trino를 거쳐 여러 카탈로그로 나뉘어 실행되는 경로",
+    "어느 입구로 들어와도 gend-api가 신원과 grant를 판정하고, Trino가 각 카탈로그(원본 DB·레이크)에 질의를 나눠 보낸 뒤 메모리에서 합칩니다. 원본에는 조회 부하가 가고, 조인 크기는 Trino 메모리에 묶입니다.",
+    box(20, 40, 130, 44, ["SQL 편집기", "워크스페이스 평면"]) +
+    box(20, 96, 130, 44, ["JDBC", "외부 BI 도구"]) +
+    box(20, 152, 130, 44, ["AI 어시스턴트", "Text-to-SQL · 조회만"]) +
+    box(20, 208, 130, 44, ["MCP · REST · CLI", "에이전트 · 외부 시스템"]) +
+    arrow("d2", "150,62 195,120") + arrow("d2", "150,118 195,135") + arrow("d2", "150,174 195,160") + arrow("d2", "150,230 195,175") +
+    box(195, 96, 175, 100, ["gend-api", "신원 전파 · 감사 로그", "활성 워크스페이스 스코프", "grant 판정 (deny-by-default)"], "hi") +
+    arrow("d2", "370,146 400,146") +
+    box(400, 96, 160, 100, ["Trino 코디네이터", "파일 기반 ACL + 신원", "행 필터 · 컬럼 마스킹", "query.max-memory 4GB (운영)"]) +
+    arrow("d2", "560,146 610,146") +
+    box(610, 111, 110, 70, ["워커 1~3", "HPA", "per-node 2GB"]) +
+    box(760, 30, 120, 44, ["sourcedb", "PostgreSQL 커넥터"]) +
+    box(760, 86, 120, 44, ["oracle_erp", "Oracle 커넥터"]) +
+    box(760, 142, 120, 44, ["iceberg", "레이크 (SeaweedFS · Ceph)"]) +
+    box(760, 198, 120, 44, ["tpch", "샘플 카탈로그"]) +
+    arrow("d2", "720,130 760,52") + arrow("d2", "720,140 760,108") + arrow("d2", "720,152 760,164") + arrow("d2", "720,162 760,220") +
+    note(880, 266, "좌표: 카탈로그.스키마.테이블", "fig-m", "end") +
+    note(880, 286, "커넥터 등록 = 카탈로그 추가 · 접속 정보는 Vault", "fig-m", "end") +
+    note(20, 286, "조회마다 원본 DB에 부하 · 조인은 Trino 메모리에서 합침", "fig-m")
+  );
+
+  /* GenD 3회차: 적재 파이프라인 */
+  def("d3", 900, 330, "소스에서 파싱·청킹·임베딩을 거쳐 세 저장소(PG·Vec·Graph)에 적재되는 파이프라인",
+    "파싱 단계에서 보안 등급이 문서와 청크에 찍히고, 임베딩은 외부 공급자가 바인딩되어 있어야 붙습니다. 파일마다 세 저장소 뱃지로 어디까지 들어갔는지 확인합니다.",
+    box(20, 40, 125, 44, ["파일 업로드", "PDF · DOCX · HWP …"]) +
+    box(20, 96, 125, 44, ["폴더 감시 · S3", "s3_op"]) +
+    box(20, 152, 125, 44, ["웹 크롤 · REST", "web_crawl"]) +
+    box(20, 208, 125, 44, ["DB 소스 · CDC", "db_source · Debezium"]) +
+    arrow("d3", "145,62 190,125") + arrow("d3", "145,118 190,135") + arrow("d3", "145,174 190,145") + arrow("d3", "145,230 190,155") +
+    region(175, 30, 480, 250, "파이프라인 스튜디오 · Dagster 실행") +
+    box(190, 110, 100, 60, ["파싱", "builtin.parse", "OCR · VLM 캡션"]) +
+    arrow("d3", "290,140 310,140") +
+    box(310, 110, 100, 60, ["청킹", "builtin.chunk", "정책 · 품질 게이트"]) +
+    arrow("d3", "410,140 430,140") +
+    box(430, 110, 100, 60, ["임베딩", "builtin.embed", "공급자 바인딩 필요"], "hi") +
+    arrow("d3", "530,140 550,140") +
+    box(550, 110, 90, 60, ["적재", "builtin.vector", "builtin.graph"]) +
+    note(190, 195, "security_level 도장: PUBLIC · CONFIDENTIAL · TOP_SECRET", "fig-lab") +
+    note(190, 215, "(노드 기본 PUBLIC · 위저드 기본 CONFIDENTIAL · 미지정 판정 CONFIDENTIAL)", "fig-m") +
+    note(290, 245, "공급자 없으면 skipped_no_provider → 벡터 없이 구조만 동기화", "fig-lab bad") +
+    note(190, 262, "커스텀 전처리 http_api는 비활성 (허용 목록 연동 후 제공)", "fig-m") +
+    box(675, 40, 205, 50, ["PostgreSQL · 문서 레코드·메타", "PG 뱃지"]) +
+    box(675, 115, 205, 50, ["Weaviate 벡터 컬렉션", "Vec · yahoo_chunks → YahooChunks"], "hi") +
+    box(675, 190, 205, 50, ["그래프 스토어 (PostgreSQL)", "Graph · 스키마 그래프 · 용어집"]) +
+    arrow("d3", "640,130 675,65") + arrow("d3", "640,140 675,140") + arrow("d3", "640,150 675,215") +
+    note(880, 262, "삭제는 타깃까지 전파 · 문서 하나는 한 인스턴스에만", "fig-m", "end") +
+    note(20, 310, "확인 화면: 수집 › 문서 (파일별 PG·Vec·Graph 뱃지) · 데이터 관측 › 벡터 인덱스 (컬렉션 PascalCase) · 파이프라인 모니터링 (Dagster)", "fig-m")
+  );
+
+  /* GenD 4회차: Text-to-SQL 4단계와 Tier */
+  def("d4", 900, 330, "자연어 질문이 네 단계를 거쳐 조회 SQL로 실행되는 경로와, 에이전트 채팅의 Tier 안전장치",
+    "위 줄은 Text-to-SQL입니다. SqlGuard가 조회문 한 문장만 통과시키므로 이 경로에서 데이터는 바뀌지 않습니다. 아래 왼쪽은 AI가 '권한 없다'고 답할 때의 등급 결정 순서, 오른쪽은 에이전트 채팅이 쓰기 작업을 다루는 Tier입니다.",
+    box(20, 50, 100, 50, ["질문", "자연어"]) +
+    arrow("d4", "120,75 150,75") +
+    box(150, 50, 130, 50, ["ContextGateway", "전처리 · 컨텍스트"]) +
+    arrow("d4", "280,75 310,75") +
+    box(310, 40, 180, 70, ["AI Orchestrator", "스키마 그래프 · 용어집 · 이력", "관련 테이블 10개 · 조인 ≤4홉"]) +
+    arrow("d4", "490,75 520,75") +
+    box(520, 40, 130, 70, ["SqlGuard", "조회문 한 문장만", "구문 트리 판정 v1.4.2+"], "hi") +
+    arrow("d4", "650,75 680,75") +
+    box(680, 50, 100, 50, ["Trino 실행", "grant · 행/열 정책"]) +
+    arrow("d4", "780,75 800,75") +
+    box(800, 50, 80, 50, ["결과", "SQL · 설명"]) +
+    arrow("d4", "585,110 585,135", "bad") +
+    note(585, 148, "UPDATE · DELETE · 두 문장 · CTE 속 변경문 → 거부", "fig-lab bad", "middle") +
+    region(20, 165, 432, 120, "AI가 '권한 없다'고 답할 때 — 등급 결정 순서") +
+    box(28, 195, 100, 44, ["① 테이블", "직접 지정 등급"]) + arrow("d4", "128,217 134,217") +
+    box(134, 195, 100, 44, ["② 워크스페이스", "기본 등급 v1.2.1+"]) + arrow("d4", "234,217 240,217") +
+    box(240, 195, 100, 44, ["③ 카탈로그", "기본 등급"]) + arrow("d4", "340,217 346,217") +
+    box(346, 195, 100, 44, ["④ 없으면", "CONFIDENTIAL"], "bad") +
+    note(28, 265, "호출자 열람 등급 < 데이터 등급이면 결과에서 제외 · 등급 변경은 재로그인 뒤 반영", "fig-m") +
+    region(470, 165, 410, 120, "AI 에이전트 채팅 · Tier 안전장치") +
+    box(478, 195, 128, 44, ["Tier 1 · 자동", "조회 · 카탈로그 · 검색"], "ok") +
+    box(612, 195, 128, 44, ["Tier 2 · 확인 후 실행", "마트 생성 · 쿼리 저장"], "hi") +
+    box(746, 195, 128, 44, ["Tier 3 · 계획만", "커넥터 · 실행 · 삭제"], "bad") +
+    note(478, 265, "확인 카드에서 [실행]을 누르면 실제로 만들어진다 — 'AI는 읽기만' 은 틀린 말", "fig-m") +
+    note(20, 315, "MCP 서버: POST /mcp · JSON-RPC 2.0 · Bearer JWT / Basic 트래킹 키 (v1.3+) / OAuth 디스커버리 (v1.4+) · X-Workspace-Slug", "fig-m")
+  );
+
+  /* GenD 5회차: 2축 접근 모델 */
+  def("d5", 900, 335, "격리 축과 권한 축의 다섯 층, AI 경로의 열람 등급 관문, 그리고 증상으로 층을 가리는 기준",
+    "왼쪽 층을 위에서 아래로 모두 통과해야 데이터를 읽습니다. AI 경로는 가운데 열람 등급 관문을 한 번 더 지납니다. 오른쪽은 민원 증상별로 어느 층을 먼저 볼지입니다.",
+    box(20, 40, 260, 40, ["L0 워크스페이스 · 격리 축", "Keycloak 그룹 /tenants/<slug> · fail-closed"], "hi") +
+    arrow("d5", "150,80 150,90") +
+    box(20, 90, 260, 40, ["L1 부서 (ResourceGroup)", "워크스페이스 안 팀 칸막이"]) +
+    arrow("d5", "150,130 150,140") +
+    box(20, 140, 260, 40, ["L2 역할", "admin · analyst · viewer · ws-admin"]) +
+    arrow("d5", "150,180 150,190") +
+    box(20, 190, 260, 40, ["L3 DataGrant", "catalog / schema / table · deny-by-default"]) +
+    arrow("d5", "150,230 150,240") +
+    box(20, 240, 260, 40, ["L4 ABAC", "row_filter · column_mask (Trino 적용)"]) +
+    note(20, 300, "카탈로그에 보여도 SELECT grant가 없으면 403 — 설계상 정상", "fig-m") +
+    box(320, 40, 240, 60, ["AI 경로 추가 관문 · 열람 등급", "PUBLIC · CONFIDENTIAL · TOP_SECRET", "호출자 clearance ≥ 데이터 등급"], "hi") +
+    box(320, 120, 240, 50, ["등급 미지정 데이터", "= CONFIDENTIAL (fail-closed)"], "bad") +
+    box(320, 190, 240, 50, ["admin도 예외 없음", "등급 변경은 재로그인 뒤 반영"]) +
+    arrow("d5", "280,260 300,260 300,70 320,70", "dash", "", 0, 0) +
+    note(320, 265, "대상 3종: 카탈로그 · 테이블 · 벡터 컬렉션", "fig-m") +
+    region(600, 30, 280, 258, "증상으로 층 가리기") +
+    box(612, 58, 256, 44, ["메뉴가 안 보인다", "역할 부족 / 메뉴 표시 설정 v1.4.4 / 모듈 꺼짐"]) +
+    box(612, 112, 256, 44, ["보이는데 403", "grant 없음 · 네임스페이스 바인딩 · 워크스페이스"]) +
+    box(612, 166, 256, 44, ["화면·SQL은 되는데 AI만 거부", "열람 등급 (접근 권한 아님)"], "hi") +
+    box(612, 220, 256, 44, ["사용자마다 결과가 다르다", "행 필터 · 컬럼 마스크 · 등급 차이"]) +
+    note(612, 280, "거부 응답의 reason_code (v1.3.1+)부터 본다", "fig-lab") +
+    note(20, 325, "감사: 전체 API 요청 → OpenSearch gend-audit* · PII: Presidio 탐지 → 관리자 확인 → 마스킹 뷰 · 망: NetworkPolicy default-deny · Linkerd mTLS", "fig-m")
+  );
+
+  /* GenD 6회차 a: 온프렘 동거 토폴로지 */
+  def("d6a", 900, 350, "온프렘 kubeadm 3노드 클러스터에 GenD와 GenOS가 동거할 때의 배치와 실측된 충돌",
+    "왼쪽은 설치 전제(노드 3대, Rook-Ceph, Harbor)와 동거 시 파드·GPU 배치, 오른쪽은 ADR-0048이 운영에서 실측한 충돌과 권고입니다. 권고는 제안 상태입니다.",
+    region(20, 30, 560, 250, "온프렘 kubeadm 클러스터 · 노드 3대 이상 (Ubuntu 22.04/24.04 · 8코어/32GB+ · raw 디스크 1개)") +
+    box(40, 58, 172, 122, ["노드 1", "Rook-Ceph OSD · etcd", "GenD 파드 ~60 (gend·monitoring)", "GenOS 파드 (동거 시)", "max-pods 110 → 250 권고"]) +
+    box(222, 58, 172, 122, ["노드 2", "Rook-Ceph OSD · etcd", "gend-api 2~10 · Trino 워커 1~3", "GenOS 파드 (동거 시)", "PDB · ResourceQuota 공유"]) +
+    box(404, 58, 172, 122, ["GPU 노드", "gpu-operator MIG 통째 모드", "프로파일 이름 = 테넌트 경계", "GenOS 원장은 GenD 사용 못 봄", "ADR-0066 (제안)"], "hi") +
+    box(40, 195, 255, 40, ["Harbor 레지스트리", "에어갭 번들 이미지 적재 load-airgap-images.sh"]) +
+    box(305, 195, 255, 40, ["Ceph RGW (S3 호환)", "SeaweedFS · Iceberg 웨어하우스 · 백업"]) +
+    note(40, 262, "검증된 조합: 폐쇄망 · 단일 노드 · 번들 단독 리허설 34회 + GenOS 위 동거 설치", "fig-m") +
+    region(610, 30, 270, 250, "동거에서 실측된 충돌 (ADR-0048 · 제안)") +
+    box(622, 58, 246, 42, ["CPU 쿼터 고갈 → PDB", "노드 drain 불가 → 업그레이드 실패"], "bad") +
+    box(622, 108, 246, 42, ["알람 채널 충돌", "Alertmanager 라우팅"], "bad") +
+    box(622, 158, 246, 42, ["vCPU 쿼터 · DaemonSet 공유", "falco · Prometheus 클러스터당 하나"], "bad") +
+    box(622, 208, 246, 42, ["권고: 전용 노드풀 + taint", "가능하면 클러스터 분리"], "ok") +
+    box(20, 298, 860, 40, ["매체 반입 = 에어갭 번들 (이미지·차트) + 소스 트리 (설치 스크립트 infra/scripts) — 둘 다 실어야 Phase 1~9 시작", "온프렘 v1.4.2~v1.4.4는 KServe 미포함 → 실시간 모델 서빙 미제공 · Falco는 에어갭에서 꺼짐"])
+  );
+
+  /* GenD 6회차 b: 릴리스 사슬과 백업 시각 */
+  def("d6b", 900, 285, "v1.0.0부터 v1.4.4까지의 릴리스 사슬과 야간 백업 CronJob 시각",
+    "minor(1.0→1.1→1.2→1.3→1.4)는 순서대로만 올릴 수 있고 patch는 건너뛰어도 됩니다. 아래는 매일 도는 백업 작업의 시각입니다. Velero와 Vault 스냅샷은 배포돼 있지 않습니다.",
+    note(20, 24, "릴리스 사슬 · minor 순차 업그레이드 (건너뛰기 불가) · 최신 minor만 기능·버그픽스 · 보안 백포트 N-2", "fig-m") +
+    box(20, 40, 76, 44, ["v1.0.0", "08-04"], "hi") + arrow("d6b", "96,62 108,62") +
+    box(108, 40, 76, 44, ["v1.1.0", "08-04"], "hi") + arrow("d6b", "184,62 196,62") +
+    box(196, 40, 76, 44, ["v1.2.0", "08-07"], "hi") + arrow("d6b", "272,62 284,62") +
+    box(284, 40, 76, 44, ["v1.3.0", "08-12"], "hi") + arrow("d6b", "360,62 372,62") +
+    box(372, 40, 76, 44, ["v1.3.1", "08-25"]) + arrow("d6b", "448,62 460,62") +
+    box(460, 40, 76, 44, ["v1.4.0", "09-17"], "hi") + arrow("d6b", "536,62 548,62") +
+    box(548, 40, 76, 44, ["v1.4.1", "09-20"]) + arrow("d6b", "624,62 636,62") +
+    box(636, 40, 76, 44, ["v1.4.2", "10-18"]) + arrow("d6b", "712,62 724,62") +
+    box(724, 40, 76, 44, ["v1.4.3", "10-21"]) + arrow("d6b", "800,62 812,62") +
+    box(812, 40, 68, 44, ["v1.4.4", "10-25"]) +
+    note(20, 104, "색칠된 상자가 minor. 2026-08-04 → 10-25, 약 3개월에 minor 5개. 온프렘은 v1.4.1 번들부터.", "fig-m") +
+    note(20, 140, "백업 CronJob (KST) · AES-256 · 복호화 키 Secret gend-backup-encrypt-key 는 외부 보관", "fig-m") +
+    note(880, 140, "Velero 미배포 · Vault 스냅샷 미배포", "fig-lab bad", "end") +
+    line("20,205 880,205") +
+    bar(58, 197, 10, 16, "ok") + note(20, 180, "03:00 PostgreSQL 전체", "fig-lab") +
+    bar(154, 197, 10, 16, "ok") + note(159, 232, "03:20 OpenSearch 감사", "fig-lab", "middle") +
+    bar(202, 197, 10, 16, "ok") + note(240, 165, "03:30 Weaviate · 노트북 PVC 스냅샷", "fig-lab", "middle") +
+    bar(345, 197, 10, 16, "") + note(350, 232, "04:00 백업 복호화·검증 (매주 월)", "fig-lab", "middle") +
+    bar(632, 197, 10, 16, "ok") + note(637, 180, "05:00 웨어하우스 미러 (v1.4+ · 클라우드)", "fig-lab", "middle") +
+    bar(775, 197, 10, 16, "") + note(780, 232, "05:30 미러 재계수 (매주 화)", "fig-lab", "middle") +
+    note(63, 256, "03:00", "fig-m", "middle") + note(350, 256, "04:00", "fig-m", "middle") + note(637, 256, "05:00", "fig-m", "middle") +
+    note(20, 278, "PostgreSQL 전체 = gend·keycloak·dagster·mlflow·nessie… + 그래프 스토어 · 색칠된 표식은 매일, 빈 표식은 매주", "fig-m")
   );
 })();
 
@@ -2271,6 +2514,855 @@ const L10 = {
   ]
 };
 
+/* GenD 1~3회차 콘텐츠 (내부 번호 11~13). 토큰: {ok}{gen}{est}{need}, 링크: [[제목|gend:경로]] */
+const GEND_NOTE = `GenD 내용은 공식 가이드(v1.4.4, 확인일 2026-11-04) 기준입니다. 운영 환경(gend.genon.ai)은 Google SSO 또는 개별 Keycloak 계정이 필요해 아직 화면으로 확인하지 못했으므로, 직접 확인 과제는 문서 기반이고 화면 실증은 확인 질문으로 남겨 둡니다.`;
+
+const LD1 = {
+  n: 11, track: "gend", title: `GenD는 무엇이고, GenOS와 어떻게 나뉘는가`,
+  basis: `GenD 가이드 첫 페이지, 범위와 연동 표면(2026-08-21), 시스템 아키텍처, 퀵스타트, ADR-0048 클러스터 배치, ADR-0066 온프렘 GPU 공유, 온프렘 설치 §6.6`,
+  figs: {explain: ["d1"]},
+  note: GEND_NOTE,
+  goals: [
+    `고객 요구를 듣고 그 일이 GenOS 일인지, GenD 일인지, 둘 다인지 근거를 들어 가른다.`,
+    `GenD가 하는 일 다섯 가지와 하지 않는 일 네 가지를 말하고, 어느 쪽이 추가 개발 범위가 되는지 설명한다.`,
+    `두 제품이 만나는 지점(MCP, 임베딩 공급자, 같은 클러스터 동거)과 거기서 생기는 리스크를 제안서 가정으로 적는다.`
+  ],
+  explain: [
+    `도서관으로 생각하면 쉽습니다. <b>GenD는 서고와 목록, 열람 규정</b>입니다. 여러 창고(DB, 데이터 레이크, 문서 저장소)에 흩어진 자료를 한 목록으로 묶고(카탈로그), 한 문장의 SQL로 꺼내 보고(연합 질의), 누가 어느 서가까지 들어갈 수 있는지(권한·보안 등급), 자료가 믿을 만한지(품질·계보)를 관리합니다. <b>GenOS는 상담 창구와 사서 로봇</b>입니다. 사람의 질문을 받아 답하는 채팅 앱, 일을 대신 처리하는 에이전트, 그 뒤의 모델 서빙이 GenOS입니다.`,
+    `공식 정의는 "Trino 기반 Federation SQL 위에 AI Text-to-SQL, 데이터 거버넌스, 데이터 품질을 통합한 AI-Native Data Intelligence Platform"입니다. {ok} 자연어로 SQL을 만들고 문서를 검색하는 AI 기능이 있지만, 문서는 "최종 사용자용 챗봇 제품이 아니다"라고 못 박습니다. 챗 UI는 확인용이고, 제품 챗봇은 MCP나 REST로 GenD를 소비하는 쪽(예: GenOS)이 만듭니다. {ok}`,
+    `PM에게 이 구분이 중요한 이유는 하나입니다. 같은 "AI로 데이터를 묻고 싶다"는 요구라도 <b>데이터가 정형 DB에 있고 통제가 핵심이면 GenD</b>, <b>사내 문서로 대화하는 앱이 핵심이면 GenOS</b>이고, 둘을 합치면 범위·일정·인프라가 두 배가 아니라 서로 얽힌 한 덩어리가 됩니다. {gen}`
+  ],
+  apply: [
+    { h: `GenD가 하는 일과 하지 않는 일`,
+      intro: `범위 문서(2026-08-21)가 가장 또렷하게 선을 긋습니다. 아래 경계 밖의 요구는 GenD 설정이 아니라 다른 제품이나 추가 개발입니다.`,
+      table: { head: [`구분`, `내용`, `근거`],
+        rows: [
+          [`한다 · 연합 질의`, `Trino로 여러 DB·레이크를 한 SQL로 조회. 커넥터 등록이 곧 카탈로그 추가`, `{ok} [[범위와 연동 표면|gend:getting-started/scope-and-integration]]`],
+          [`한다 · 반입·적재`, `파일·폴더 감시·웹 크롤·DB 소스 → 파싱·청킹·임베딩 → 벡터·그래프·테이블 적재`, `{ok} [[데이터 수집|gend:features/ingestion/]]`],
+          [`한다 · 거버넌스`, `행/열 접근 정책, PII 탐지·마스킹, 감사 로그, 보존·컴플라이언스, 데이터 품질 점수`, `{ok} [[거버넌스|gend:features/governance/]]`],
+          [`한다 · 지식·AI 표면`, `온톨로지·용어 사전·스키마 그래프·계보, RAG 어시스턴트, Text-to-SQL, MCP 서버`, `{ok} [[AI 인텔리전스|gend:features/ai/]]`],
+          [`한다 · 운영`, `파이프라인 스케줄, 비용 대시보드, 워크스페이스 격리, 백업`, `{ok}`],
+          [`안 한다 · 최종 사용자 챗봇`, `챗 UI는 확인용. 제품 챗봇은 MCP/REST로 GenD를 부르는 쪽이 만든다`, `{ok} 범위 §4`],
+          [`안 한다 · 모델 학습·서빙 프레임워크`, `MLflow·KServe 같은 OSS를 쓰지만 그 자체를 제공하는 제품이 아님. 온프렘은 실시간 서빙(KServe) 미포함`, `{ok} 릴리스 v1.4.2·v1.4.4`],
+          [`안 한다 · 원본 마스터 데이터 관리`, `원본 시스템의 데이터를 고치는 MDM이 아님`, `{ok}`],
+          [`안 한다 · 사용자 계정·조직 관리`, `Keycloak이 신원의 정본. GenD는 발급 조작만 대행`, `{ok} ADR-0086`]
+        ] } },
+    { h: `GenOS와 GenD 비교`,
+      intro: `둘 다 Weaviate를 쓰고 둘 다 "워크스페이스", "보안등급"이라는 말을 씁니다. 이름이 같아도 개념과 범위가 다르니 고객 앞에서 섞어 쓰지 않습니다.`,
+      table: { head: [`항목`, `GenOS`, `GenD`, `PM 시사점`],
+        rows: [
+          [`역할`, `AI 앱·에이전트 평면: 채팅 앱, 워크플로우(Flowise), 모델 서빙, MCP·A2A, 크레딧`, `데이터 평면: 연합 SQL, 적재 파이프라인, 거버넌스, NL2SQL, MCP 서버`, `요구가 "서비스"인지 "데이터"인지로 가른다`],
+          [`사용자 인증`, `자체 IAM(사용자·관리 그룹·정책·역할), 비밀번호 로그인 {live}`, `Keycloak OIDC, Google SSO(운영), 고객 IdP 브로커링(v1.4+) {ok}`, `통합 사업이면 계정 체계 통일이 과제 {need}`],
+          [`테넌트`, `워크스페이스(v1.9.0) + 관리 그룹`, `워크스페이스(Keycloak 그룹 /tenants/&lt;slug&gt;) + 부서(ResourceGroup)`, `두 워크스페이스는 별개 개념. 매핑 설계 필요 {need}`],
+          [`문서·벡터`, `벡터 DB(Weaviate 기반 노드), 전처리기 3종, AI 드라이브`, `파이프라인 스튜디오(파싱·청킹·임베딩), Weaviate 컬렉션, 그래프 스토어`, `인스턴스·컬렉션은 별개로 보인다 {est}. 문서를 어느 쪽에 적재할지 결정`],
+          [`정형 데이터`, `데이터 분석 앱(데이터 소스)`, `Trino 연합 SQL, 커넥터 9종`, `DB 조회 요구는 GenD가 본진`],
+          [`AI 모델`, `자체 서빙(vLLM·Triton·SGLang)+외부 API, 서비스 라우터`, `모델을 띄우지 않고 외부 엔드포인트를 "AI 모델 제공자"로 등록. GenOS 서비스 라우터 등록이 문서화됨`, `GenD의 임베딩·LLM을 GenOS 서빙으로 공급하는 구성이 표준 후보 {ok}`],
+          [`보안등급`, `문서 레벨 0~10(v1.9.0)`, `PUBLIC · CONFIDENTIAL · TOP_SECRET 3단계 + 열람 등급`, `체계가 다르다. 고객 분류 체계를 각각 매핑`],
+          [`릴리스`, `약 2주(v1.4→v1.9.6)`, `패치 주 1회 안팎, minor 월 1회 안팎(v1.0.0 8/4→v1.4.4 10/25)`, `둘 다 변경 관리 합의가 필수`]
+        ] } },
+    { h: `두 제품이 만나는 지점`,
+      intro: `"GenOS 연동은 미정. 다만 MCP/REST는 표준 프로토콜이라 별도 규격 없이 호출 가능"이 범위 문서의 공식 문장입니다. {ok} 그 밖에 문서에 나타난 접점은 아래와 같습니다.`,
+      items: [
+        `<b>에이전트 → MCP</b>: GenOS 에이전트(MCP 노드)가 GenD <code>/mcp</code>를 호출합니다. 호출자 신원·워크스페이스·열람 등급이 화면과 똑같이 적용됩니다. {ok} [[워크스페이스 온보딩 여정|gend:tutorials/workspace-onboarding-journey]]`,
+        `<b>임베딩·LLM 공급자</b>: 온프렘 설치 §6.6은 사이트 임베딩 공급자로 GenOS 서비스 라우터의 게이트웨이 주소(<code>/api/gateway/service-router/&lt;endpoint&gt;/v1</code>)를 등록하라고 안내합니다. 용어집·계보·스키마 그래프의 선행 조건입니다. {ok} [[온프렘 설치|gend:admin-ops/installation/onprem]]`,
+        `<b>같은 클러스터 동거</b>: 온프렘 통합 사업에서 GenD는 GenOS와 같은 클러스터·같은 GPU 노드를 씁니다. 그로 인한 충돌(쿼터 고갈 → PDB → 노드 drain 불가, 알람 채널 충돌, GPU 원장 불일치)이 실측됐고, ADR-0048은 "분리를 기본값"으로 제안합니다. 상태는 <b>제안</b>이지 채택이 아닙니다. {ok} [[ADR-0048|gend:adr/gend-genos-cluster-topology]]`,
+        `<b>GPU</b>: GenD는 GPU 스택을 설치하지 않고 사이트 gpu-operator의 MIG 프로파일을 받아 씁니다. GenOS의 GPU 할당량(원장)은 DB 값이라 GenD 소비를 보지 못해 GenOS 서빙이 Pending에 빠질 수 있습니다. {ok} [[ADR-0066|gend:adr/onprem-gpu-sharing-model]] (제안)`,
+        `<b>알림·패키지</b>: 알림 대상에 GenOS가 있고, GenOS가 띄운 사내 pypiserver를 GenD 코드 노드가 공유할 수 있습니다. {ok} ADR-0088, ADR-0071`,
+        `에이전트 빌더에서 GenD MCP를 등록하는 전용 화면·규격, 두 제품 워크스페이스의 표준 매핑 {need}`
+      ] }
+  ],
+  task: {
+    title: `범위 문서와 퀵스타트로 경계 확인하기 (문서 기반)`,
+    steps: [
+      `[[범위와 연동 표면|gend:getting-started/scope-and-integration]]을 열어 §3 "하는 일"과 §4 "하지 않는 일"을 읽고, "GenOS 연동"에 대한 문장을 그대로 찾아 적습니다.`,
+      `[[퀵스타트|gend:getting-started/quickstart]] Step 5에서 워크스페이스 평면의 공통 핀 메뉴와 관리 콘솔 그룹 수를 셉니다.`,
+      `[[시스템 아키텍처|gend:appendix/architecture]]에서 GenOS에도 있는 구성요소(Weaviate 등)와 GenD에만 있는 구성요소(Trino, Keycloak, Dagster 등)를 나눠 봅니다.`
+    ],
+    evidence: [[`scope`, `"GenOS 연동"에 대한 문서의 문장`], [`pins`, `공통 핀 메뉴 수 / 관리 콘솔 그룹 수`], [`shared`, `GenOS와 겹치는 구성요소`], [`only`, `GenD에만 있는 구성요소`]],
+    expected: `공통 핀은 홈·카탈로그·SQL 편집기·AI 어시스턴트·JDBC 연결 가이드·MCP 도구 마켓플레이스 6개, 관리 콘솔은 5그룹입니다. {ok} "GenOS 연동은 미정"이라는 문장이 그대로 있습니다. {ok}`,
+    fallback: `운영 환경 계정(Google SSO 또는 Keycloak 계정)을 받으면 같은 항목을 화면에서 세어 문서와 다른 점을 기록합니다. 계정 발급 가능 여부는 확인 질문 D1입니다. {need}`
+  },
+  pm: {
+    pitch: `GenD는 데이터 평면입니다. 흩어진 DB와 문서를 한 곳에서 SQL과 자연어로 조회하고, 누가 어떤 데이터를 볼 수 있는지와 데이터가 믿을 만한지를 관리합니다. 사용자와 대화하는 AI 앱과 에이전트는 GenOS가 맡고, 둘은 MCP와 REST로 연결됩니다.`,
+    avoid: [
+      `"GenOS를 도입하면 GenD 기능이 따라옵니다": 별개 제품이고 설치 전제(Kubernetes, 3노드)도 다릅니다. {ok}`,
+      `"GenD로 챗봇을 만들어 드립니다": 문서가 명시적으로 부정하는 범위입니다. {ok}`,
+      `"같은 서버에 둘 다 올리면 됩니다": 동거는 실측된 충돌이 있고 ADR은 분리를 기본값으로 제안합니다. 확정 형상은 {need}`
+    ],
+    table: [
+      [`범위`, `요구를 GenOS·GenD·둘 다로 분류하면 제품별 기능 대응표가 두 장이 되고, 연결 지점(MCP·임베딩 공급자·계정)이 세 번째 범위가 됩니다.`, `분류는 내가, 연결 지점의 가능 여부는 양 제품 개발팀`],
+      [`일정`, `GenD는 Kubernetes 설치 사슬(Phase 1~9)과 첫 관리자 부트스트랩이 있어 GenOS와 별도의 설치 일정이 필요합니다.`, `설치 기간은 구축팀 확인`],
+      [`비용`, `라이선스·과금 단위가 문서에 없습니다. 노드·워크스페이스·사용자 중 무엇인지 견적 전에 확인합니다.`, `영업·제품팀 {need}`],
+      [`검수`, `"AI로 데이터를 묻는다"는 요구는 GenD Text-to-SQL(조회 전용)과 GenOS 채팅 앱으로 시험 대상이 달라집니다. 검수 시나리오를 제품별로 씁니다.`, `시나리오 초안은 내가`],
+      [`리스크`, `동거 설치의 GPU 원장 불일치, 두 제품의 업그레이드 주기 충돌, 계정 체계 이원화.`, `인프라팀·개발팀 확인 후 제안서 가정으로 명시`]
+    ],
+    devq: [
+      [`GenOS 동거 설치의 표준 형상(노드풀 분리 여부, MIG 프로파일 배분, 계정 체계)은 무엇이 확정인가요? ADR-0048·0066은 제안 상태입니다.`, `통합 제안서의 인프라 가정과 R&amp;R이 여기서 정해집니다.`],
+      [`GenOS 에이전트 빌더에서 GenD MCP 서버를 등록하는 공식 경로와 신원 전달(ADR-0064) 지원 범위는 어디까지인가요?`, `통합 데모와 검수 범위가 달라집니다.`],
+      [`GenD 학습·검증용 운영 계정을 받을 수 있나요?`, `문서와 화면의 차이를 확인해야 고객 설명이 정확해집니다.`]
+    ]
+  },
+  cases: [
+    { title: `고객이 "사내 DB를 AI 챗봇으로 묻고 싶다"고 한다 — 어느 제품인가`,
+      symptom: `공공기관 고객이 "직원이 챗봇에 '지난달 민원 건수'라고 물으면 ERP DB에서 숫자를 찾아 답하게 해 달라"고 요구합니다. 제안서에 제품을 적어야 합니다.`,
+      causes: [`해석 ①: 정형 DB 조회가 핵심 → GenD Text-to-SQL(조회 전용) + GenD AI 어시스턴트 화면으로 충분`, `해석 ②: 직원용 대화 앱·권한 연동·업무 흐름이 핵심 → GenOS 채팅 앱/에이전트가 GenD MCP 도구를 호출`, `해석 ③: 문서(규정·공문)와 DB를 함께 묻는다 → GenOS 벡터 DB + GenD 연합 SQL, 문서를 어느 쪽에 적재할지 결정 필요`, `해석 ④: 숫자를 바꾸거나 등록하는 요구가 섞여 있다 → GenD AI는 Tier 2(확인 후)·Tier 3(계획만)이라 쓰기 자동화는 범위 밖`],
+      check: [`요구의 데이터 종류(정형 DB·문서·둘 다)와 쓰기 포함 여부`, `사용자 수·역할과 기존 SSO(Keycloak 브로커링 대상인지)`, `[[범위와 연동 표면|gend:getting-started/scope-and-integration]] §4 경계와 [[에이전트 채팅|gend:features/ai/agent-chat]] Tier 표`, `GenOS 쪽: 채팅 앱·에이전트의 MCP 노드 지원 범위(GenOS 5회차)`],
+      actions: [`① → GenD 단독 제안, 검수는 Text-to-SQL 정확도·권한 시나리오`, `② → GenOS + GenD, 연결 지점(MCP 인증·워크스페이스·열람 등급)을 범위에 명시`, `③ → 문서 적재 주체를 하나로 정하고 중복 적재 금지`, `④ → 쓰기 요구는 별도 업무 시스템 연동(추가 개발)으로 분리`],
+      owner: [`PM: 요구 분류표와 제품 매핑 초안`, `개발팀(양 제품): MCP 연동 범위, 신원 전달`, `고객: 데이터 종류·쓰기 요구·SSO 확정`],
+      recheck: `제안서의 기능 대응표에서 모든 요구가 GenOS / GenD / 연결 지점 / 추가 개발 중 하나로 분류되고, 연결 지점마다 담당 개발팀의 확인 답변이 붙어 있으면 완료입니다.` }
+  ],
+  questions: [
+    { id: `q1`, k: `개념 설명`, t: `GenD와 GenOS의 역할을 '데이터 평면'과 'AI 앱·에이전트 평면'이라는 말을 쓰지 않고, 고객이 이해할 수 있는 비유나 사례로 설명해 보세요. GenD가 하지 않는 일도 두 가지 이상 넣으세요.`,
+      rubric: `GenD: 여러 DB·레이크·문서를 한 목록(카탈로그)으로 묶어 한 SQL/자연어로 조회, 권한·보안 등급·PII·품질·계보 관리, MCP/REST/JDBC로 외부에 제공. GenOS: 채팅 앱·워크플로우·에이전트·모델 서빙·크레딧 등 사용자와 만나는 AI 서비스. 하지 않는 일: 최종 사용자 챗봇 제품, 모델 학습·서빙 프레임워크 자체(온프렘 KServe 미포함), 원본 마스터 데이터 관리, 계정·조직 관리(Keycloak 정본). 보너스: 둘은 MCP/REST로 연결, "GenOS 연동은 미정"이라는 문서 문장.` },
+    { id: `q2`, k: `원인 분석`, t: `통합 설치 사이트에서 GenOS 모델 서빙이 GPU 부족으로 Pending에 멈췄는데, GenOS 관리 화면의 GPU 할당량은 여유가 있다고 나옵니다. 문서에 근거해 가능한 원인과 확인 순서를 적어 보세요.`,
+      rubric: `원인 후보(확정 금지): GenD 코드스페이스·배치 작업이 같은 GPU 노드의 MIG 프로파일을 점유(ADR-0066, GenD는 gpu-operator MIG 프로파일을 그대로 씀), GenOS GPU 원장은 DB 값이라 GenD 소비를 반영하지 못함(이슈 #20590 반입 전제), MIG 프로파일 조합 고정으로 GenOS가 요구하는 프로파일이 없음, 노드 max-pods 상한(동거 시 110 초과 → Too many pods), 쿼터·PDB 충돌(ADR-0048). 확인: kubectl로 노드 GPU/MIG 할당 상태와 Pending 사유(describe pod), GenD GPU 사용 대시보드(admin-ops/gpu-usage), GenOS 원장 값과 실제 kube 상태 비교, 노드 파드 수. 대응: 전용 노드풀·taint, 프로파일 배분표 합의, 원장 반영 기능 확인. 모두 제안 상태 ADR이므로 현장 형상 확인이 먼저.` },
+    { id: `q3`, k: `PM 판단`, t: `금융 고객이 "GenOS와 GenD를 폐쇄망에 함께 설치하고 직원 AI 비서가 고객 거래 DB를 조회하게 하고 싶다"고 합니다. 제안서에 어떤 가정과 확인 항목을 적겠습니까? 범위·일정·비용·검수·리스크로 나눠 쓰세요.`,
+      rubric: `범위: GenOS(채팅 앱·에이전트), GenD(커넥터·Text-to-SQL·권한·PII·감사), 연결 지점(MCP 인증 방식, 워크스페이스·열람 등급 매핑, 임베딩 공급자=GenOS 서비스 라우터), 추가 개발(쓰기 요구·전용 연동 화면). 일정: 두 설치 사슬(GenD Phase 1~9 + 부트스트랩, GenOS 설치), 에어갭 반입(번들+소스 트리), 권한 설계 워크숍, 복원 리허설. 비용: 라이선스 단위 확인 필요, 노드 3대+GPU 배분, 운영 R&R. 검수: 권한 시나리오(계정 2개 비교), SqlGuard 거부율, 열람 등급 노출 0건, 동시 사용자 정의 합의. 리스크: 동거 충돌(ADR 제안 상태), 계정 체계 이원화(Keycloak 브로커링 vs GenOS 로그인), 두 제품 업그레이드 주기, 온프렘 실시간 서빙 미포함, 백업 키 보관. 수치는 합의 필요로 표시.` }
+  ],
+  facts: [
+    `GenD 정의: Trino 기반 Federation SQL 위에 AI Text-to-SQL, 데이터 거버넌스, 데이터 품질을 통합한 AI-Native Data Intelligence Platform (GenD 가이드 첫 페이지, v1.4.4).`,
+    `하는 일(범위 §3): 연합 질의, 반입·적재, 거버넌스(행/열 정책·PII·감사·보존·컴플라이언스·품질), 지식(온톨로지·용어 사전·스키마 그래프·계보), AI 표면(RAG·NL2SQL·MCP 서버), 운영(스케줄·비용·워크스페이스 격리).`,
+    `하지 않는 일(범위 §4): 최종 사용자 챗봇 제품(챗 UI는 확인용), 모델 학습·서빙 프레임워크 자체, 원본 마스터 데이터 관리, 사용자 계정·조직 관리(Keycloak 정본).`,
+    `"GenOS 연동은 미정. MCP/REST는 표준 프로토콜이라 별도 규격 없이 호출 가능" (범위와 연동 표면, 2026-08-21).`,
+    `외부 입구: REST /api/v1 (Bearer JWT, 활성 워크스페이스 스코프), MCP POST /mcp (JSON-RPC 2.0 Streamable HTTP), JDBC(Trino), CLI gend.`,
+    `구성요소: gend-ui(React 19), gend-api(FastAPI), Trino 435+, PostgreSQL 15(+Apache AGE 그래프 스토어, ArangoDB 대체 ADR-0073), Weaviate 1.24+, Iceberg+SeaweedFS, Keycloak 24+, OpenBao, Dagster, MLflow, Presidio, Grafana, OpenSearch.`,
+    `온프렘 통합 사업에서 GenD는 GenOS와 같은 클러스터·같은 GPU 노드 사용(ADR-0066 배경). ADR-0048 "분리를 기본값으로"(제안, 2026-08-16): prod 실측 충돌 — 쿼터 고갈→PDB→drain 불가, 알람 채널 충돌, vCPU 쿼터 공유, DaemonSet 클러스터당 하나.`,
+    `ADR-0066(제안, 2026-09-06): gpu-operator MIG 통째 모드, 프로파일 이름이 테넌트 경계, GenOS GPU 원장은 GenD 소비를 못 봄(이슈 #20590 전제). ADR-005(KAI+HAMi)는 종료된 사업 RFP 맥락, 코드 0줄.`,
+    `임베딩 공급자: 온프렘 설치 §6.6 — GenOS 서비스 라우터 게이트웨이 주소를 사이트 임베딩 공급자로 등록, 임베딩 use-case 전사 바인딩. 용어집·계보·스키마 그래프의 선행 조건.`,
+    `GenOS 에이전트(MCP 노드) → GenD /mcp 호출 시 호출자 신원·워크스페이스·열람 등급이 화면과 동일하게 적용(온보딩 여정 §5). 트래킹 키 직접 수용 ADR-0058, 워크스페이스 공용 키 ADR-0060.`,
+    `온프렘 v1.4.2~v1.4.4는 실시간 모델 서빙(KServe) 미포함. 모델 등록·실험·배치 예측은 제공.`,
+    `퀵스타트 Step 5: 공통 핀 6개(홈·카탈로그·SQL 편집기·AI 어시스턴트·JDBC 연결 가이드·MCP 도구 마켓플레이스), 관리 콘솔 5그룹(접근 제어&보안 / 운영&모니터링 / 데이터플레인 설정 / AI&MCP 플랫폼 / 테넌트&사용자).`,
+    `라이선스·과금 단위, 성능 수치, GenOS 전용 연동 규격은 문서에 없음(확인 필요).`
+  ],
+  gloss: [
+    [`데이터 평면 / AI 앱 평면`, `데이터를 모아 통제하는 층 / 사람과 만나는 AI 서비스 층`, `GenD / GenOS. 범위 문서가 경계를 정의`, `요구가 어느 평면인지 먼저 가른다`],
+    [`Federation SQL(연합 질의)`, `서로 다른 DB의 표를 한 문장의 SQL로 조인`, `Trino 엔진, 커넥터=카탈로그`, `원본 DB 부하와 계정`],
+    [`MCP 서버`, `AI 클라이언트가 GenD를 도구로 쓰는 표준 입구`, `POST /mcp, JSON-RPC 2.0. GenOS 에이전트의 접점`, `인증 방식과 전용 규격 유무`],
+    [`ADR`, `설계 결정 기록. 상태가 '제안'이면 확정 아님`, `99건 공개. ADR-0048·0066이 동거 설치의 근거`, `제안 상태 ADR을 확정값처럼 쓰지 않기`],
+    [`Keycloak`, `로그인과 계정을 맡는 서버`, `GenD 신원의 정본(realm gend). GenOS는 자체 IAM`, `통합 사업의 계정 체계`],
+    [`MIG 프로파일`, `GPU 한 장을 고정 크기로 나눈 조각 이름`, `GenD가 받는 GPU 단위이자 테넌트 경계(ADR-0066)`, `GenOS와 카드 배분표`]
+  ],
+  docs: [
+    {t: `GenD 가이드 (첫 페이지)`, u: `https://gend-docs.genon.ai/`},
+    {t: `GenD의 범위와 연동 표면`, u: `https://gend-docs.genon.ai/getting-started/scope-and-integration`},
+    {t: `퀵스타트`, u: `https://gend-docs.genon.ai/getting-started/quickstart`},
+    {t: `시스템 아키텍처`, u: `https://gend-docs.genon.ai/appendix/architecture`},
+    {t: `ADR-0048 GenD ↔ GenOS 클러스터 배치`, u: `https://gend-docs.genon.ai/adr/gend-genos-cluster-topology`},
+    {t: `ADR-0066 온프렘 GPU 공유 모델`, u: `https://gend-docs.genon.ai/adr/onprem-gpu-sharing-model`},
+    {t: `워크스페이스 온보딩 여정 (GenOS 에이전트 → MCP)`, u: `https://gend-docs.genon.ai/tutorials/workspace-onboarding-journey`},
+    {t: `온프렘 설치 §6.6 임베딩 공급자`, u: `https://gend-docs.genon.ai/admin-ops/installation/onprem`}
+  ],
+  unknown: [
+    `라이선스·과금 단위와 유지보수 범위`,
+    `GenOS 동거 설치의 확정 형상(노드풀·MIG 배분·계정 체계) — ADR은 제안 상태`,
+    `GenOS 에이전트 빌더에서 GenD MCP를 등록하는 전용 화면·규격`,
+    `운영 환경 화면이 문서와 같은지(학습 계정 미확보)`
+  ]
+};
+
+const LD2 = {
+  n: 12, track: "gend", title: `연합 SQL · 카탈로그 · 커넥터`,
+  basis: `퀵스타트, 첫 번째 쿼리, 연합 SQL 튜토리얼, 커넥터 타입별 가이드, 커넥터 추가, 커넥터 문제 해결, 스케일링, 성능 문제 해결`,
+  figs: {explain: ["d2"]},
+  note: GEND_NOTE,
+  goals: [
+    `카탈로그.스키마.테이블 좌표와 크로스 카탈로그 조인이 어떻게 실행되는지, 원본 DB에 어떤 부하가 가는지 설명한다.`,
+    `커넥터 등록의 역할·승인·허용 목록 규칙을 알고 고객 소스 목록을 지원 여부로 분류한다.`,
+    `쿼리가 느리거나 실패할 때 Trino 메모리·워커 수·커넥터 설정 중 어디부터 볼지 정한다.`
+  ],
+  explain: [
+    `통역사를 생각하면 됩니다. 영업 DB는 PostgreSQL 말을, 회계 DB는 Oracle 말을, 데이터 레이크는 Iceberg 말을 씁니다. <b>Trino는 질문을 각 DB 말로 쪼개 보내고, 돌아온 답을 자기 메모리에서 합쳐(조인) 한 표로 돌려주는 통역사</b>입니다. 그래서 사용자는 <code>sourcedb.public.customers</code>처럼 <b>카탈로그.스키마.테이블</b> 세 토막 주소만 알면 됩니다. {ok}`,
+    `두 가지를 기억해야 합니다. 첫째, 데이터를 복사하지 않으므로 <b>조회 때마다 원본 DB에 부하가 갑니다</b>. 둘째, 조인은 Trino 메모리에서 일어나므로 <b>큰 조인은 Trino의 메모리 상한과 워커 수에 묶입니다</b>. 고객이 "DB를 옮기지 않아도 된다"는 장점을 들을 때, PM은 이 두 비용을 같이 말해야 합니다. {gen}`,
+    `GenD에서 커넥터를 등록하면 곧 Trino 카탈로그가 하나 늘어납니다. 접속 정보는 Vault(OpenBao)에만 저장되고, 등록 시 연결 테스트를 거칩니다. {ok}`
+  ],
+  apply: [
+    { h: `조회 입구와 좌표`,
+      table: { head: [`입구`, `누가`, `특징`],
+        rows: [
+          [`SQL 편집기 {ok}`, `모든 사용자(워크스페이스 평면)`, `카탈로그 트리에서 테이블 확인 → SQL 입력 → 실행. 퀵스타트 예시 쿼리는 10행 약 1.5초`],
+          [`AI 어시스턴트 {ok}`, `모든 사용자`, `자연어 → Text-to-SQL(GenD 4회차). 조회문만 실행`],
+          [`JDBC {ok}`, `외부 BI 도구(Superset·Tableau 등)`, `Trino에 직접 접속. 공통 핀의 "JDBC 연결 가이드" 참고. 엔진 계층 접근제어는 파일 기반 ACL + 신원 전파(ADR-0030)`],
+          [`MCP · REST · CLI {ok}`, `에이전트·외부 시스템·개발자`, `/mcp, /api/v1, gend CLI. 같은 grant·워크스페이스 판정이 적용`]
+        ] },
+      items: [
+        `좌표 예: <code>SELECT count(*) FROM sourcedb.public.customers</code>, <code>SELECT count(*) FROM iceberg.card.transactions</code>. 크로스 카탈로그 조인은 <code>tpch.tiny.customer c JOIN sourcedb.public.orders o ON …</code> 꼴입니다. {ok} [[연합 SQL 튜토리얼|gend:tutorials/federation-sql]]`,
+        `샘플 카탈로그 <code>tpch</code>가 있어 고객 DB 없이도 조인을 연습할 수 있습니다. 새 설치의 tpch·iceberg 카탈로그는 보안 등급 행이 없어 AI 경로에서는 기밀 취급됩니다(5회차). {ok}`
+      ] },
+    { h: `커넥터 타입과 등록 규칙`,
+      intro: `Trino 커넥터 생태계를 그대로 씁니다. 아래 표에 없는 소스(예: SAP HANA, Teradata)는 지원 여부를 반드시 확인합니다.`,
+      table: { head: [`분류`, `타입`, `주요 설정`],
+        rows: [
+          [`관계형 DB {ok}`, `PostgreSQL 9.6+ · MySQL 5.7+/MariaDB · SQL Server · Oracle`, `host, port, database(또는 SID/service), user, password`],
+          [`데이터 레이크 {ok}`, `Hive · Iceberg · Delta Lake`, `metastore URI, S3/HDFS·warehouse 경로`],
+          [`기타 {ok}`, `MongoDB · Kafka`, `connection string / bootstrap servers, topic`],
+          [`CDC {ok}`, `Debezium(관리 콘솔 › 데이터플레인 설정)`, `원본 변경을 Kafka로 받아 Bronze 적재`]
+        ] },
+      items: [
+        `등록 권한: 워크스페이스 관리자(ws-admin)와 플랫폼 관리자(admin). ws-admin이 등록하면 그 워크스페이스 팀원 전원에게 SELECT 권한이 함께 부여됩니다. {ok} [[커넥터 추가|gend:features/connectors/add-connector]]`,
+        `일반 팀원은 소스 추가 버튼이 비활성이고 <b>등록 요청 보내기</b>(v1.4+)로 신청합니다. 승인은 1회용이며, 승인된 좌표가 채워진 폼에서 비밀번호만 입력하면 등록이 끝납니다. {ok} ADR-0065`,
+        `등록·수정은 egress 허용 목록 검사를 받습니다. 허용되지 않은 호스트(사설망 등)는 운영자가 허용 목록에 넣어야 합니다. {ok}`,
+        `삭제·카탈로그 재생성은 플랫폼 관리자 전용이고 되돌릴 수 없습니다(접속 정보와 그 카탈로그의 모든 권한이 함께 사라짐). {ok}`,
+        `커넥터명은 Trino 카탈로그명으로 그대로 쓰이므로 영문 소문자와 언더스코어만 허용됩니다. {ok}`
+      ] },
+    { h: `성능·용량에서 PM이 알아야 할 숫자`,
+      table: { head: [`항목`, `값`, `근거`],
+        rows: [
+          [`Trino 메모리(운영 권장)`, `query.max-memory 4GB, per-node 2GB, JVM heap 8G 이상`, `{ok} [[성능 문제 해결|gend:admin-ops/troubleshooting/performance]]`],
+          [`Trino 워커`, `HPA 최소 1 / 최대 3`, `{ok} [[스케일링|gend:admin-ops/operations/scaling]]`],
+          [`gend-api`, `HPA 최소 2 / 최대 10(스케일링 문서) 또는 2 / 6(HA 베이스라인) — 문서 간 값이 다름`, `{ok} 환경별 차이로 보임 {est}`],
+          [`금지 명령`, `<code>helm upgrade trino trino/trino --set worker.replicas=N</code> — 운영 values 전부가 덮여 사고가 났던 명령`, `{ok} 과거 문서 정정 기록`],
+          [`동시 사용자·응답시간 기준`, `문서에 없음. 퀵스타트의 "10행 약 1.5초"가 유일한 수치`, `{need}`]
+        ] } }
+  ],
+  task: {
+    title: `연합 조인 쿼리와 커넥터 오류 유형 정리하기 (문서 기반)`,
+    steps: [
+      `[[연합 SQL 튜토리얼|gend:tutorials/federation-sql]] Step 4의 크로스 카탈로그 JOIN 쿼리를 읽고, 조인에 쓰인 두 카탈로그 이름과 조인 키를 적습니다.`,
+      `[[커넥터 문제 해결|gend:features/connectors/troubleshooting]]의 오류 제목을 모두 적고, 각각 고객 DB 담당·GenD 운영자 중 누가 풀어야 하는지 표시합니다.`,
+      `[[커넥터 타입별 가이드|gend:features/connectors/connector-types]]에서 고객이 자주 쓰는 소스(예: Oracle, MSSQL, Tibero, SAP HANA) 중 표에 없는 것을 골라 둡니다.`
+    ],
+    evidence: [[`join`, `크로스 카탈로그 조인의 두 카탈로그`], [`errs`, `커넥터 오류 유형 수`], [`missing`, `표에 없는 고객 소스`], [`mem`, `운영 권장 query.max-memory`]],
+    expected: `오류 유형은 연결 실패·인증 오류·메타데이터 조회 실패·외부 관리형 DB 네트워크·쿼리 타임아웃·낡은 카탈로그 값 6가지입니다. {ok} 운영 권장 query.max-memory는 4GB입니다. {ok}`,
+    fallback: `운영 계정을 받으면 SQL 편집기에서 tpch 카탈로그로 Step 3·4 쿼리를 실행해 응답시간을 기록하고, 데이터 액세스 › 권한에서 내 grant 목록을 확인합니다.`
+  },
+  pm: {
+    pitch: `고객 DB를 옮기거나 복제하지 않고 그대로 둔 채, 여러 DB의 표를 한 SQL로 조회할 수 있습니다. 접속 정보는 금고에만 저장되고, 어떤 테이블을 누가 볼 수 있는지는 권한 부여로 통제됩니다.`,
+    avoid: [
+      `"모든 DB를 지원합니다": 문서의 타입은 9종 + CDC입니다. 국산 DB(Tibero 등)와 SAP는 {need}`,
+      `"원본 시스템에 부하가 없습니다": 조회 때마다 원본에 쿼리가 갑니다. 조회 전용 계정과 시간대 합의가 필요합니다. {gen}`,
+      `"동시 사용자 N명, 응답 N초": 문서에 기준이 없습니다. 측정 정의와 부하 조건을 먼저 합의합니다. {need}`
+    ],
+    table: [
+      [`범위`, `고객 소스 목록을 커넥터 타입 표로 분류합니다. 표 밖의 소스는 추가 개발이 아니라 "지원 여부 확인" 항목입니다.`, `분류는 내가, 지원 여부는 개발팀`],
+      [`일정`, `커넥터 등록은 설정이지만, 고객 DB 조회 계정 발급·방화벽·egress 허용 목록 등록이 선행됩니다. 고객 측 리드타임을 일정에 넣습니다.`, `고객 DBA·보안팀`],
+      [`비용`, `Trino 워커·메모리는 조인 규모에 따라 늘어납니다. 노드 사양 견적은 대표 쿼리 세트를 받은 뒤에 합니다.`, `대표 쿼리는 고객, 사양은 인프라팀`],
+      [`검수`, `합의한 조인 쿼리 N개가 성공하고 응답시간이 기준 안이면 통과. 기준값은 합의 항목입니다.`, `기준값 합의는 내가 주도`],
+      [`리스크`, `원본 DB 성능 저하 민원, 커넥터 삭제 시 권한 일괄 회수, 운영 values를 덮는 잘못된 helm 명령.`, `운영 절차서에 금지 명령 명시`]
+    ],
+    devq: [
+      [`Tibero·Altibase·SAP HANA 같은 소스의 커넥터 지원 또는 검증 사례가 있나요?`, `공공·금융 고객 소스의 상당수가 여기 해당합니다.`],
+      [`대표 고객 사례의 동시 쿼리 수·응답시간·Trino 노드 사양을 받을 수 있나요?`, `"동시 사용자 N명" 요구에 근거 있는 가정을 적어야 합니다.`],
+      [`원본 DB 부하를 제한하는 수단(쿼리 타임아웃, 동시 실행 제한, 시간대 제한)이 제품 설정에 있나요?`, `고객 DBA의 가장 흔한 질문입니다.`]
+    ]
+  },
+  cases: [
+    { title: `특정 조인 쿼리가 느리거나 메모리 초과로 실패하는 경우`,
+      symptom: `월말 보고용 크로스 카탈로그 조인 쿼리가 평소 20초였는데 이번 달은 3분 넘게 걸리다 실패합니다. 단일 카탈로그 쿼리는 정상입니다.`,
+      causes: [`조인 결과가 Trino 메모리 상한(query.max-memory 4GB, per-node 2GB)을 넘음`, `Trino 워커가 최소값(1)에 머물러 분산되지 않음`, `원본 DB(Oracle 등)가 느리게 응답하거나 통계가 없어 조인 순서가 나쁨`, `커넥터 쿼리 타임아웃 설정`, `동시에 돌던 다른 대용량 쿼리와 메모리를 나눔`],
+      check: [`Trino 쿼리 감사 로그에서 실패 사유와 메모리 사용량 ([[Trino 쿼리 감사|gend:admin-ops/monitoring/trino-query-audit]])`, `Grafana의 Trino 메모리·워커 수 추이, <code>kubectl get hpa trino-worker</code>`, `원본 DB 쪽 세션·실행 계획(고객 DBA)`, `커넥터 설정의 타임아웃 값과 [[커넥터 문제 해결|gend:features/connectors/troubleshooting]]의 '쿼리 타임아웃' 절`],
+      actions: [`메모리 초과 → 쿼리 분할·필터 선행·마트(데이터 마트) 사전 집계 검토, 운영 values로 메모리 상향(금지 명령 사용 금지)`, `워커 부족 → HPA 최소값 조정은 운영 values 변경으로`, `원본 지연 → 조회 시간대·인덱스·통계 갱신을 DBA와 협의`, `동시 경합 → 스케줄 분산`],
+      owner: [`GenD 운영자: Trino 설정·HPA`, `고객 DBA: 원본 DB 실행 계획·인덱스`, `PM: 월말 쿼리 목록과 허용 응답시간 합의`],
+      recheck: `같은 쿼리를 같은 데이터 규모로 다시 실행해 합의한 기준(예: p95 응답시간) 안에 들고, 쿼리 감사 로그에 실패가 없으면 재검증 통과입니다.` }
+  ],
+  questions: [
+    { id: `q1`, k: `개념 설명`, t: `고객 DBA가 "GenD가 우리 Oracle에 직접 붙는다는데 데이터가 복제되는 건가요, 부하는 어떻게 되나요?"라고 묻습니다. 카탈로그 좌표와 Trino의 동작을 들어 답해 보세요.`,
+      rubric: `복제 아님: 커넥터=Trino 카탈로그, 조회 때마다 원본에 쿼리 전달(연합 질의). 좌표 카탈로그.스키마.테이블. 조인은 Trino 메모리에서 수행(query.max-memory 4GB 등). 부하: 조회 전용 계정, 시간대·타임아웃 합의, 필요하면 Iceberg 레이크(Bronze/Silver/Gold)나 데이터 마트로 사전 적재해 원본 부하를 줄이는 선택지. 접속 정보는 Vault에만 저장, 연결 테스트. 부하 제한 수단의 구체 설정은 확인 필요로 표시하면 가점.` },
+    { id: `q2`, k: `원인 분석`, t: `새로 등록한 MSSQL 커넥터가 등록 직후에는 되다가 다음 날부터 "메타데이터 조회 실패"가 납니다. 문서의 오류 유형과 등록 규칙을 근거로 가능한 원인과 확인 순서를 적어 보세요.`,
+      rubric: `후보(확정 금지): 고객 측 계정 비밀번호 변경·만료(Vault의 값과 불일치), 방화벽·egress 허용 목록 변경, 원본 DB 재시작·호스트 변경, 카탈로그가 낡은 값을 들고 있음(문제 해결 문서의 '설정은 맞는데 계속 실패' 절, v1.3.2+ 예정), 커넥터 수정이 허용 목록 검사에 걸림. 확인: 커넥터 문제 해결 문서의 진단 방법 → 연결 테스트 재실행 → 감사 로그·gend-api 로그 → 고객 DBA에 계정 상태 → 필요 시 admin의 카탈로그 재생성(권한 회수 영향 주의). 하나로 확정하지 않을 것.` },
+    { id: `q3`, k: `PM 판단`, t: `고객이 "DB 12개를 모두 연결하고 동시 사용자 200명을 지원해 달라"고 합니다. 견적과 검수 기준에 어떤 가정을 적고 무엇을 확인하겠습니까?`,
+      rubric: `소스 12개를 커넥터 타입 표로 분류(지원·확인 필요), 각 소스의 계정·네트워크·허용 목록 리드타임. "동시 사용자 200명"은 정의 필요: 동시 접속 vs 동시 쿼리, 대표 쿼리 세트, 데이터 규모, 응답시간 기준(p95), 부하시험 방법·도구(문서에 없음 → 개발팀 확인). Trino 메모리·워커 HPA 1~3·gend-api HPA 값과 노드 사양은 부하시험 결과로 확정, 견적에는 가정과 증설 조건 명시. 검수: 합의 쿼리 N개 성공률, 응답시간, 원본 DB 부하 한도. 리스크: 원본 DB 민원, 커넥터 삭제 시 권한 회수.` }
+  ],
+  facts: [
+    `카탈로그.스키마.테이블 좌표. 예: sourcedb.public.customers, iceberg.card.transactions, tpch.tiny.customer. 퀵스타트 Step 4 예시 쿼리는 10행 약 1.5초.`,
+    `연합 SQL 튜토리얼: Step 1 카탈로그 확인 → Step 2 단일 카탈로그 → Step 3 같은 카탈로그 JOIN → Step 4 크로스 카탈로그 JOIN(Federation) → Step 5 다중 테이블 JOIN. AI Agent Chat으로도 수행 가능.`,
+    `커넥터 타입: PostgreSQL 9.6+, MySQL 5.7+/MariaDB, SQL Server, Oracle / Hive, Iceberg, Delta Lake / MongoDB, Kafka. CDC는 Debezium. 접속 정보는 Vault, 등록 시 연결 테스트, 커넥터명은 Trino 카탈로그명(영문 소문자·언더스코어).`,
+    `커넥터 등록 권한: ws-admin·admin. ws-admin 등록 시 팀원 전원 SELECT 자동 부여. 일반 팀원은 등록 요청 보내기(v1.4+), 승인은 1회용(ADR-0065). 등록·수정은 egress 허용 목록 검사. 삭제·재생성은 admin 전용, 되돌릴 수 없고 권한 일괄 회수.`,
+    `커넥터 문제 해결 오류 유형: 연결 실패(Connection Refused), 인증 오류, 메타데이터 조회 실패, 외부 관리형 DB Network is unreachable, 쿼리 타임아웃, 설정은 맞는데 계속 실패(낡은 카탈로그 값, v1.3.2+ 예정).`,
+    `Trino 운영 권장: query.max-memory 4GB, query.max-memory-per-node 2GB, JVM heap 8G+. 워커 HPA min 1 / max 3. gend-api HPA min 2 / max 10(스케일링) 또는 2 / 6(HA 베이스라인). helm upgrade trino --set worker.replicas 금지(운영 values 덮임).`,
+    `엔진 계층 접근제어: 파일 기반 ACL + 신원 전파(ADR-0030). gend-api→Trino JWT는 켜지 않음(ADR-0080). JDBC는 외부 BI 도구가 Trino에 직접 접속.`,
+    `동시 사용자·응답시간 기준·부하시험 결과는 문서에 없음. 라이선스 단위 없음.`
+  ],
+  gloss: [
+    [`카탈로그`, `데이터 소스 하나를 가리키는 이름`, `커넥터 등록 = 카탈로그 추가. tpch는 샘플`, `고객 소스별 카탈로그 설계`],
+    [`Trino`, `여러 DB에 질문을 나눠 보내고 결과를 합치는 분산 SQL 엔진`, `코디네이터 + 워커(HPA 1~3), 메모리 상한`, `조인 규모와 노드 사양`],
+    [`커넥터`, `Trino가 특정 DB와 말하는 어댑터`, `타입 9종 + CDC, Vault 저장, 승인 1회용`, `표 밖 소스의 지원 여부`],
+    [`egress 허용 목록`, `GenD가 밖으로 연결해도 되는 주소 목록`, `커넥터 등록·수정, 알림, Intel 수집에 적용`, `고객 DB 호스트 등록 절차`],
+    [`JDBC`, `BI 도구가 DB에 붙는 표준 드라이버 방식`, `Trino에 직접 접속, 공통 핀의 연결 가이드`, `기존 BI 도구 연계 범위`],
+    [`데이터 마트`, `자주 쓰는 집계를 미리 만들어 둔 표`, `마트 빌더, ws-admin 위임(ADR-0078)`, `원본 부하를 줄이는 대안`]
+  ],
+  docs: [
+    {t: `퀵스타트`, u: `https://gend-docs.genon.ai/getting-started/quickstart`},
+    {t: `첫 번째 쿼리`, u: `https://gend-docs.genon.ai/getting-started/first-query`},
+    {t: `연합 SQL 튜토리얼`, u: `https://gend-docs.genon.ai/tutorials/federation-sql`},
+    {t: `커넥터 타입별 가이드`, u: `https://gend-docs.genon.ai/features/connectors/connector-types`},
+    {t: `커넥터 추가`, u: `https://gend-docs.genon.ai/features/connectors/add-connector`},
+    {t: `커넥터 문제 해결`, u: `https://gend-docs.genon.ai/features/connectors/troubleshooting`},
+    {t: `스케일링`, u: `https://gend-docs.genon.ai/admin-ops/operations/scaling`},
+    {t: `성능 문제 해결`, u: `https://gend-docs.genon.ai/admin-ops/troubleshooting/performance`},
+    {t: `Trino 쿼리 감사`, u: `https://gend-docs.genon.ai/admin-ops/monitoring/trino-query-audit`}
+  ],
+  unknown: [
+    `문서 표 밖의 소스(Tibero, Altibase, SAP HANA 등) 지원 여부`,
+    `동시 쿼리 수·응답시간 실측과 부하시험 방법`,
+    `원본 DB 부하 제한 설정(타임아웃·동시 실행 제한)의 제품 내 위치`
+  ]
+};
+
+const LD3 = {
+  n: 13, track: "gend", title: `적재 파이프라인과 벡터 · 그래프`,
+  basis: `데이터 수집, 파이프라인 스튜디오 GUI·노드 명세, 파일 업로드, 벡터 타깃, 벡터 인덱스, 스키마 동기화(ADR-0074), 무서명 벡터 청크 진단, 온프렘 설치 §6.6`,
+  figs: {explain: ["d3"]},
+  note: GEND_NOTE,
+  goals: [
+    `문서가 GenD에 들어와 검색 가능해지기까지의 노드 5종과 세 저장소(PG·Vec·Graph)를 순서대로 설명한다.`,
+    `"적재는 성공인데 AI 검색이 0건"일 때 컬렉션 이름·보안 등급·임베딩 공급자·워크스페이스 중 어디부터 볼지 정한다.`,
+    `파일 형식·크기·이름 제한과 커스텀 전처리 노드의 상태를 알고 고객 문서 요구를 설정/확인 필요/추가 개발로 나눈다.`
+  ],
+  explain: [
+    `공장 라인입니다. 원료(파일·웹 페이지·DB 행)가 반입되면 <b>파싱</b>이 글자와 표를 뽑고, <b>청킹</b>이 검색하기 좋은 크기로 자르고, <b>임베딩</b>이 조각마다 의미를 담은 숫자 라벨을 붙입니다. 완성품은 창고 세 곳으로 갑니다. 문서 레코드와 메타는 PostgreSQL(PG), 벡터는 Weaviate 컬렉션(Vec), 관계·용어·계보는 그래프 스토어(Graph). 파일마다 세 창고에 들어갔는지 뱃지로 보여 줍니다. {ok}`,
+    `GenOS와 다른 점이 둘 있습니다. 첫째, 파싱 단계에서 <b>보안 등급 도장(PUBLIC·CONFIDENTIAL·TOP_SECRET)</b>이 산출 문서와 청크에 찍히고, 나중에 AI가 읽을 때 이 도장과 사용자의 열람 등급을 비교합니다. 둘째, <b>임베딩 모델은 GenD가 띄우지 않습니다</b>. 외부 엔드포인트(예: GenOS 서비스 라우터)를 "AI 모델 제공자"로 등록하고 워크스페이스에 바인딩해야 라벨이 붙습니다. 공급자가 없으면 벡터 없이 구조만 동기화됩니다. {ok}`,
+    `그래서 "적재는 됐는데 검색이 안 된다"는 민원은 라인 어느 공정이 비었는지 뱃지와 컬렉션 이름부터 보는 문제이지, 모델 성능 문제가 아닌 경우가 많습니다. {gen}`
+  ],
+  apply: [
+    { h: `입구 네 가지`,
+      table: { head: [`입구`, `무엇을`, `비고`],
+        rows: [
+          [`DB 커넥터 {ok}`, `정형 DB를 Trino 카탈로그로 연합`, `복사 없음(2회차). 적재가 아니라 연결`],
+          [`파일·문서 수집 {ok}`, `파일 업로드 → 파싱·청킹·임베딩 → 벡터·그래프 적재. 파이프라인/실행/문서 3탭`, `[[데이터 수집|gend:features/ingestion/]]`],
+          [`파이프라인 스튜디오 {ok}`, `소스 → 처리 → 스케줄 → 확인 4단계 위저드, 캔버스에서 노드 조립, 드라이런(v1.4+), 배포·롤백`, `[[파이프라인 스튜디오 GUI|gend:features/ingestion/pipeline-studio-gui]]`],
+          [`CSV·Excel → Iceberg {ok}`, `표 데이터를 레이크 테이블로 적재`, `.xls는 거부. 헤더보다 많은 칸은 경고 없이 버려짐(v1.4.4 기록) [[CSV·Iceberg 적재|gend:tutorials/csv-iceberg-ingestion]]`]
+        ] } },
+    { h: `파이프라인 노드와 설정`,
+      intro: `노드 이름은 문서 그대로입니다. 설정 항목은 고객이 "표 추출", "OCR", "이미지 설명" 같은 요구를 낼 때 설정으로 되는지 보는 기준이 됩니다.`,
+      table: { head: [`노드`, `역할`, `주요 설정·제약`],
+        rows: [
+          [`소스`, `S3/SeaweedFS(s3_op), DB/Federation(db_source), 웹 크롤(web_crawl), REST`, `db_source는 커넥터 선택지가 비고 실행 경로 미연결이라는 문서 기록 — 현재 상태 {need}`],
+          [`builtin.parse`, `파일 → 텍스트+메타`, `processor auto/local, <b>security_level</b>(기본 PUBLIC, 위저드 기본 CONFIDENTIAL), page_range, extract_images, ocr_lang(기본 kor+eng), vlm_caption(가용 provider 필요) {ok}`],
+          [`builtin.chunk`, `텍스트 → 청크`, `청킹 정책, 텍스트 품질 게이트 [[청킹 정책|gend:features/ingestion/chunking-policy]]`],
+          [`builtin.embed`, `청크 → 벡터`, `요청 타임아웃(기본 30초). 공급자·바인딩이 선행 조건 {ok}`],
+          [`builtin.vector`, `Weaviate(기본) 적재. Oracle 23ai 선택지. Milvus는 기본 설치 미제공`, `적재 시 MCP 검색 도구 자동 등록(v1.4.0+) {ok}`],
+          [`builtin.graph`, `그래프 스토어(PostgreSQL) 적재`, `스키마 그래프·용어집·계보와 같은 저장소`],
+          [`http_api`, `커스텀 전처리 — 내 서비스 호출`, `"외부 호출 허용 목록 연동 후 제공"으로 팔레트에서 비활성(v1.4.2) {ok} → 고객 전처리 서버 연동은 현재 {need}`],
+          [`retention`, `멀티스토어 보존`, `유지보수 노드`]
+        ] } },
+    { h: `파일·이름·컬렉션 규칙`,
+      items: [
+        `지원 형식: 문서 PDF·DOCX·HWP·TXT, 스프레드시트 XLSX·CSV, 이미지 PNG·JPG·TIFF(OCR), 오디오 MP3·WAV(STT). {ok} [[파일 업로드|gend:features/ingestion/file-upload]] HWPX도 문서에 언급됩니다. 표·서식 품질은 {need}`,
+        `파일명 길이: 한글 83자+.txt(253바이트)는 업로드, 84자(256바이트)는 거부. 바이트 기준 한도입니다. {ok}`,
+        `컬렉션 이름: 스튜디오에 snake_case로 적으면 Weaviate에는 PascalCase로 저장·검색됩니다(<code>yahoo_chunks</code> → <code>YahooChunks</code>). 검색·MCP·CLI <code>--class</code>가 기준으로 삼는 이름은 변환 후 이름입니다. {ok} [[벡터 인덱스|gend:features/governance/vector-index]]`,
+        `벡터 타깃: 기본 Weaviate 외 인스턴스는 admin이 등록하고 워크스페이스에 허용해야 파이프라인에서 고를 수 있습니다. 문서 하나는 한 인스턴스에만 등록되고, 수집 › 문서에서 삭제하면 타깃의 청크도 함께 지워집니다. {ok} [[벡터 타깃|gend:features/ingestion/vector-targets]]`,
+        `스키마 동기화: 구조 먼저, 임베딩은 명시적으로(ADR-0074). 공급자가 없으면 <code>skipped_no_provider</code>로 벡터 없이 동기화되어 용어집·계보·스키마 그래프가 비어 보일 수 있습니다. {ok}`,
+        `적재 확인 화면: 수집 › 문서의 파일별 PG·Vec·Graph 뱃지, 데이터 관측 › 벡터 인덱스의 컬렉션·문서 수, 파이프라인 모니터링(Dagster, v1.4.4부터 관리자 전용). {ok}`,
+        `Medallion: Bronze(원천 그대로) → Silver(정제·PII 마스킹) → Gold(마트). 레이크 적재 설계의 기본 어휘입니다. {ok}`
+      ] }
+  ],
+  task: {
+    title: `노드 명세와 컬렉션 규칙 확인하기 (문서 기반)`,
+    steps: [
+      `[[파이프라인 스튜디오 GUI|gend:features/ingestion/pipeline-studio-gui]] §3 "사용 가능한 노드 타입"에서 소스·변환·적재·연동·유지보수 노드 이름을 적고, 비활성으로 표시된 노드를 찾습니다.`,
+      `[[벡터 인덱스|gend:features/governance/vector-index]]에서 컬렉션 이름이 어떤 규칙으로 표시되는지, CLI <code>--class</code>에 무엇을 넣으라는지 적습니다.`,
+      `[[무서명 벡터 청크 진단|gend:admin-ops/troubleshooting/unsigned-vector-chunks]]의 증상과 진단 순서를 세 줄로 요약합니다.`
+    ],
+    evidence: [[`nodes`, `변환 노드 3종의 이름`], [`off`, `비활성 노드와 사유`], [`class`, `컬렉션 이름 표시 규칙`], [`unsigned`, `무서명 청크 진단 요약`]],
+    expected: `변환 노드는 builtin.parse → builtin.chunk → builtin.embed, 비활성 노드는 http_api(외부 호출 허용 목록 연동 후 제공)입니다. {ok} 컬렉션 이름은 PascalCase로 표시됩니다. {ok}`,
+    fallback: `운영 계정을 받으면 파이프라인 스튜디오를 열어 노드 팔레트를 캡처하고, 수집 › 문서에서 파일 하나의 PG·Vec·Graph 뱃지 상태를 확인합니다. 등록·실행은 하지 않습니다.`
+  },
+  pm: {
+    pitch: `문서를 올리면 파싱·청킹·임베딩을 거쳐 벡터와 그래프에 저장되고, 파일마다 어느 저장소까지 들어갔는지 화면에서 확인할 수 있습니다. 보안 등급은 적재 단계에서 문서와 조각에 찍혀 AI 검색 때 그대로 적용됩니다.`,
+    avoid: [
+      `"HWP 표도 완벽히 읽습니다": 형식은 지원 목록에 있지만 품질 수치는 문서에 없습니다. 샘플 문서로 시험합니다. {need}`,
+      `"고객 전처리 서버를 붙이면 됩니다": 커스텀 전처리 노드(http_api)는 현재 비활성입니다. {ok}`,
+      `"임베딩은 기본 포함": GenD는 임베딩 모델을 띄우지 않습니다. 공급자(예: GenOS 서비스 라우터)가 범위에 있어야 합니다. {ok}`
+    ],
+    table: [
+      [`범위`, `문서 적재 요구는 형식(지원 목록), 전처리(설정 가능 항목), 커스텀 전처리(비활성→추가 개발 또는 로드맵)로 나눕니다. 임베딩·VLM 공급자가 별도 범위입니다.`, `분류는 내가, http_api 제공 시점은 제품팀`],
+      [`일정`, `임베딩 공급자 등록(설치 §6.6)이 끝나야 용어집·계보·스키마 그래프가 채워집니다. 설치 직후 "비어 보인다"는 민원을 예방하는 순서를 일정에 둡니다.`, `설치팀`],
+      [`비용`, `대량 적재는 Dagster 실행과 임베딩 호출(토큰·GPU) 비용이 듭니다. 문서 수·평균 길이·재적재 주기로 산정합니다.`, `산정 근거는 고객 자료`],
+      [`검수`, `샘플 문서 N건에 대해 PG·Vec·Graph 뱃지 전부 초록, 벡터 인덱스 문서 수 일치, 등급별 검색 노출 0건.`, `시험 문서 세트는 고객과 합의`],
+      [`리스크`, `컬렉션 이름 변환을 모르고 검색 설정을 잘못 잡는 운영 실수, 공급자 미바인딩 상태의 무벡터 동기화, 파일명 바이트 한도.`, `운영 교육 자료에 명시`]
+    ],
+    devq: [
+      [`HWP·HWPX 파싱 품질(표·이미지·서식) 시험 결과가 있나요? 공공 고객 샘플로 시험 가능한가요?`, `공공 문서의 대부분이 HWP입니다.`],
+      [`커스텀 전처리 노드(http_api)의 제공 시점과 허용 목록 연동 방식은?`, `고객 EAI/AIM 서버 연동 요구의 분류가 달라집니다.`],
+      [`db_source 노드의 현재 상태(커넥터 선택지·실행 경로)는? 문서에는 미연결 기록이 있습니다.`, `DB 행을 문서처럼 적재하는 요구에 답해야 합니다.`]
+    ]
+  },
+  cases: [
+    { title: `적재는 성공인데 AI 검색이 0건인 경우`,
+      symptom: `파이프라인 실행이 성공으로 끝났고 수집 › 문서에서 Vec 뱃지가 초록인데, AI 어시스턴트의 문서 검색에 아무것도 나오지 않습니다.`,
+      causes: [`검색 설정이 snake_case 이름을 보고 있는데 실제 컬렉션은 PascalCase`, `문서 보안 등급이 호출자 열람 등급보다 높아 결과가 조용히 걸러짐`, `다른 워크스페이스의 컬렉션(활성 워크스페이스 불일치)`, `임베딩 공급자 미바인딩으로 벡터 없이 적재·동기화(skipped_no_provider)`, `무서명 벡터 청크(진단 문서의 사례)`],
+      check: [`데이터 관측 › 벡터 인덱스의 컬렉션 이름·문서 수`, `내 열람 등급(워크스페이스 설정)과 문서의 security_level`, `활성 워크스페이스와 벡터 타깃 허용 목록`, `관리 콘솔 › AI 모델 바인딩의 임베딩 use-case`, `[[무서명 벡터 청크 진단|gend:admin-ops/troubleshooting/unsigned-vector-chunks]] 절차, Dagster 실행 로그`],
+      actions: [`이름 불일치 → 변환 후 이름으로 검색 설정 교정`, `등급 → 열람 등급 부여 후 재로그인(변경은 재로그인 반영)`, `워크스페이스 → 전환 또는 타깃 허용`, `공급자 → 바인딩 후 재임베딩`, `무서명 → 진단 문서의 복구 절차`],
+      owner: [`ws-admin: 열람 등급·워크스페이스·도구`, `플랫폼 admin: 공급자·바인딩·벡터 타깃`, `파이프라인 작성자: 노드 설정·컬렉션 이름`],
+      recheck: `같은 질문으로 검색 건수 1건 이상, 결과에 document_id·chunk_index 출처(v1.4+)가 표시되고, 등급이 낮은 계정에서는 그 문서가 나오지 않으면 재검증 통과입니다.` }
+  ],
+  questions: [
+    { id: `q1`, k: `개념 설명`, t: `문서 한 건이 GenD에 올라가 AI 검색에 잡히기까지의 과정을 노드 이름과 세 저장소를 들어 순서대로 설명하고, 어느 단계에서 보안 등급이 결정되는지 말해 보세요.`,
+      rubric: `소스(업로드/s3_op/web_crawl/db_source) → builtin.parse(텍스트+메타, security_level 스탬프: 기본 PUBLIC, 위저드 기본 CONFIDENTIAL, 미지정 판정 CONFIDENTIAL) → builtin.chunk(청킹 정책·품질 게이트) → builtin.embed(외부 공급자 바인딩 필요, 타임아웃 30초) → builtin.vector(Weaviate 컬렉션, snake→Pascal) / builtin.graph(PostgreSQL 그래프 스토어) / 문서 레코드·메타는 PG. 뱃지 PG·Vec·Graph로 확인. Dagster가 실행. 등급은 파싱 단계에서 찍히고 AI 조회 시 호출자 열람 등급과 비교.` },
+    { id: `q2`, k: `원인 분석`, t: `설치 직후 고객이 "용어 사전, 데이터 리니지, 스키마 그래프가 전부 비어 있다"고 합니다. 문서 근거로 가능한 원인과 확인 순서를 적어 보세요.`,
+      rubric: `후보: 임베딩 공급자 미등록·미바인딩(설치 §6.6 — 용어집·계보·스키마 그래프의 선행 조건, skipped_no_provider로 구조만 동기화), 스키마 동기화 미실행(ADR-0074: 구조 먼저, 임베딩은 명시적으로), 대화형 LLM 공급자 미등록(§6.7), 활성 워크스페이스 미선택, 메뉴 표시 설정. 확인: 관리 콘솔 › AI 모델 제공자/바인딩(임베딩 use-case 전사 바인딩), 스키마 동기화 결과(skipped_no_provider 여부), Dagster 실행 로그, 워크스페이스 선택. 대응: 공급자 등록(GenOS 서비스 라우터 주소) → 바인딩 → 동기화·임베딩 재실행. 확정 금지.` },
+    { id: `q3`, k: `PM 판단`, t: `공공 고객이 "HWP 공문 5만 건을 적재하고, 자체 비식별 서버를 거쳐 들어오게 해 달라"고 합니다. 설정·확인 필요·추가 개발로 나누고, 일정과 검수에 넣을 항목을 적어 보세요.`,
+      rubric: `설정: HWP 업로드(지원 목록), 파이프라인 스튜디오 위저드, 보안 등급 스탬프, PII 관리(Presidio)로 대체 가능한 부분. 확인 필요: HWP 표·서식 파싱 품질(수치 없음), 5만 건 적재 처리량·임베딩 비용, 파일명 바이트 한도 영향, 공급자(임베딩·VLM) 범위. 추가 개발/로드맵: 커스텀 전처리 노드 http_api가 비활성 → 외부 비식별 서버 연동은 현재 불가, 제공 시점 확인 또는 사전 비식별 후 업로드로 우회. 일정: 공급자 등록 선행, 샘플 100건 시험 → 처리량 측정 → 전체 적재. 검수: 샘플 N건 뱃지 3종, 벡터 인덱스 문서 수 일치, 등급별 노출 0건, 표 추출 정확도는 합의 기준.` }
+  ],
+  facts: [
+    `입구 4종: DB 커넥터(연합, 복사 없음), 파일·문서 수집(/ingestion, 파이프라인/실행/문서 3탭), 파이프라인 스튜디오(소스→처리→스케줄→확인 위저드, 드라이런 v1.4+, 배포·롤백), CSV·Excel→Iceberg(.xls 거부, 헤더 초과 칸은 경고 없이 버려짐).`,
+    `노드: 소스 s3_op·db_source·web_crawl·REST / 변환 builtin.parse→builtin.chunk→builtin.embed / 적재 builtin.vector(Weaviate 기본, Oracle 23ai, Milvus 미제공)·builtin.graph(PostgreSQL) / 연동 http_api(비활성: 외부 호출 허용 목록 연동 후 제공) / 유지보수 retention. db_source는 커넥터 선택지 비어 있음·실행 경로 미연결 기록.`,
+    `builtin.parse 설정: processor auto/local, security_level(PUBLIC/CONFIDENTIAL/TOP_SECRET, 노드 기본 PUBLIC, 위저드 기본 CONFIDENTIAL, 워크스페이스 상한 max_member_clearance 초과는 전역 관리자만), page_range, extract_images, ocr_lang(kor+eng), vlm_caption. builtin.embed 타임아웃 기본 30초.`,
+    `파일 형식: PDF·DOCX·HWP·TXT, XLSX·CSV, PNG·JPG·TIFF(OCR), MP3·WAV(STT). HWPX 언급. 파일명 한글 83자+.txt(253B) 가능, 84자(256B) 거부.`,
+    `컬렉션 이름 snake_case→PascalCase(yahoo_chunks→YahooChunks). 검색·MCP·CLI --class는 변환 후 이름. 벡터 적재 노드가 MCP 검색 도구를 자동 등록(v1.4.0+).`,
+    `벡터 타깃: admin 등록 → 워크스페이스 허용 → 파이프라인 참조. 문서 하나는 한 인스턴스에만. 삭제는 타깃까지 전파.`,
+    `스키마 동기화 ADR-0074: 구조 먼저, 임베딩은 명시적으로. 공급자 없으면 skipped_no_provider. 임베딩 공급자 등록(설치 §6.6)이 용어집·계보·스키마 그래프의 선행 조건, 대화형 LLM 공급자(§6.7)가 AI 채팅·SQL 설명의 선행 조건.`,
+    `확인 화면: 수집 › 문서(PG·Vec·Graph 뱃지), 데이터 관측 › 벡터 인덱스, 파이프라인 모니터링(Dagster, v1.4.4부터 관리자 전용). 무서명 벡터 청크 진단 문서 존재.`,
+    `Medallion Bronze/Silver/Gold. 데이터 마트 ws-admin 위임(ADR-0078). 학습 데이터셋은 Iceberg 스냅샷 버전 고정(ADR-0027), 저장소 쿼터(ADR-0039).`,
+    `HWP 파싱 품질 수치, 적재 처리량, http_api 제공 시점은 문서에 없음.`
+  ],
+  gloss: [
+    [`파이프라인 스튜디오`, `수집→파싱→청킹→임베딩→적재를 캔버스로 조립하는 도구`, `4단계 위저드, Dagster 실행, 드라이런`, `노코드 범위와 비활성 노드`],
+    [`PG · Vec · Graph 뱃지`, `파일이 세 저장소에 들어갔는지 표시`, `수집 › 문서 화면`, `검수 증빙으로 사용`],
+    [`컬렉션`, `벡터 DB 안 문서 묶음`, `snake_case → PascalCase 변환`, `운영 교육 항목`],
+    [`보안 등급 스탬프`, `문서·청크에 찍는 PUBLIC/CONFIDENTIAL/TOP_SECRET`, `builtin.parse의 security_level`, `고객 분류 체계 매핑`],
+    [`임베딩 공급자`, `청크를 벡터로 바꿔 주는 외부 모델 주소`, `AI 모델 제공자 + 바인딩, GenOS 서비스 라우터 가능`, `범위에 공급자 포함 여부`],
+    [`Dagster`, `파이프라인을 실제로 돌리는 실행기`, `적재·PII 스캔·품질 스캔, 센서 기반`, `"즉시 시작 아님" 안내`],
+    [`Medallion`, `Bronze→Silver→Gold 정제 단계`, `iceberg.cdc.* → stg_* → 마트`, `레이크 설계 어휘`]
+  ],
+  docs: [
+    {t: `데이터 수집`, u: `https://gend-docs.genon.ai/features/ingestion/`},
+    {t: `파이프라인 스튜디오 GUI`, u: `https://gend-docs.genon.ai/features/ingestion/pipeline-studio-gui`},
+    {t: `파이프라인 노드 명세`, u: `https://gend-docs.genon.ai/features/ingestion/pipeline-studio-node-specs`},
+    {t: `파일 업로드`, u: `https://gend-docs.genon.ai/features/ingestion/file-upload`},
+    {t: `벡터 타깃`, u: `https://gend-docs.genon.ai/features/ingestion/vector-targets`},
+    {t: `벡터 인덱스`, u: `https://gend-docs.genon.ai/features/governance/vector-index`},
+    {t: `스키마 동기화`, u: `https://gend-docs.genon.ai/features/governance/schema-sync`},
+    {t: `무서명 벡터 청크 진단`, u: `https://gend-docs.genon.ai/admin-ops/troubleshooting/unsigned-vector-chunks`},
+    {t: `CSV·Iceberg 적재 튜토리얼`, u: `https://gend-docs.genon.ai/tutorials/csv-iceberg-ingestion`}
+  ],
+  unknown: [
+    `HWP·HWPX 표·서식 파싱 품질`,
+    `커스텀 전처리 노드(http_api)와 db_source 노드의 현재 상태·제공 시점`,
+    `대량 적재 처리량과 임베딩 비용 산정 근거`
+  ]
+};
+
+/* GenD 4~6회차 콘텐츠 (내부 번호 14~16). 토큰: {ok}{gen}{est}{need}, 링크: [[제목|gend:경로]] */
+const LD4 = {
+  n: 14, track: "gend", title: `Text-to-SQL · RAG · MCP`,
+  basis: `Text-to-SQL, AI 에이전트 채팅, RAG 검색, 쿼리 캐시, AI 모델 제공자·바인딩·사용량, MCP 서버 API 레퍼런스, MCP 연동 튜토리얼, ADR-0057~0061`,
+  figs: {explain: ["d4"]},
+  note: GEND_NOTE,
+  goals: [
+    `자연어 질문이 SQL이 되어 실행되기까지의 4단계와, SqlGuard가 막는 것과 못 막는 것을 설명한다.`,
+    `에이전트 채팅의 Tier 1·2·3을 들어 "AI가 데이터를 바꿀 수 있는가"에 정확히 답한다.`,
+    `외부 에이전트(예: GenOS)가 GenD MCP를 부를 때의 인증 세 가지와, 데이터가 비어 보일 때의 확인 순서를 정한다.`
+  ],
+  explain: [
+    `통역사와 검문소입니다. 사용자가 한국어로 묻으면 <b>ContextGateway</b>가 질문을 정리하고 맥락을 모읍니다. <b>AI Orchestrator</b>가 스키마 그래프·용어 사전·대화 이력을 보고 관련 테이블 10개를 고르고 조인 경로(최대 4홉)를 힌트로 넣어 SQL을 씁니다. <b>SqlGuard</b>는 그 SQL이 조회문(SELECT·WITH) 한 문장인지 구문 트리로 검사해 통과시키고, 마지막으로 Trino가 사용자의 권한(grant·행/열 정책)대로 실행합니다. {ok}`,
+    `여기서 흔한 오해 하나. "AI는 읽기만 한다"는 말은 Text-to-SQL 경로에만 맞습니다. <b>AI 에이전트 채팅</b>은 플랫폼 도구를 써서 마트를 만들고 용어를 등록하는 등 쓰기 작업도 합니다. 다만 <b>Tier</b>라는 결재 체계가 있어 조회(Tier 1)는 자동, 쓰기(Tier 2)는 확인 카드를 승인해야 실제 실행, 파괴적 작업(Tier 3)은 계획만 보여 줍니다. {ok}`,
+    `RAG(문서 검색 답변)는 사서입니다. 질문과 비슷한 청크를 벡터 검색으로 찾되, <b>열람 등급을 서버 쪽 조건으로 강제</b>해 등급 밖 문서는 아예 후보에서 빠집니다. 그래서 "AI가 권한 없다고 답한다"는 민원은 모델이 아니라 등급 판정의 문제입니다. {ok} 모델 자체는 GenD가 띄우지 않고 외부 공급자(OpenAI 호환 엔드포인트, GenOS 서비스 라우터 등)를 등록해 씁니다. {ok}`
+  ],
+  apply: [
+    { h: `Text-to-SQL 처리 흐름`,
+      table: { head: [`단계`, `하는 일`, `PM이 볼 점`],
+        rows: [
+          [`① ContextGateway {ok}`, `요청 전처리, 컨텍스트 수집`, `—`],
+          [`② AI Orchestrator {ok}`, `스키마 그래프·용어집·대화 이력 참조, 관련 테이블 10개 선정, 직접 조인 + 다중 홉 조인 경로 힌트(≤4홉, v1.4+)`, `정확도는 스키마 그래프·용어 사전이 채워져 있어야 오른다(3회차 공급자 선행)`],
+          [`③ SqlGuard {ok}`, `조회문(SELECT·WITH) 한 문장만 통과. 주석·괄호·CTE 안에 숨긴 변경문도 구문 트리로 거부(v1.4.2+)`, `"AI로 데이터 수정"은 이 경로에서 불가`],
+          [`④ 실행·응답 {ok}`, `Trino 실행(grant·행/열 정책 적용), SQL·설명·실행 결과, 캐시 히트 표시, 자동 실행 모드`, `[[쿼리 캐시|gend:features/ai/query-cache]]는 같은 질문의 재실행을 줄임`]
+        ] },
+      items: [
+        `AI가 "데이터 접근 권한이 없다"고 답할 때의 등급 결정 순서: ① 관리자가 테이블에 직접 지정한 등급 → ② 내 워크스페이스 소유 데이터면 워크스페이스 기본 등급(v1.2.1+) → ③ 카탈로그 기본 등급 → ④ 없으면 CONFIDENTIAL. 새로 올린 데이터나 등록 안 된 카탈로그는 기본적으로 AI가 읽지 못합니다. {ok} [[Text-to-SQL|gend:features/ai/text-to-sql]]`
+      ] },
+    { h: `AI 에이전트 채팅과 Tier 안전장치`,
+      intro: `도구 수는 AI 기능 개요에 46개, 에이전트 채팅 페이지에 49개(Tier 1 자동 24 · Tier 2 확인 15 · Tier 3 계획)로 문서 간 수치가 다릅니다. 현장 버전에서 확인합니다. {ok}`,
+      table: { head: [`Tier`, `동작`, `예시`],
+        rows: [
+          [`Tier 1 · 자동 {ok}`, `즉시 실행, 결과 표시`, `SELECT, 카탈로그 조회, 품질 점수, 용어 조회, 문서 검색(v1.4+), 문서·파일 저장소 목록(v1.4.2+)`],
+          [`Tier 2 · 확인 {ok}`, `승인 카드 표시 → 사용자가 [실행]을 누르면 <b>실제로 실행</b>`, `마트 생성, PII 스캔, 쿼리 저장, 용어 생성·수정·삭제`],
+          [`Tier 3 · 계획 {ok}`, `실행 계획만 텍스트로 안내`, `커넥터 생성, 파이프라인 실행, 데이터 삭제`]
+        ] },
+      items: [
+        `문서 검색 결과에는 document_id·chunk_index 출처가 붙습니다(v1.4.0+). 검수에서 출처 대조에 씁니다. {ok}`,
+        `Hybrid RAG(벡터+그래프+온톨로지)는 ADR-013에 설계가 있습니다. 구현 범위는 {need}`
+      ] },
+    { h: `MCP 서버와 모델 공급자`,
+      table: { head: [`항목`, `내용`, `근거`],
+        rows: [
+          [`엔드포인트`, `<code>POST /mcp</code> — JSON-RPC 2.0 Streamable HTTP(initialize·tools/list·tools/call·resources/*). 루트 경로이지 <code>/api/v1/mcp</code>가 아님`, `{ok} [[MCP 서버 API|gend:api-reference/platform/mcp-server]]`],
+          [`인증 3종`, `Bearer JWT / Basic 개인 트래킹 키(v1.3+, 감사가 나에게 귀속) / OAuth 디스커버리(v1.4+, RFC 9728 — Claude Desktop·Cursor 등 표준 클라이언트가 로그인 창을 띄움)`, `{ok} [[MCP 연동 튜토리얼|gend:tutorials/mcp-integration]]`],
+          [`워크스페이스`, `<code>X-Workspace-Slug</code> 또는 활성 워크스페이스. 워크스페이스 공용 키(v1.4+, ADR-0060), 키의 도구 범위 tool_scope(ADR-0061)`, `{ok}`],
+          [`도구 수`, `39개 실측(2026-08-21, 범위 문서), Claude Desktop 예시 33개 — 역할·워크스페이스·버전별 차이로 보임`, `{ok} {est}`],
+          [`관리`, `관리 콘솔 › MCP 게이트웨이(호출 로그·Rate Limit), MCP 도구. 워크스페이스는 ws-admin이 조회 도구를 만들어 마켓플레이스에 발행`, `{ok} [[MCP 도구 위저드|gend:features/workspace/mcp-tools-wizard]]`],
+          [`모델 공급자`, `관리 콘솔 › AI 모델 제공자(OpenAI 호환 등 외부 엔드포인트, API 키는 Vault, 헬스체크, 모델 화이트리스트, 단가) → AI 모델 바인딩(use-case × 워크스페이스) → AI 모델 사용량(토큰·비용·실패율)`, `{ok} [[AI 모델 제공자|gend:admin-ops/llm-providers]]`],
+          [`GenOS 접점`, `GenOS 에이전트(MCP 노드) → GenD /mcp. 신원·워크스페이스·열람 등급이 화면과 동일 적용. 임베딩·LLM 공급자로 GenOS 서비스 라우터 등록`, `{ok} 온보딩 여정 §5, 설치 §6.6·6.7`]
+        ] } }
+  ],
+  task: {
+    title: `등급 결정 순서와 Tier 표, MCP 인증 옵션 정리하기 (문서 기반)`,
+    steps: [
+      `[[Text-to-SQL|gend:features/ai/text-to-sql]]의 "AI가 데이터 접근 권한이 없다고 답할 때" 절에서 등급 결정 순서 4줄과 "어떻게 푸나"의 두 경우를 적습니다.`,
+      `[[AI 에이전트 채팅|gend:features/ai/agent-chat]]의 Tier 표에서 Tier 2 예시 중 "실제로 리소스를 만드는" 도구 이름을 적습니다.`,
+      `[[MCP 연동 튜토리얼|gend:tutorials/mcp-integration]] "1단계 인증 자격 준비"의 옵션(A·A2·OAuth)과 각각 누가 쓰는지 적습니다.`
+    ],
+    evidence: [[`order`, `등급 결정 순서 4단계`], [`tier2`, `Tier 2에서 실제로 만드는 도구 예`], [`auth`, `MCP 인증 옵션 3가지`], [`path`, `MCP 엔드포인트 경로`]],
+    expected: `④ "없으면 CONFIDENTIAL"이 핵심이고, Tier 2의 save_query·create_data_mart·create_glossary_term 등은 승인 시 실제 생성됩니다. {ok} 엔드포인트는 루트 <code>/mcp</code>입니다. {ok}`,
+    fallback: `운영 계정을 받으면 AI 어시스턴트에서 tpch 카탈로그로 조회 질문 하나를 던져 SQL·설명·캐시 표시를 캡처하고, 변경문을 유도하는 질문으로 SqlGuard 거부 문구를 확인합니다. Tier 2 확인 카드는 승인하지 않습니다.`
+  },
+  pm: {
+    pitch: `자연어로 물으면 GenD가 SQL을 만들어 조회만 실행합니다. 조회 밖의 작업은 사용자가 확인 카드를 승인해야만 실행되고, 커넥터 생성이나 삭제 같은 작업은 계획만 보여 줍니다. AI가 참조하는 데이터는 사용자의 열람 등급 안으로 제한됩니다.`,
+    avoid: [
+      `"AI는 데이터를 절대 바꾸지 못합니다": 에이전트 채팅의 Tier 2는 승인 후 실제 실행됩니다. 정확히 말해야 합니다. {ok}`,
+      `"정확도 95%": Text-to-SQL 정확도 수치는 문서에 없습니다. 질문 세트·정답 기준·데이터로 측정 방법을 먼저 합의합니다. {need}`,
+      `"GPT 없이도 됩니다": GenD는 모델을 띄우지 않습니다. 공급자(외부 API 또는 GenOS 서빙)가 범위에 있어야 합니다. {ok}`
+    ],
+    table: [
+      [`범위`, `AI 기능은 공급자(임베딩·LLM) + 바인딩 + 스키마 그래프·용어 사전 구축이 묶여야 동작합니다. 용어 사전은 고객 현업 참여가 필요한 범위입니다.`, `용어 사전 작성 R&R은 고객과 합의`],
+      [`일정`, `Text-to-SQL 정확도는 용어 사전·스키마 그래프가 채워지는 만큼 오릅니다. PoC 기간에 용어 정리 회차를 넣습니다.`, `PoC 설계는 내가`],
+      [`비용`, `AI 모델 사용량 대시보드(토큰·비용)가 있어 공급자 비용을 워크스페이스별로 볼 수 있습니다. 외부 API면 토큰 과금, GenOS 서빙이면 GPU·크레딧.`, `단가는 공급자 계약`],
+      [`검수`, `조회 질문 세트의 SQL 정답률, 변경 유도 질문의 SqlGuard 거부율, 등급 다른 계정의 출처 노출 0건, Tier 2 무승인 실행 0건.`, `기준값은 합의`],
+      [`리스크`, `MCP 경로 오기재(/api/v1/mcp), 워크스페이스 미설정 토큰, 문서 간 도구 수 차이로 인한 기대 불일치.`, `현장 버전에서 도구 목록 확정`]
+    ],
+    devq: [
+      [`Text-to-SQL 정확도를 고객 사례에서 어떻게 측정했고, 어떤 질문 세트와 기준을 썼나요?`, `"정확도 N%" 요구에 측정 정의를 제안해야 합니다.`],
+      [`GenOS 에이전트에서 GenD MCP를 부를 때 권장 인증(JWT 전달·공용 키·트래킹 키)과 신원 전달(ADR-0064) 지원 범위는?`, `통합 데모 설계와 보안 검토 항목입니다.`],
+      [`Hybrid RAG(ADR-013)의 구현 범위와 도구 수(46/49/39/33) 차이의 이유는?`, `고객 설명 자료의 수치를 맞춰야 합니다.`]
+    ]
+  },
+  cases: [
+    { title: `외부 에이전트(GenOS)가 GenD MCP를 호출했는데 데이터가 비어 보이는 경우`,
+      symptom: `GenOS 에이전트가 GenD MCP 도구로 매출 테이블을 조회하는데 결과가 빈 목록이거나 "권한 없음"입니다. 같은 사람이 GenD 화면에서 SQL을 실행하면 정상입니다.`,
+      causes: [`토큰에 활성 워크스페이스가 없음(X-Workspace-Slug 미설정)`, `에이전트 신원(M2M·공용 키)에 해당 테이블 grant가 없음(deny-by-default)`, `호출자 열람 등급이 테이블 등급보다 낮음(화면 SQL은 되지만 AI·MCP 경로는 등급 적용)`, `경로를 /api/v1/mcp로 잘못 호출`, `키의 tool_scope가 해당 도구를 포함하지 않음`, `워크스페이스 미배정·재로그인 전 상태`],
+      check: [`<code>tools/list</code> 응답에 도구가 보이는지, 401(인증)과 403(권한) 구분 ([[API 인증|gend:api-reference/authentication]])`, `isError 응답의 거부 사유 문구(v1.4.4+ 워크스페이스 배정 안내 등)`, `데이터 액세스 › 부여된 권한에서 호출 신원의 grant`, `호출 신원의 열람 등급과 테이블 등급`, `관리 콘솔 › MCP 게이트웨이 호출 로그, 감사 로그`],
+      actions: [`워크스페이스 → 헤더 설정 또는 공용 키 사용`, `grant → 권한 요청·승인(5회차)`, `등급 → 열람 등급 부여 후 재발급`, `경로 → /mcp로 교정`, `범위 → tool_scope 조정`],
+      owner: [`GenOS 개발팀: MCP 노드 설정·헤더`, `GenD ws-admin: 공용 키·도구·등급`, `PM: 어느 신원으로 호출하는지(사용자 JWT vs M2M) 결정`],
+      recheck: `같은 토큰으로 tools/list에 도구가 나오고, 조회 도구 1건이 성공하며, 등급이 낮은 신원으로는 같은 호출이 거부되면 재검증 통과입니다.` }
+  ],
+  questions: [
+    { id: `q1`, k: `개념 설명`, t: `고객 보안 담당이 "AI가 SQL을 만들어 실행한다니 DELETE도 할 수 있는 것 아니냐"고 묻습니다. Text-to-SQL과 에이전트 채팅을 구분해 정확히 답해 보세요.`,
+      rubric: `Text-to-SQL: ContextGateway → Orchestrator → SqlGuard(조회문 SELECT·WITH 한 문장만, 구문 트리 판정 v1.4.2+, CTE·주석 속 변경문도 거부) → Trino(grant·행/열 정책) — DELETE 불가. 에이전트 채팅: Tier 1 자동(조회), Tier 2 확인 후 실제 실행(마트 생성·쿼리 저장·용어 생성 등 — 데이터 삭제는 아님), Tier 3 계획만(커넥터 생성·파이프라인 실행·데이터 삭제). 즉 데이터 삭제는 AI가 실행하지 않고 계획만 안내. 그래도 Tier 2는 리소스를 만든다는 점을 숨기지 않을 것. 열람 등급·감사 로그 언급 시 가점.` },
+    { id: `q2`, k: `원인 분석`, t: `같은 워크스페이스의 두 사용자가 같은 질문을 했는데 한 명은 SQL과 결과를 받고, 다른 한 명은 "데이터 접근 권한이 없다"는 답을 받습니다. 두 사람 모두 SQL 편집기에서는 해당 테이블을 조회할 수 있습니다. 원인 후보와 확인 순서를 적어 보세요.`,
+      rubric: `SQL 편집기는 되는데 AI만 거부 → 접근 권한(grant)이 아니라 열람 등급(clearance) 문제(FAQ·Text-to-SQL 문서). 후보: 두 사람의 열람 등급 차이(전역 gend-llm-* 역할 vs 워크스페이스 한정 등급 — 낮은 쪽 적용), 테이블 등급이 CONFIDENTIAL/TOP_SECRET 또는 미지정(=CONFIDENTIAL), 등급 변경 후 재로그인 안 함, 활성 워크스페이스 다름, 캐시 히트 차이는 아님. 확인: 각자 열람 등급(워크스페이스 설정), 테이블 등급 결정 순서(테이블 지정→워크스페이스 기본→카탈로그 기본→CONFIDENTIAL), 재로그인, 감사 로그. 대응: 등급 부여 또는 카탈로그·워크스페이스 기본 등급 지정. 확정 금지.` },
+    { id: `q3`, k: `PM 판단`, t: `고객이 "직원이 GenOS 비서에게 물으면 GenD의 매출 DB를 조회해 답하게 하고, 정확도 95%를 보장해 달라"고 합니다. 연동 방식, 측정 정의, 검수 기준, 리스크를 제안서 문장으로 적어 보세요.`,
+      rubric: `연동: GenOS 에이전트(MCP 노드) → GenD /mcp(JSON-RPC 2.0), 인증은 사용자 JWT 전달·워크스페이스 공용 키·트래킹 키 중 선택(권장안은 개발팀 확인), X-Workspace-Slug, 열람 등급·grant를 에이전트 신원에 부여. 정확도: "95%" 대신 질문 세트(N개, 업무 대표성), 정답 SQL/결과 기준, 데이터 스냅샷, 용어 사전 구축 전후 측정, 판정자, 재측정 주기를 합의. 검수: 정답률, SqlGuard 거부율, Tier 2 무승인 실행 0건, 등급 노출 0건, 응답시간. 리스크: 용어 사전 미구축 시 정확도 저하, 공급자(LLM) 비용·장애, 도구 수·버전 차이, GenOS 전용 연동 규격 미정. 가정과 합의 필요 표시.` }
+  ],
+  facts: [
+    `Text-to-SQL 흐름: ContextGateway(전처리·컨텍스트) → AI Orchestrator(스키마 그래프·용어집·대화 이력, 관련 테이블 10개, 직접 조인 + 다중 홉 조인 경로 힌트 ≤4홉 v1.4+) → SqlGuard(조회문 SELECT·WITH 한 문장만, 구문 트리 판정 v1.4.2+) → Trino 실행. 응답에 SQL·설명·캐시 히트, 자동 실행 모드. 쿼리 캐시 기능 있음.`,
+    `AI가 권한 없다고 답할 때 등급 결정 순서: ① 테이블 직접 지정 등급 → ② 워크스페이스 소유 데이터면 워크스페이스 기본 등급(v1.2.1+) → ③ 카탈로그 기본 등급 → ④ 없으면 CONFIDENTIAL. 공용 카탈로그는 카탈로그 기본 등급, 워크스페이스 데이터는 워크스페이스 기본 등급 지정으로 해결.`,
+    `AI 에이전트 채팅(/ai/chat): 플랫폼 도구 46개(AI 개요) 또는 49개(에이전트 채팅 페이지: Tier 1 자동 24, Tier 2 확인 15, Tier 3 계획). Tier 1 조회·카탈로그·품질·용어·문서 검색(v1.4+)·문서/파일 목록(v1.4.2+); Tier 2 마트 생성·PII 스캔·쿼리 저장·용어 생성/수정/삭제 — 승인 시 실제 실행(save_query·create_data_mart·create_glossary_term 등 6개는 리소스 생성/수정/삭제); Tier 3 커넥터 생성·파이프라인 실행·데이터 삭제는 계획만.`,
+    `RAG: 벡터 검색에 열람 등급을 server-side where로 강제. 문서 검색 결과에 document_id·chunk_index(v1.4.0+). Hybrid RAG(벡터+그래프+온톨로지) ADR-013.`,
+    `MCP 서버: POST /mcp(루트), JSON-RPC 2.0 Streamable HTTP, initialize·tools/list·tools/call·resources/list·resources/read. 응답 봉투는 result 또는 error 하나만. OAuth 디스커버리 RFC 9728(v1.4+), GEND_MCP_RESOURCE_IDENTIFIER 절대 URL 필수.`,
+    `MCP 인증: Bearer JWT / Basic 개인 트래킹 키(v1.3+, gend-user-*, v1.4 이전 Trino 도구 미동작 이슈) / OAuth 로그인(v1.4+). 워크스페이스 공용 키(v1.4+, ADR-0060), 트래킹 키 직접 수용·만료일·허용 IP(ADR-0058), tool_scope(ADR-0061). X-Workspace-Slug.`,
+    `도구 수: 39개 실측(2026-08-21, 범위 문서), Claude Desktop 연동 예시 33개. 관리 콘솔 › MCP 게이트웨이(호출 로그·Rate Limit)·MCP 도구. ws-admin이 조회 도구를 만들어 마켓플레이스 발행. 벡터 적재 노드가 검색 도구 자동 등록(v1.4.0+).`,
+    `AI 모델 제공자: 외부 LLM/VLM/임베딩 엔드포인트 등록(OpenAI 호환 등), API 키 Vault, 헬스체크, 모델 화이트리스트, 단가. 바인딩 use-case × 워크스페이스. 사용량 대시보드(토큰·비용·실패율). 임베딩 공급자(설치 §6.6)·대화형 LLM(§6.7, v1.4.2+)이 선행 조건.`,
+    `GenOS 접점: GenOS 에이전트(MCP 노드) → GenD /mcp, 신원·워크스페이스·열람 등급 동일 적용(온보딩 여정 §5). 임베딩 공급자로 GenOS 서비스 라우터 등록.`,
+    `v1.4.4: MCP 도구 실행 직전 판정이 카탈로그 접두 시스템 카탈로그(iceberg.information_schema 등)도 차단. isError 응답에 거부 사유 문구. Text-to-SQL 정확도 수치는 문서에 없음.`
+  ],
+  gloss: [
+    [`SqlGuard`, `AI가 만든 SQL이 조회문 한 문장인지 검사하는 문지기`, `Text-to-SQL ③단계, 구문 트리 판정`, `쓰기 요구는 범위 밖`],
+    [`Tier 안전장치`, `AI 도구를 자동·확인·계획으로 나눈 결재 체계`, `에이전트 채팅 Tier 1/2/3`, `"AI가 바꿀 수 있는가"의 정확한 답`],
+    [`열람 등급(clearance)`, `사용자가 AI로 볼 수 있는 데이터 등급`, `gend-llm-* 역할 또는 워크스페이스 한정 등급, 재로그인 반영`, `고객 분류 매핑과 기본 등급 지정`],
+    [`스키마 그래프 · 용어 사전`, `표 관계도 · 업무 용어 정의`, `Orchestrator가 참조. 임베딩 공급자 선행`, `현업 참여 범위`],
+    [`MCP 서버`, `AI 클라이언트가 GenD를 도구로 쓰는 입구`, `POST /mcp, JSON-RPC 2.0, 인증 3종`, `GenOS 연동 경로`],
+    [`트래킹 키 · 공용 키`, `개인 장기 연동 키 / 워크스페이스 팀 연동 키`, `ADR-0057~0061, tool_scope`, `키 만료·허용 IP 운영`],
+    [`AI 모델 제공자 · 바인딩`, `외부 모델 주소 등록 / 용도별·워크스페이스별 연결`, `관리 콘솔 AI&MCP 플랫폼`, `공급자 범위와 비용`]
+  ],
+  docs: [
+    {t: `Text-to-SQL`, u: `https://gend-docs.genon.ai/features/ai/text-to-sql`},
+    {t: `AI 에이전트 채팅`, u: `https://gend-docs.genon.ai/features/ai/agent-chat`},
+    {t: `RAG 검색`, u: `https://gend-docs.genon.ai/features/ai/rag-search`},
+    {t: `쿼리 캐시`, u: `https://gend-docs.genon.ai/features/ai/query-cache`},
+    {t: `MCP 서버 API`, u: `https://gend-docs.genon.ai/api-reference/platform/mcp-server`},
+    {t: `MCP 연동 튜토리얼`, u: `https://gend-docs.genon.ai/tutorials/mcp-integration`},
+    {t: `MCP 도구 발행 튜토리얼`, u: `https://gend-docs.genon.ai/tutorials/mcp-tool-publish`},
+    {t: `AI 모델 제공자`, u: `https://gend-docs.genon.ai/admin-ops/llm-providers`},
+    {t: `AI 모델 바인딩`, u: `https://gend-docs.genon.ai/admin-ops/llm-bindings`},
+    {t: `API 인증`, u: `https://gend-docs.genon.ai/api-reference/authentication`}
+  ],
+  unknown: [
+    `Text-to-SQL 정확도 측정 방법과 고객 사례 수치`,
+    `도구 수(46/49/39/33) 차이의 이유와 현장 버전의 실제 목록`,
+    `GenOS 에이전트 → GenD MCP의 권장 인증과 신원 전달(ADR-0064) 지원 범위`,
+    `Hybrid RAG(ADR-013) 구현 범위`
+  ]
+};
+
+const LD5 = {
+  n: 15, track: "gend", title: `권한 · 보안 · 거버넌스`,
+  basis: `접근권한 정본 모델, 워크스페이스 격리, 인증(Keycloak), 고객사 IdP 브로커링, 데이터 액세스, 보안 등급, PII 관리, 감사 로그·감사 체인, FAQ, ADR-021·022·0063·0064·0082`,
+  figs: {explain: ["d5"]},
+  note: GEND_NOTE,
+  goals: [
+    `격리 축(워크스페이스)과 권한 축(역할·그룹·grant·ABAC), 그리고 AI 경로의 열람 등급을 층별로 설명한다.`,
+    `"메뉴가 안 보인다", "보이는데 403", "AI만 거부", "사람마다 결과가 다르다"를 증상별로 어느 층 문제인지 가린다.`,
+    `보안 심사 질문(SSO, 감사 로그, PII, 망 분리)에 문서 근거로 답하고 확인 필요 항목을 남긴다.`
+  ],
+  explain: [
+    `건물 출입으로 생각합니다. <b>건물(워크스페이스)</b>에 등록되지 않으면 아무것도 못 봅니다(fail-closed). 건물 안에서 <b>층(부서, ResourceGroup)</b>과 <b>직급(역할 admin·analyst·viewer)</b>이 있고, 각 방 문은 <b>열쇠(DataGrant: 카탈로그·스키마·테이블 단위)</b>가 있어야 열립니다. 방에 들어가도 <b>서류의 일부가 가려져(ABAC: 행 필터·컬럼 마스크)</b> 있을 수 있습니다. 여기까지가 2축 모델입니다. {ok}`,
+    `AI 경로에는 관문이 하나 더 있습니다. <b>열람 등급(clearance)</b>입니다. 데이터에 PUBLIC·CONFIDENTIAL·TOP_SECRET 도장이 찍혀 있고, 등급이 없는 데이터는 CONFIDENTIAL로 봅니다. 그래서 화면에서 SQL은 되는데 AI만 거부하는 일이 생깁니다. 플랫폼 admin이라고 자동으로 열람되지 않고, 등급을 바꾸면 재로그인해야 반영됩니다. {ok}`,
+    `원칙은 <b>deny-by-default</b>입니다. 카탈로그 목록에 테이블이 보여도 SELECT grant가 없으면 403입니다. 보이는 것과 읽을 수 있는 것이 다르다는 점을 고객에게 미리 말해 두면 "권한 오류" 민원의 절반이 설명됩니다. {ok}`
+  ],
+  apply: [
+    { h: `접근 통제 계층`,
+      table: { head: [`층`, `단위`, `내용`, `근거`],
+        rows: [
+          [`L0 워크스페이스`, `격리 축`, `Keycloak 그룹 <code>/tenants/&lt;slug&gt;</code>. 미배정이면 전부 차단(fail-closed). 활성 워크스페이스가 API·MCP 스코프`, `{ok} [[접근권한 정본 모델|gend:admin-ops/multi-tenant/access-control-canonical-model]]`],
+          [`L1 부서`, `ResourceGroup`, `워크스페이스 안의 팀 칸막이`, `{ok}`],
+          [`L2 역할`, `realm role`, `admin · analyst · viewer + 워크스페이스 관리자(ws-admin)`, `{ok}`],
+          [`L3 DataGrant`, `catalog / schema / table`, `요청 → 검토(승인=발급, ADR-0063) → 부여. 커넥터 등록 승인은 1회용`, `{ok} [[데이터 액세스|gend:features/governance/access/]]`],
+          [`L4 ABAC`, `row_filter · column_mask`, `관리 콘솔 › 접근 정책. Trino 실행 시 적용`, `{ok}`],
+          [`AI 관문 · 열람 등급`, `PUBLIC / CONFIDENTIAL / TOP_SECRET`, `대상 3종: 카탈로그·테이블·벡터 컬렉션. 미지정=CONFIDENTIAL. 워크스페이스 한정 등급이 전역보다 낮으면 낮은 쪽`, `{ok} [[보안 등급|gend:features/admin/security-levels/]]`]
+        ] },
+      items: [
+        `권한 요청 상태: pending → approved(관리자 승인) / rejected / cancelled(요청자 취소) / expired(기한 만료). {ok}`,
+        `거부 응답에는 사유(reason_code, v1.3.1+)가 실립니다: Grant 없음 / 네임스페이스 바인딩 / 워크스페이스 미선택 / 시스템 카탈로그 등. 진단은 여기서 시작합니다. {ok}`,
+        `브라우저에 이전 계정의 워크스페이스 선택이 남던 문제는 v1.4.2+에서 계정별 기억으로 수정됐습니다. {ok}`
+      ] },
+    { h: `인증과 SSO`,
+      items: [
+        `Keycloak OIDC(realm gend). UI는 PKCE S256 public 클라이언트, API는 JWT RS256(JWKS 자동 갱신). 클라이언트 매트릭스 6종(gend-ui·gend-api·trino·oauth2-proxy·jupyterhub·grafana), 인증 패턴 3종(직접 JWT / ForwardAuth / Native OIDC). {ok} [[인증|gend:admin-ops/auth]]`,
+        `운영은 Google SSO, 도메인 한정 자동 가입(ADR-0076), 본인 비밀번호 변경(ADR-0090). {ok}`,
+        `<b>고객사 IdP 브로커링(v1.4+)</b>: Okta·Azure AD·사내 Keycloak 등 고객 IdP로 로그인한 사람을 gend realm의 진짜 회원으로 만듭니다. prod Keycloak 변경이라 등록·활성화·회수에 명시 승인이 필요합니다. {ok} [[고객사 IdP 브로커링|gend:admin-ops/auth/identity-federation]]`,
+        `M2M: 서비스 클라이언트(관리 콘솔 › 테넌트&amp;사용자), MCP 트래킹 키·공용 키(4회차). 에이전트 신원과 비회원 데이터 권한은 ADR-0064. {ok}`,
+        `GenOS와의 계정 통일(GenOS 자체 IAM vs Keycloak) {need}`
+      ] },
+    { h: `PII · 감사 · 망`,
+      table: { head: [`영역`, `내용`, `근거`],
+        rows: [
+          [`PII`, `Presidio 자동 탐지 → 관리자 확인/거부(confirmed_by/at 감사) → 마스킹 뷰 생성. 스캔은 Dagster 센서 큐라 즉시 시작이 아님. 활동 로그 4종`, `{ok} [[PII 관리|gend:features/admin/pii/]]`],
+          [`감사 로그`, `전체 API 요청을 AuditMiddleware가 OpenSearch <code>gend-audit*</code>에 적재. 감사 체인 검증 알림, 보존 정책(v1.4.2 업그레이드 시 등록 최대 ~11분). Trino 쿼리 감사 별도`, `{ok} [[감사 체인|gend:admin-ops/monitoring/audit-chain]]`],
+          [`망·플랫폼`, `NetworkPolicy 전면 default-deny(ADR-021), 서비스 간 mTLS Linkerd(ADR-022), 클라이언트 IP 신뢰 모델(ADR-0082), gend-api→Trino JWT는 켜지 않음(평문 HTTP 위 토큰은 검사되지 않음, ADR-0080)`, `{ok}`],
+          [`출하·취약점`, `출하 OSS는 OSI 승인 라이선스만(ADR-0072), CVE 스캐닝, LDAP·S3 자격증명 회전 문서`, `{ok} [[CVE 스캐닝|gend:admin-ops/security/cve-scanning]]`],
+          [`오남용 탐지`, `기본 꺼짐(GEND_ABUSE_DETECTION_ENABLED=false)`, `{ok}`],
+          [`메뉴 가시성`, `관리자가 메뉴를 숨길 수 있음(v1.4.4+). 권한이 아니라 화면만 가림`, `{ok} [[메뉴 표시 설정|gend:admin-ops/menu-visibility]]`]
+        ] } }
+  ],
+  task: {
+    title: `정본 모델과 FAQ로 증상 분류표 만들기 (문서 기반)`,
+    steps: [
+      `[[접근권한 정본 모델|gend:admin-ops/multi-tenant/access-control-canonical-model]]을 읽고 L0~L4 각각을 한 줄로 적습니다.`,
+      `[[FAQ|gend:appendix/faq]]에서 "메뉴가 안 보입니다"의 세 가지 이유와 "AI만 거부"의 설명을 찾습니다.`,
+      `[[보안 등급|gend:features/admin/security-levels/]]에서 등급을 붙일 수 있는 대상 3종과 미지정 데이터의 판정을 적습니다.`
+    ],
+    evidence: [[`layers`, `L0~L4 한 줄 요약`], [`menu`, `메뉴가 안 보이는 세 가지 이유`], [`targets`, `등급 대상 3종`], [`null`, `미지정 데이터 판정`]],
+    expected: `메뉴 사유는 역할 부족 / 관리자가 메뉴 표시를 꺼 둠(v1.4.4+) / 설치에서 꺼진 모듈, 등급 대상은 카탈로그·테이블·벡터 컬렉션, 미지정은 CONFIDENTIAL입니다. {ok}`,
+    fallback: `운영 계정을 받으면 워크스페이스 설정에서 내 열람 등급을, 데이터 액세스 › 부여된 권한에서 내 grant를, 카탈로그에서 보이지만 조회가 403인 테이블이 있는지 확인합니다. 권한 요청은 보내지 않습니다.`
+  },
+  pm: {
+    pitch: `GenD는 워크스페이스로 조직을 격리하고, 테이블 단위 권한 부여와 행·열 정책으로 누가 무엇을 보는지 통제합니다. AI가 참조하는 데이터는 보안 등급과 사용자의 열람 등급으로 한 번 더 제한되며, 모든 API 요청이 감사 로그에 남습니다. 기존 SSO(Okta, Azure AD 등)와는 브로커링 절차로 연결합니다.`,
+    avoid: [
+      `"관리자는 모든 데이터를 AI로 볼 수 있습니다": admin도 열람 등급이 없으면 AI 경로는 막힙니다. {ok}`,
+      `"권한 설정은 하루면 됩니다": 워크스페이스·부서·역할·grant·ABAC·등급 다섯 층을 고객 조직도와 데이터 분류에 매핑하는 설계가 필요합니다. 공수는 {need}`,
+      `"감사 로그 N년 보관": 보존 기간 기본값과 외부 SIEM 반출 방법은 {need}`
+    ],
+    table: [
+      [`범위`, `권한 설계 워크숍(조직도→워크스페이스·부서, 데이터 분류→등급·정책)이 별도 작업입니다. IdP 브로커링은 prod Keycloak 변경 승인 절차가 따릅니다.`, `워크숍 주관은 내가, 승인 절차는 운영팀`],
+      [`일정`, `등급 변경은 재로그인, PII 스캔은 센서 큐 대기, 권한 요청은 승인 리드타임이 있습니다. 검수 일정에 이 지연을 넣습니다.`, `승인자 지정은 고객`],
+      [`비용`, `ABAC 정책 수와 등급 대상 수가 설계·검수 공수를 결정합니다. 정책 개수를 먼저 셉니다.`, `정책 목록은 고객 보안팀`],
+      [`검수`, `계정 2개(역할·부서·grant·정책·등급 다름)로 같은 쿼리·같은 AI 질문을 비교해 노출 0건, 거부 사유 코드가 정확히 나오는지, 감사 로그에 두 요청이 남는지.`, `시나리오 초안은 내가`],
+      [`리스크`, `미지정 데이터=CONFIDENTIAL이라 초기에 "AI가 아무것도 못 읽는다" 민원, 메뉴 표시 설정을 권한으로 오해, 계정 체계 이원화.`, `운영 교육·FAQ 반영`]
+    ],
+    devq: [
+      [`감사 로그 보존 기간 기본값과 SIEM 반출(형식·방법)은 어떻게 되나요?`, `공공·금융 보안 심사의 필수 항목입니다.`],
+      [`고객 IdP 브로커링(Okta·Azure AD) 적용 사례와 소요 기간, 승인 절차는?`, `SSO 연계 일정과 R&amp;R을 적어야 합니다.`],
+      [`한국어 PII(주민번호·계좌·전화) 탐지 정확도와 커스텀 패턴 추가 방법은?`, `비식별 요구의 검수 기준이 됩니다.`]
+    ]
+  },
+  cases: [
+    { title: `같은 질문인데 사용자마다 AI 답이 다르거나 "권한 없음"이 나오는 경우`,
+      symptom: `영업팀 두 명이 같은 자연어 질문을 했는데 결과 행 수가 다르고, 세 번째 사람은 "데이터 접근 권한이 없다"는 답을 받습니다.`,
+      causes: [`행 필터·컬럼 마스크(ABAC) 정책이 부서·속성별로 다르게 적용(정상 동작일 수 있음)`, `열람 등급 차이(워크스페이스 한정 등급이 전역보다 낮으면 낮은 쪽)`, `세 번째 사람의 테이블 grant 없음 또는 활성 워크스페이스 다름`, `등급 변경 후 재로그인 안 함`, `브라우저에 남은 이전 계정의 워크스페이스 선택(v1.4.2 이전)`],
+      check: [`거부 응답의 reason_code(Grant 없음 / 네임스페이스 바인딩 / 워크스페이스 미선택 / 시스템 카탈로그)`, `각자의 열람 등급(워크스페이스 설정)과 테이블 등급`, `데이터 액세스 › 부여된 권한`, `관리 콘솔 › 접근 정책의 행 필터·컬럼 마스크`, `감사 로그에서 세 요청의 판정 기록`],
+      actions: [`정책 차이가 의도면 "정상"으로 고객에게 설명`, `등급 → 부여 후 재로그인`, `grant → 요청·승인`, `워크스페이스 → 전환`],
+      owner: [`ws-admin: 등급·워크스페이스`, `플랫폼 admin: 정책·grant 승인`, `PM: 어떤 차이가 의도된 정책인지 고객 보안팀과 확인`],
+      recheck: `같은 정책·등급·grant를 가진 두 계정은 같은 결과를, 다른 계정은 설계한 대로 다른 결과를 내고, 거부 사유 코드가 설계와 일치하면 재검증 통과입니다.` }
+  ],
+  questions: [
+    { id: `q1`, k: `개념 설명`, t: `고객 보안 담당에게 GenD의 접근 통제를 '격리 축'과 '권한 축', 그리고 AI 경로의 추가 관문으로 나눠 설명해 보세요. "카탈로그에 보이는데 조회가 안 된다"는 현상이 왜 정상인지도 포함하세요.`,
+      rubric: `격리 축 L0 워크스페이스(Keycloak 그룹 /tenants/<slug>, fail-closed, 활성 워크스페이스 스코프). 권한 축 L1 부서(ResourceGroup) → L2 역할(admin·analyst·viewer, ws-admin) → L3 DataGrant(catalog/schema/table, 요청→승인=발급) → L4 ABAC(row_filter·column_mask, Trino 적용). AI 관문: 보안 등급 3단계(대상 카탈로그·테이블·벡터 컬렉션), 열람 등급, 미지정=CONFIDENTIAL, admin도 예외 없음, 재로그인 반영. deny-by-default: 목록에 보여도 SELECT grant 없으면 403 — 설계상 정상. 감사 로그·reason_code 언급 시 가점.` },
+    { id: `q2`, k: `원인 분석`, t: `새 설치 사이트에서 "AI 어시스턴트가 샘플 카탈로그(tpch)조차 읽지 못한다"는 민원이 들어왔습니다. SQL 편집기에서는 tpch 조회가 됩니다. 문서 근거로 원인 후보와 해결 순서를 적어 보세요.`,
+      rubric: `SQL은 되고 AI만 거부 → 열람 등급 문제. 새 설치의 tpch·iceberg 카탈로그는 등급 행이 없어 미지정=CONFIDENTIAL로 판정(Text-to-SQL 문서 등급 결정 순서 ④, 보안 등급 문서). 사용자 열람 등급이 없거나 CONFIDENTIAL 미만. 해결: 카탈로그 기본 등급 지정(공용 카탈로그) 또는 테이블 오버라이드, 사용자에게 열람 등급 부여, 재로그인. 그 밖 후보: 활성 워크스페이스 미선택, 대화형 LLM 공급자 미등록(§6.7)이면 다른 오류. 확인 순서: 거부 사유 문구 → 카탈로그 등급 → 내 열람 등급 → 재로그인 → 공급자 바인딩.` },
+    { id: `q3`, k: `PM 판단`, t: `금융 고객의 보안 심사 체크리스트에 "SSO 연계, 개인정보 자동 탐지, 감사 로그 5년 보관·반출, 망 분리"가 있습니다. 각 항목을 '문서로 답할 수 있는 것 / 확인 필요 / 추가 범위'로 나누고 제안서 문장을 적어 보세요.`,
+      rubric: `SSO: 문서로 답 가능 — Keycloak OIDC, 고객 IdP 브로커링(v1.4+, Okta·Azure AD·사내 Keycloak), 승인 절차; GenOS 계정 통일은 확인 필요. PII: 문서로 답 — Presidio 탐지→관리자 확인→마스킹 뷰, 활동 로그; 한국어 정확도·커스텀 패턴은 확인 필요. 감사: 문서로 답 — 전체 API 요청 OpenSearch gend-audit*, 감사 체인 검증, Trino 쿼리 감사, 보존 정책 존재; 5년 보관 기본값·SIEM 반출은 확인 필요(저장 용량은 추가 범위 가능). 망: NetworkPolicy default-deny, Linkerd mTLS, egress 허용 목록, 폐쇄망 설치(6회차); 고객 망분리 규정 매핑은 설계 작업. 수치 약속 금지, 검수 시나리오 제안.` }
+  ],
+  facts: [
+    `2축 모델: L0 워크스페이스(Keycloak 그룹 /tenants/<slug>, fail-closed, 활성 워크스페이스 스코프) → L1 부서(ResourceGroup) → L2 역할(admin·analyst·viewer, ws-admin) → L3 DataGrant(catalog/schema/table, deny-by-default: 목록에 보여도 grant 없으면 403) → L4 ABAC(row_filter·column_mask, Trino 적용) → AI 경로 열람 등급.`,
+    `보안 등급 PUBLIC/CONFIDENTIAL/TOP_SECRET, 대상 카탈로그·테이블·벡터 컬렉션. 미지정=CONFIDENTIAL. admin도 열람 등급 없으면 AI 차단. 등급 변경은 재로그인 반영. 워크스페이스 한정 등급이 전역보다 낮으면 낮은 쪽. 새 설치의 tpch·iceberg는 등급 행 없음(테이블 오버라이드로 지정).`,
+    `데이터 액세스: 요청(permission_grant) pending → approved/rejected/cancelled/expired. 승인=발급(ADR-0063). 커넥터 등록 승인 1회용(ADR-0065). 거부 사유 reason_code(v1.3.1+): Grant 없음 / 네임스페이스 바인딩 / 워크스페이스 선택 / 시스템 카탈로그.`,
+    `인증: Keycloak OIDC realm gend, UI PKCE S256, API JWT RS256(JWKS 자동 갱신). 클라이언트 6종 gend-ui·gend-api·trino·oauth2-proxy·jupyterhub·grafana. 패턴 3종 직접 JWT/ForwardAuth/Native OIDC. Google SSO(운영), 도메인 한정 자동 가입(ADR-0076), 본인 비밀번호 변경(ADR-0090). 고객사 IdP 브로커링(v1.4+): Okta·Azure AD·사내 Keycloak, prod Keycloak 변경이라 명시 승인.`,
+    `PII: Presidio 탐지 → 관리자 확인/거부(confirmed_by/at) → 마스킹 뷰. Dagster 센서 큐(즉시 시작 아님). 활동 로그 4종. 예측 PII 마스킹 문서 있음.`,
+    `감사: AuditMiddleware → OpenSearch gend-audit*(전체 API 요청), 감사 체인 검증 알림, 보존 정책 등록(v1.4.2 업그레이드 최대 ~11분), Trino 쿼리 감사. 워크스페이스 축 관측은 메트릭 라벨 vs 감사 로그 분업(ADR-0033).`,
+    `망·플랫폼: NetworkPolicy 전면 default-deny(ADR-021), Linkerd mTLS(ADR-022), 클라이언트 IP 신뢰 모델(ADR-0082), gend-api→Trino JWT 미사용(ADR-0080), 출하 OSS OSI 라이선스만(ADR-0072), CVE 스캐닝, LDAP·S3 자격증명 회전. 오남용 탐지 기본 꺼짐.`,
+    `메뉴가 안 보이는 3가지: 역할 부족(요청 가능) / 관리자가 메뉴 표시를 꺼 둠(v1.4.4+, 권한 아님) / 설치에서 꺼진 모듈. FAQ: 화면·SQL은 되는데 AI만 막히면 열람 등급 문제.`,
+    `v1.4.2: 보안 강화·권한 노출 범위 교정, 계정별 워크스페이스 선택 기억. 감사 로그 보존 기본값·SIEM 반출·한국어 PII 정확도·권한 설계 공수는 문서에 없음.`
+  ],
+  gloss: [
+    [`워크스페이스(테넌트)`, `가장 바깥 격리 단위`, `Keycloak 그룹 /tenants/<slug>, fail-closed`, `고객 조직을 몇 개로 나눌지`],
+    [`ResourceGroup · DataGrant`, `부서 칸막이 / 테이블 단위 열쇠`, `데이터 액세스 요청·검토·권한`, `권한 요청·승인 R&amp;R`],
+    [`ABAC`, `속성 조건으로 행을 거르고 열을 가리는 정책`, `접근 정책 메뉴, Trino 적용`, `정책 수와 검수 시나리오`],
+    [`deny-by-default`, `허용이 없으면 거부`, `목록에 보여도 grant 없으면 403`, `"보이는데 안 된다" 민원 예방 설명`],
+    [`reason_code`, `거부 응답에 실리는 사유 코드`, `v1.3.1+, Grant·바인딩·워크스페이스·시스템 카탈로그`, `진단 첫 단계`],
+    [`IdP 브로커링`, `고객 로그인 서버를 GenD 로그인에 연결`, `v1.4+, Okta·Azure AD·사내 Keycloak, 명시 승인`, `SSO 연계 일정`],
+    [`Presidio`, `개인정보 탐지 엔진`, `PII 관리, 마스킹 뷰`, `한국어 정확도`]
+  ],
+  docs: [
+    {t: `접근권한 정본 모델`, u: `https://gend-docs.genon.ai/admin-ops/multi-tenant/access-control-canonical-model`},
+    {t: `워크스페이스 격리`, u: `https://gend-docs.genon.ai/admin-ops/multi-tenant/workspace-isolation`},
+    {t: `인증 (Keycloak)`, u: `https://gend-docs.genon.ai/admin-ops/auth`},
+    {t: `고객사 IdP 브로커링`, u: `https://gend-docs.genon.ai/admin-ops/auth/identity-federation`},
+    {t: `데이터 액세스`, u: `https://gend-docs.genon.ai/features/governance/access/`},
+    {t: `보안 등급`, u: `https://gend-docs.genon.ai/features/admin/security-levels/`},
+    {t: `PII 관리`, u: `https://gend-docs.genon.ai/features/admin/pii/`},
+    {t: `감사 로그`, u: `https://gend-docs.genon.ai/features/admin/audit/`},
+    {t: `감사 체인`, u: `https://gend-docs.genon.ai/admin-ops/monitoring/audit-chain`},
+    {t: `FAQ`, u: `https://gend-docs.genon.ai/appendix/faq`},
+    {t: `메뉴 표시 설정`, u: `https://gend-docs.genon.ai/admin-ops/menu-visibility`}
+  ],
+  unknown: [
+    `감사 로그 보존 기간 기본값과 SIEM 반출 방법`,
+    `한국어 PII 탐지 정확도와 커스텀 패턴`,
+    `GenOS 자체 IAM과 Keycloak의 계정 통일 방안`,
+    `권한 설계 표준 템플릿과 공수`
+  ]
+};
+
+const LD6 = {
+  n: 16, track: "gend", title: `설치 · 운영 · 버전`,
+  basis: `온프렘 설치, 에어갭 반입, 클러스터 배치(ADR-0048), 스케일링, 백업/복원, 모니터링, 운영 가이드, 업그레이드 런북(v1.4.1→1.4.2, v1.4.2→1.4.4), 지원 정책, 릴리스 노트, ADR-0081 환경 모델`,
+  figs: {explain: ["d6a"], "apply:3": ["d6b"]},
+  note: GEND_NOTE,
+  goals: [
+    `온프렘 설치의 전제(노드·디스크·파드 여유·레지스트리)와 에어갭 반입물 두 가지를 말하고 설치 일정의 선행 조건을 적는다.`,
+    `백업·HA·스케일링이 실제로 보장하는 범위(무엇이 안 되어 있는지 포함)를 운영 계약 문장으로 바꾼다.`,
+    `릴리스 주기·지원 정책·순차 업그레이드를 일정과 변경 관리 합의에 반영한다.`
+  ],
+  explain: [
+    `이사입니다. GenD는 <b>Kubernetes라는 건물</b>이 먼저 있어야 들어갑니다. 온프렘은 kubeadm으로 노드 3대 이상을 세우고(Rook-Ceph 저장소는 3대 미만이면 디스크 요청이 영원히 대기), 사내 Harbor 레지스트리에 이미지를 올린 뒤 40개가 넘는 워크로드를 Phase 순서대로 들여놓습니다. {ok}`,
+    `폐쇄망이면 <b>트럭 두 대</b>가 필요합니다. 하나는 이미지·차트를 담은 에어갭 번들, 다른 하나는 설치 스크립트가 들어 있는 소스 트리입니다. 번들만 가져가면 설치를 시작조차 못 합니다. {ok} 설치가 끝나면 첫 관리자 부트스트랩(계정 → 워크스페이스 → 토큰 → grant → 임베딩·LLM 공급자 등록)까지 해야 사용자가 뭔가를 볼 수 있습니다. {ok}`,
+    `운영에서 PM이 꼭 알아야 할 것은 "문서에 있는 것"보다 <b>"아직 배포되지 않은 것"</b>입니다. Velero 백업과 Vault 스냅샷 CronJob은 prod에 없고, 온프렘 실시간 모델 서빙(KServe)은 미포함이며, Stateful 구성요소의 HA는 진행 중입니다. 백업 암호화 키를 잃으면 백업도 잃습니다. {ok}`
+  ],
+  apply: [
+    { h: `설치 환경과 전제 조건`,
+      table: { head: [`항목`, `내용`, `근거`],
+        rows: [
+          [`배포 환경`, `로컬 Kind / 클라우드 Azure AKS / <b>온프렘 kubeadm 3노드</b>(Rook-Ceph, 자체서명 또는 사내 CA, 사내 Harbor)`, `{ok} [[온프렘 설치|gend:admin-ops/installation/onprem]]`],
+          [`노드`, `3대 이상(Ceph mon 3·replicated 3), Ubuntu 22.04/24.04, 노드당 8코어/32GB 이상, OSD용 raw 디스크 노드당 1개(파티션 라벨 'ceph' 시작 금지), etcd 저지연 디스크`, `{ok}`],
+          [`파드 여유`, `kubelet max-pods 여유 70 이상(GenD 파드 ~60 + Job). GenOS 동거 단일 노드는 250 권고 — 기본 110은 넘침(Too many pods)`, `{ok}`],
+          [`네트워크`, `포트 6443/10250/2379-2380/VXLAN 4789, underlay MTU 1500 미만이면 Calico MTU 설정`, `{ok}`],
+          [`도구`, `kubeadm/kubelet/kubectl v1.31, helm v3.16.4, containerd; 설치 호스트에 kubectl·helm·jq·openssl·curl·python3·base64`, `{ok}`],
+          [`형상 스위치`, `GEND_DMZ_ENABLED(Phase 7 DMZ 릴레이), GEND_EGRESS_POLICY·GEND_INGRESS_POLICY(Phase 9, 기본 on), GEND_FALCO_ENABLED(에어갭이면 false), SUPERSET_ADMIN_PASSWORD 필수(16자+)`, `{ok}`]
+        ] } },
+    { h: `에어갭 반입과 첫 관리자`,
+      items: [
+        `번들 생성(공급자측) <code>scripts/make_airgap_bundle.sh vX.Y.Z</code> → 매체 반입 → 고객측 <code>load-airgap-images.sh &lt;사이트 레지스트리&gt;</code>(레포 불필요, 단독 실행). GPU 이미지는 선택(v1.4+). 트리의 VERSION과 태그가 다르면 시작 전에 멈춤(v1.4.4+). {ok} [[에어갭 반입|gend:admin-ops/operations/airgap]]`,
+        `<b>번들에 설치 스크립트는 없습니다.</b> 릴리스 태그의 소스 트리(infra/scripts 오케스트레이터 + 사이트 프로파일)를 함께 실어야 Phase 1~9를 시작할 수 있습니다. {ok}`,
+        `검증된 조합: 폐쇄망·단일 노드·번들 단독 설치 리허설 34회 + 실제 GenOS 위 동거 설치(사내 VM). {ok}`,
+        `첫 관리자 부트스트랩(v1.4+): §6.1 관리자 계정 → §6.2 워크스페이스 → §6.3 확인 → §6.4 grant와 그룹 동기화 → §6.6 임베딩 공급자(용어집·계보·스키마 그래프 선행) → §6.7 대화형 LLM 공급자(AI 채팅·SQL 설명 선행, v1.4.2+). {ok}`,
+        `온프렘 v1.4.2~v1.4.4는 KServe 미포함 → 실시간 모델 서빙 미제공. v1.4.4에서 ingress 라우트 사이트의 Dagster 관리자 전용 미적용·도구 화면 502 가능이 알려진 제약. {ok}`,
+        `환경 모델: 개발계(GitOps 자동) · 검증계(회차) · 운영계(수동 실행). ADR-0081 {ok}`
+      ] },
+    { h: `운영: HA · 스케일링 · 백업 · 모니터링`,
+      table: { head: [`영역`, `문서가 보장하는 것`, `보장하지 않거나 미배포`],
+        rows: [
+          [`HA`, `gend-api 2/6, gend-ui 2~5, gend-relay 2~4 등 stateless HA. 2026-05-20 AKS prod 실측: 4노드 순차 drain, 113파드 축출, 외부 트래픽 99.5% uptime {ok}`, `Stateful(PostgreSQL·Vault·Keycloak·OpenSearch) HA는 Phase 1~8 별도 진행 {ok} → "무중단"은 stateless에 한정`],
+          [`스케일링`, `gend-api HPA(CPU 70%·메모리 80%), Trino 워커 HPA 1~3, Weaviate HPA, VPA {ok}`, `동시 사용자 기준·부하시험 결과 없음 {need}`],
+          [`백업`, `CronJob(KST): PostgreSQL 전체 03:00, OpenSearch 감사 03:20, Weaviate 03:30, 노트북 PVC 스냅샷 03:30(v1.4+), 웨어하우스 미러 05:00(v1.4+, Azure Blob), 검증 월 04:00·화 05:30. AES-256 암호화, 복원 절차 문서 {ok} [[백업/복원|gend:admin-ops/operations/backup-restore]]`, `Velero 미배포(2026-08-07 실측), Vault raft 스냅샷 CronJob prod 미배포, RPO/RTO 명시 없음. 복호화 키(Secret gend-backup-encrypt-key)를 잃으면 백업도 잃음 {ok}`],
+          [`모니터링`, `Prometheus/Grafana, Fluent Bit/OpenSearch, Alertmanager → Slack #genon-gend-alert(v1.4+), 운영 체크리스트(매일·매주·매월) {ok} [[운영 가이드|gend:admin-ops/]]`, `폐쇄망은 Slack 대신 GenOS 내부 알림 UI 구성(ADR-0088) — 사이트별 확인`],
+          [`장애 진단`, `파드 상태 → 서비스 연결(포트포워드 헬스) → 리소스·이벤트. CrashLoopBackOff / API 401 / 쿼리 느림 / 접속 불가 절 {ok} [[공통 이슈|gend:admin-ops/troubleshooting/common-issues]]`, `—`]
+        ] } },
+    { h: `버전 · 지원 정책 · 업그레이드`,
+      table: { head: [`버전`, `날짜`, `PM이 기억할 것`],
+        rows: [
+          [`v1.0.0 / v1.1.0`, `2026-08-04`, `SemVer·GET /version, 에어갭 번들, 지원 정책 제정, 워크스페이스 격리 강화`],
+          [`v1.2.0 / v1.3.0 / v1.3.1`, `08-07 / 08-12 / 08-25`, `학습 데이터셋 CLI, 외부 GPU 서버 MLflow, 권한 실효화, 거부 사유 reason_code`],
+          [`v1.4.0 / v1.4.1`, `09-17 / 09-20`, `온프렘·폐쇄망 설치 사슬 완성, 첫 관리자 부트스트랩, PostgreSQL+AGE 그래프 스토어. "온프렘은 v1.4.0 대신 v1.4.1 번들로"`],
+          [`v1.4.2 / v1.4.3 / v1.4.4`, `10-18 / 10-21 / 10-25`, `보안 강화·DB 스키마 변경, 온프렘 실시간 서빙 미제공 명시, 메뉴 표시 설정, 업그레이드 번들만으로 패치 업그레이드`],
+          [`v1.4.5`, `unreleased`, `준비 중 {ok}`]
+        ] },
+      items: [
+        `지원 정책: 기능·버그픽스는 최신 minor만(patch로 제공), 보안 백포트 N-2 minor, 그 밖은 EOL. <b>minor는 순차 업그레이드</b>(건너뛰기 미지원, DB 마이그레이션 누적), patch는 건너뛰어도 됨. 버전은 <code>GET /version</code> 또는 UI StatusBar. {ok} [[지원 정책|gend:appendix/support-policy]]`,
+        `업그레이드 런북: v1.4.1→v1.4.2, v1.4.2→v1.4.4 전용 페이지(반입·점검·실행·확인·되돌리기). DB 마이그레이션 → helmfile → helmfile 밖 단계 순서. {ok} [[업그레이드|gend:admin-ops/operations/upgrades]]`,
+        `v1.0.0(8/4)에서 v1.4.4(10/25)까지 약 3개월. 고객 운영망의 업그레이드 주기·창·검증계 회차를 계약에 넣습니다. {gen}`
+      ] }
+  ],
+  task: {
+    title: `설치 전제·백업 시각·지원 정책 적기 (문서 기반)`,
+    steps: [
+      `[[온프렘 설치|gend:admin-ops/installation/onprem]] §1 전제 조건 표에서 노드 수·사양·max-pods 여유·raw 디스크 조건을 적습니다.`,
+      `[[백업/복원|gend:admin-ops/operations/backup-restore]]의 CronJob 표에서 4종의 시각과 "배포돼 있지 않다"고 적힌 항목을 적습니다.`,
+      `[[지원 정책|gend:appendix/support-policy]]에서 보안 백포트 범위와 minor 업그레이드 규칙을 적습니다.`
+    ],
+    evidence: [[`nodes`, `노드 수·사양·max-pods 여유`], [`cron`, `백업 CronJob 4종 시각`], [`notdeployed`, `미배포로 적힌 항목`], [`policy`, `보안 백포트 범위 / minor 규칙`]],
+    expected: `노드 3대·8코어/32GB·여유 70(동거 250), 백업 03:00/03:20/03:30/월 04:00, 미배포는 Velero·Vault 스냅샷, 보안 백포트 N-2·minor 순차입니다. {ok}`,
+    fallback: `운영 계정을 받으면 UI StatusBar 또는 GET /version으로 현장 버전을 확인하고 문서의 "(vX.Y+)" 표기와 대조합니다.`
+  },
+  pm: {
+    pitch: `GenD는 Kubernetes 위에 설치되며 폐쇄망 반입 절차와 검증된 설치 리허설이 있습니다. 매일 자동 백업과 복원 절차, 무중단 롤링 업데이트(무상태 구성요소), 운영 체크리스트가 제공되고, 버전은 지원 정책에 따라 순차 업그레이드합니다.`,
+    avoid: [
+      `"서버 한 대면 됩니다": 온프렘은 노드 3대 이상이 전제이고 raw 디스크·파드 여유 조건이 있습니다. {ok}`,
+      `"전체 무중단·즉시 복구": Stateful HA는 진행 중이고 RPO/RTO는 문서에 없습니다. Velero도 없습니다. {ok}`,
+      `"실시간 추론 서빙 포함": 온프렘 v1.4.2~v1.4.4는 KServe 미포함입니다. {ok}`
+    ],
+    table: [
+      [`범위`, `설치 범위에 Kubernetes·Harbor·Ceph 구축이 포함되는지(고객 보유 vs 우리 구축)가 가장 큰 변수입니다. 실시간 서빙 요구는 별도 설치 범위입니다.`, `인프라 범위는 고객과 합의`],
+      [`일정`, `매체 반입 승인(번들+소스 트리), 노드 준비, Phase 1~9, 첫 관리자 부트스트랩, 공급자 등록, 복원 리허설을 WBS에 넣습니다. 폐쇄망 반입 심사 리드타임이 큽니다.`, `반입 절차는 고객 보안팀`],
+      [`비용`, `노드 3대+GPU(동거 시 배분), Harbor·Ceph 디스크, 운영 인력(매일·매주·매월 체크리스트).`, `사양은 인프라팀`],
+      [`검수`, `설치 검수: GET /version, 전 워크로드 Running, 부트스트랩 완료, 백업 CronJob 성공·복호화 검증, 복원 리허설 1회, 롤링 업데이트 중 서비스 유지.`, `기준은 착수 시 합의`],
+      [`리스크`, `백업 키 분실, 동거 설치의 PDB·쿼터 충돌로 업그레이드 실패, minor 건너뛰기 불가로 밀린 업그레이드의 누적, 두 제품 업그레이드 창 충돌.`, `운영 계약에 변경 관리 조항`]
+    ],
+    devq: [
+      [`온프렘 사이트에서 Velero 또는 Vault 스냅샷을 배포한 사례가 있나요? RPO/RTO를 어떻게 제시하나요?`, `운영 계약의 복구 조항입니다.`],
+      [`지원 가능한 Kubernetes 배포판·버전 범위(kubeadm v1.31 외 OpenShift·k3s·고객 기존 클러스터)는?`, `고객 인프라 적합성 판단입니다.`],
+      [`온프렘 실시간 서빙(KServe) 미포함은 언제 해소되나요? 그 전까지 권장 대안은?`, `ML 서빙 요구가 있는 사업의 범위 결정입니다.`]
+    ]
+  },
+  cases: [
+    { title: `운영망 업그레이드 중 노드 drain이 멈추는 경우 (GenOS 동거 사이트)`,
+      symptom: `v1.4.2→v1.4.4 업그레이드 런북대로 노드를 drain하는데 특정 노드에서 멈추고, 업그레이드 창을 넘겼습니다.`,
+      causes: [`다른 플랫폼(GenOS)의 파드가 CPU 쿼터 고갈로 재스케줄되지 못해 PDB가 축출을 막음(ADR-0048 실측 ①)`, `노드 파드 수 상한(max-pods 110)으로 옮겨 갈 자리가 없음`, `Stateful 파드(PostgreSQL·Vault 등)의 PDB·단일 replica`, `클러스터당 하나인 DaemonSet(falco·Prometheus) 충돌`],
+      check: [`<code>kubectl describe node</code>·drain 출력의 PDB 메시지, 남은 파드의 네임스페이스`, `네임스페이스별 ResourceQuota 사용량`, `노드 allocatable.pods와 현재 파드 수`, `[[ADR-0048|gend:adr/gend-genos-cluster-topology]]의 충돌 4건과 대조`],
+      actions: [`쿼터 → 해당 네임스페이스 쿼터 조정(소유자 협의)`, `파드 수 → max-pods 상향(kubeadm maxPods)`, `Stateful → 런북의 되돌리기·예외 절차`, `구조적 → 전용 노드풀+taint, 클러스터 분리 검토(제안 상태)`],
+      owner: [`인프라팀: 노드·쿼터·PDB`, `GenOS 운영자: GenOS 파드 쿼터`, `PM: 업그레이드 창과 두 제품 변경 일정 조율`],
+      recheck: `런북의 "확인" 단계(GET /version, 전 워크로드 Running, 백업 검증)를 통과하고, 다음 업그레이드 창 전에 노드풀·쿼터 계획이 합의되어 있으면 종료합니다.` }
+  ],
+  questions: [
+    { id: `q1`, k: `개념 설명`, t: `고객 인프라 담당에게 GenD 온프렘 설치에 필요한 것과 폐쇄망 반입물을 설명해 보세요. "설치 후 바로 쓸 수 있나요?"에 대한 답도 포함하세요.`,
+      rubric: `Kubernetes 전제: kubeadm 3노드 이상(Rook-Ceph mon 3), Ubuntu 22.04/24.04, 8코어/32GB+, raw 디스크 노드당 1개, etcd 저지연, max-pods 여유 70(동거 250), 포트·MTU, Harbor 레지스트리, kubeadm v1.31·helm 3.16.4. 반입물 두 가지: 에어갭 번들(이미지·차트, make_airgap_bundle.sh → load-airgap-images.sh)과 소스 트리(설치 스크립트). 설치 후 첫 관리자 부트스트랩(계정→워크스페이스→토큰→grant→임베딩·LLM 공급자) 전에는 사용자가 볼 게 없음. KServe 미포함, Falco는 에어갭에서 꺼짐 언급 시 가점.` },
+    { id: `q2`, k: `원인 분석`, t: `온프렘 설치가 Phase 8에서 "Waiting for rollout…"로 멈춰 있습니다. 노드는 1대이고 같은 노드에 GenOS가 이미 돌고 있습니다. 문서 근거로 가장 먼저 볼 것과 그 다음 후보를 적어 보세요.`,
+      rubric: `가장 먼저: kubelet max-pods 상한(기본 110) — GenOS 동거 단일 노드에서 GenD 파드(~60+Job)가 더해져 넘침, kubectl describe pod에 "Too many pods" Pending. 처방: kubeadm /var/lib/kubelet/config.yaml maxPods(또는 k3s kubelet-arg max-pods=250) + kubelet 재시작, 설치 이어짐(실측). preflight(GEND_POD_HEADROOM_MIN 70)가 시작 전에 잡았어야 함. 다음 후보: PVC Pending(Ceph 노드 3 미만·파티션 라벨), ImagePullBackOff(Harbor·Phase 2.5 이미지 게이트), inotify 한도, MTU. 확정 금지, describe/events로 확인.` },
+    { id: `q3`, k: `PM 판단`, t: `금융 고객이 운영 계약에 "RPO 1시간, RTO 4시간, 연 2회 업그레이드, 무중단"을 넣자고 합니다. 문서 근거로 받을 수 있는 것, 조건부, 받을 수 없는 것을 나누고 대안 문장을 써 보세요.`,
+      rubric: `RPO 1시간: 현재 백업은 야간 1회 CronJob(03:00 등) → RPO 1시간은 문서 근거 없음, 조건부(추가 구성·Velero 미배포·Vault 스냅샷 미배포 → 개발팀 확인). RTO 4시간: 복원 절차는 있으나 RTO 수치 없음 → 복원 리허설로 측정 후 합의. 연 2회 업그레이드: 지원 정책상 최신 minor만 기능·버그픽스, 보안 백포트 N-2, minor 순차 → 연 2회면 버전이 밀려 EOL 위험, 보안 패치 창을 별도로. 무중단: stateless(gend-api·ui·relay·trino)만 실측 99.5%, Stateful HA 진행 중 → "무상태 구성요소 롤링 업데이트 무중단, Stateful 점검 창 별도"로. 백업 키 보관 책임 조항, 동거 사이트 PDB 리스크 명시.` }
+  ],
+  facts: [
+    `배포 환경: 로컬 Kind / Azure AKS(Ceph RGW, cert-manager, ACR) / 온프렘 kubeadm 3노드(Rook-Ceph, 자체서명·사내 CA, Harbor). 노드 3대 이상(Ceph mon 3, replicated 3 — 미만이면 PVC 영원히 Pending), Ubuntu 22.04/24.04, 8코어/32GB+, raw 디스크 노드당 1개(파티션 라벨 'ceph' 시작 금지), etcd 저지연, 포트 6443/10250/2379-2380/4789, MTU 1500 미만이면 Calico MTU. kubeadm v1.31, helm 3.16.4.`,
+    `kubelet max-pods: 여유 70 이상(GenD 파드 ~60 + Job), GenOS 동거 단일 노드 250 권고. 기본 110은 넘침 → Phase 8 "Too many pods" Pending. preflight GEND_POD_HEADROOM_MIN 70. inotify max_user_instances 1024.`,
+    `에어갭: make_airgap_bundle.sh vX.Y.Z(--full/--gpu 선택) → 매체 → load-airgap-images.sh <레지스트리>(단독 실행). 번들에 설치 스크립트 없음 → 소스 트리(infra/scripts + 사이트 프로파일) 동반 필수. VERSION·태그 불일치 시 시작 전 중단(v1.4.4+). 검증: 폐쇄망·단일 노드·번들 단독 리허설 34회 + GenOS 위 동거 설치.`,
+    `Phase: 설치 호스트 도구 검사 → Phase 1~9(2.5 이미지 게이트, 4 라우트, 5 Falco(에어갭 false), 7 DMZ 릴레이 GEND_DMZ_ENABLED, 8 코드 노드 러너, 9 egress/ingress 정책). SUPERSET_ADMIN_PASSWORD 필수 16자+. GenD 앱은 Helm 릴리스 gend-app(v1.4.2+).`,
+    `첫 관리자 부트스트랩(v1.4+): §6.1 계정 → §6.2 워크스페이스 → §6.3 확인 → §6.4 grant·그룹 동기화 → §6.6 임베딩 공급자(GenOS 서비스 라우터 가능) → §6.7 대화형 LLM 공급자(v1.4.2+). §8 에이전트 신원 인수검증 회차.`,
+    `온프렘 KServe 미포함(v1.4.2~v1.4.4) → 실시간 서빙 미제공. v1.4.4 알려진 제약: ingress 라우트 사이트 Dagster 관리자 전용 미적용, 도구 화면 502 가능.`,
+    `HA: gend-api 2/6, gend-ui 2~5, gend-relay 2~4, Trino 워커 HPA 1~3. 2026-05-20 AKS prod 실측 4노드 순차 drain·113파드·99.5% uptime. Stateful HA Phase 1~8 별도. gend-api HPA 스케일링 문서 2/10(CPU 70%·메모리 80%, 60초 후 2개씩 증가, 300초 후 1개씩 감소).`,
+    `백업 CronJob(KST): db-backup-postgresql 03:00(gend·keycloak·dagster·mlflow·hive_metastore·nessie·openmetadata·jupyterhub, 그래프 스토어 포함), db-backup-opensearch 03:20, db-backup-weaviate 03:30, notebook-pvc-snapshot 03:30(v1.4+, PVC당 14개), warehouse-mirror 05:00(v1.4+, SeaweedFS→Azure Blob), db-backup-verify 월 04:00, warehouse-mirror-verify 화 05:30. AES-256, Secret gend-backup-encrypt-key 외부 보관. Velero 미배포(2026-08-07), Vault raft 스냅샷 CronJob prod 미배포. RPO/RTO 없음.`,
+    `모니터링: Prometheus/Grafana, Fluent Bit/OpenSearch, Alertmanager→Slack #genon-gend-alert(v1.4+), Slack App 웹훅 채널 오버라이드 무시 가능. 운영 체크리스트 매일(파드·헬스·Grafana·감사)·매주(백업·PVC·Vault unseal)·매월(노드·인증서·Trino 성능). 온프렘 OpenBao 수동 unseal.`,
+    `릴리스: v1.0.0·v1.1.0 2026-08-04, v1.2.0 08-07, v1.3.0 08-12, v1.3.1 08-25, v1.4.0 09-17, v1.4.1 09-20, v1.4.2 10-18, v1.4.3 10-21, v1.4.4 10-25, v1.4.5 unreleased. 지원 정책: 최신 minor만 기능·버그픽스, 보안 백포트 N-2, minor 순차 업그레이드(건너뛰기 불가), patch 자유. GET /version·UI StatusBar. 업그레이드 런북 v1.4.1→1.4.2, v1.4.2→1.4.4(반입·점검·실행·확인·되돌리기). 환경 모델 개발계·검증계·운영계(ADR-0081).`,
+    `ADR-0048(제안): 동거 충돌 — 쿼터 고갈→PDB→drain 불가→업그레이드 실패, 알람 채널 충돌, vCPU 쿼터 공유, DaemonSet 클러스터당 하나. 권고 전용 노드풀+taint, 가능하면 클러스터 분리.`
+  ],
+  gloss: [
+    [`kubeadm · Rook-Ceph · Harbor`, `쿠버네티스 설치 도구 · 노드 디스크로 만드는 저장소 · 사내 이미지 창고`, `온프렘 3노드 전제`, `고객 보유 여부가 범위를 가름`],
+    [`에어갭 번들`, `인터넷 없는 곳에 넣을 이미지·차트 묶음`, `make_airgap_bundle.sh / load-airgap-images.sh, 소스 트리 동반`, `반입 심사 리드타임`],
+    [`부트스트랩`, `설치 뒤 첫 관리자·워크스페이스·공급자를 세팅하는 절차`, `온프렘 설치 §6`, `일정에 별도 단계로`],
+    [`HPA · PDB`, `부하에 따라 파드 수 조절 / 동시에 내려갈 수 있는 파드 한도`, `gend-api 2~10, 워커 1~3; PDB가 drain을 막는 충돌`, `무중단 범위와 업그레이드 창`],
+    [`CronJob 백업 · Velero`, `정해진 시각에 도는 백업 작업 / 클러스터 통째 백업 도구`, `CronJob 4종 + 검증; Velero 미배포`, `RPO/RTO와 키 보관 책임`],
+    [`SemVer · minor 순차`, `주.부.패치 버전 체계 / 부 버전은 건너뛰지 못함`, `지원 정책, 업그레이드 런북`, `업그레이드 주기 계약`],
+    [`OpenBao unseal`, `재시작한 금고를 여는 절차`, `온프렘 수동, AKS auto-unseal`, `운영자 절차 교육`]
+  ],
+  docs: [
+    {t: `온프렘 설치`, u: `https://gend-docs.genon.ai/admin-ops/installation/onprem`},
+    {t: `에어갭 반입`, u: `https://gend-docs.genon.ai/admin-ops/operations/airgap`},
+    {t: `클러스터 배치`, u: `https://gend-docs.genon.ai/admin-ops/installation/cluster-topology`},
+    {t: `스케일링`, u: `https://gend-docs.genon.ai/admin-ops/operations/scaling`},
+    {t: `백업/복원`, u: `https://gend-docs.genon.ai/admin-ops/operations/backup-restore`},
+    {t: `업그레이드`, u: `https://gend-docs.genon.ai/admin-ops/operations/upgrades`},
+    {t: `업그레이드 v1.4.2 → v1.4.4`, u: `https://gend-docs.genon.ai/admin-ops/operations/upgrade-v1.4.2-to-v1.4.4`},
+    {t: `지원 정책`, u: `https://gend-docs.genon.ai/appendix/support-policy`},
+    {t: `릴리스 노트`, u: `https://gend-docs.genon.ai/appendix/release-notes`},
+    {t: `운영 가이드`, u: `https://gend-docs.genon.ai/admin-ops/`},
+    {t: `공통 이슈`, u: `https://gend-docs.genon.ai/admin-ops/troubleshooting/common-issues`}
+  ],
+  unknown: [
+    `RPO/RTO와 복원 리허설 주기, 온프렘 Velero·Vault 스냅샷 적용 사례`,
+    `지원 Kubernetes 배포판·버전 범위(OpenShift·k3s·고객 기존 클러스터)`,
+    `온프렘 실시간 서빙(KServe) 해소 시점`,
+    `폐쇄망 알림 구성(Slack 대신 GenOS 내부 알림)의 표준`
+  ]
+};
+
 
 const GLOSS = [
   ["벡터 DB","문장을 숫자 벡터로 바꿔 '뜻이 비슷한 것'을 찾게 해 주는 저장소","데이터 > 벡터 DB. 형식은 문서·FAQ·자동적재","문서 수, 갱신 주기, 어떤 형식으로 만들지"],
@@ -2292,7 +3384,24 @@ const GLOSS = [
   ["이관 · 개발망/운영망","만들고 시험하는 환경과 실제 서비스 환경을 나누고, 검증한 것을 옮기는 일","워크플로우 이관, 코드 서빙 이관(결재 필요)","이관 리드타임과 결재 절차를 일정에 반영"]
 ];
 
-const LESSON_CONTENT = [L2, L3, L4, L5, L6, L7, L8, L9, L10];
+/* ---------- 트랙(제품)과 회차 ---------- */
+const LESSON_CONTENT = [L2, L3, L4, L5, L6, L7, L8, L9, L10, LD1, LD2, LD3, LD4, LD5, LD6];
+const TRACKS = {
+  genos: { id: "genos", name: "GenOS", sub: "AI 앱 · 에이전트 평면", nums: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+    basis: "GenOS 공식 문서 v1.9.6 기준 · 확인일 2026-10-30 · 실제 환경 점검 2026-11-03",
+    desc: "채팅 앱, 워크플로우, 모델 서빙, 에이전트, 크레딧. 사용자와 만나는 AI 서비스를 만들고 운영하는 제품입니다.",
+    who: "고객 요구가 \"사내 문서로 답하는 챗봇\", \"업무를 대신하는 에이전트\", \"모델 서빙과 GPU\"라면 여기서 시작합니다.",
+    label: n => `${n}회차`, short: n => String(n).padStart(2, "0"), hash: n => "genos-" + n },
+  gend: { id: "gend", name: "GenD", sub: "데이터 평면", nums: [11, 12, 13, 14, 15, 16],
+    basis: "GenD 공식 가이드 v1.4.4 기준 · 확인일 2026-11-04 · 문서 기준 (운영 환경 미접속)",
+    desc: "연합 SQL, 적재 파이프라인, 권한·PII·품질·계보, Text-to-SQL, MCP 서버. 흩어진 데이터를 한 곳에서 조회하고 통제하는 제품입니다.",
+    who: "고객 요구가 \"여러 DB를 한 번에 조회\", \"누가 어떤 데이터를 보는지 통제\", \"데이터 품질·계보 증빙\"이라면 여기서 시작합니다.",
+    label: n => `GenD ${n - 10}회차`, short: n => "D" + (n - 10), hash: n => "gend-" + (n - 10) }
+};
+const ALLNUMS = [...TRACKS.genos.nums, ...TRACKS.gend.nums];
+const trackOf = n => n > 10 ? TRACKS.gend : TRACKS.genos;
+const LBL = n => trackOf(n).label(n);
+const PRODUCT = n => trackOf(n).name;
 const SKEL = Object.fromEntries(DATA.lessons.map(l => [l.n, l]));
 const QSETS = {1: QS}, FACTSETS = {1: FACTS}, TITLES = {1: "제품 목적과 기능 지도"}, LONGTITLE = {1: "GenOS는 무엇이고, 어디까지인가"};
 const CHECKKEYS = {1: ["g1","g2","g3","t1","t2","t3"]};
@@ -2300,7 +3409,8 @@ LESSON_CONTENT.forEach(L => {
   QSETS[L.n] = L.questions; FACTSETS[L.n] = L.facts; TITLES[L.n] = L.title; LONGTITLE[L.n] = L.title;
   CHECKKEYS[L.n] = [...L.goals.map((_, i) => "g" + (i + 1)), ...L.task.steps.map((_, i) => "t" + (i + 1))];
 });
-const NUMS = Array.from({length: 10}, (_, i) => i + 1);
+let activeTrack = "genos";
+try { const t = localStorage.getItem("genos-study-track"); if(TRACKS[t]) activeTrack = t; } catch(e){}
 
 /* ---------- 서식 ---------- */
 function fmt(s){
@@ -2314,13 +3424,15 @@ function tableHTML(t){
   const w = Math.max(560, t.head.length * 160);
   return `<div class="tbl-wrap"><table style="min-width:${w}px"><thead><tr>${t.head.map(h => `<th>${fmt(h)}</th>`).join("")}</tr></thead><tbody>${t.rows.map(r => `<tr>${r.map(c => `<td>${fmt(c)}</td>`).join("")}</tr>`).join("")}</tbody></table></div>`;
 }
-function glossItem(item, n){
+function glossItem(item, n, product){
   const [t, e, g, p] = item;
-  return `<div class="gitem"><dt>${fmt(t)}${n ? ` <span class="lab">${n}회차</span>` : ""}</dt><dd><span><span class="lab">쉬운 뜻</span>${fmt(e)}</span><span><span class="lab">GenOS</span>${fmt(g)}</span><span><span class="lab">PM 확인</span>${fmt(p)}</span></dd></div>`;
+  const prod = product || (n ? PRODUCT(n) : "GenOS");
+  return `<div class="gitem"><dt>${fmt(t)}${n ? ` <span class="lab">${LBL(n)}</span>` : ""}</dt><dd><span><span class="lab">쉬운 뜻</span>${fmt(e)}</span><span><span class="lab">${prod}</span>${fmt(g)}</span><span><span class="lab">PM 확인</span>${fmt(p)}</span></dd></div>`;
 }
 function navHTML(n){
-  const prev = n > 1 ? `<button class="btn" type="button" data-go="${n-1}">← ${n-1}회차 ${TITLES[n-1]}</button>` : `<span></span>`;
-  const next = n < 10 ? `<button class="btn primary" type="button" data-go="${n+1}">${n+1}회차 ${TITLES[n+1]} →</button>` : `<span></span>`;
+  const T = trackOf(n), i = T.nums.indexOf(n), p = T.nums[i - 1], q = T.nums[i + 1];
+  const prev = p ? `<button class="btn" type="button" data-go="${p}">← ${LBL(p)} ${TITLES[p]}</button>` : `<button class="btn" type="button" data-go="home">← 대표 페이지</button>`;
+  const next = q ? `<button class="btn primary" type="button" data-go="${q}">${LBL(q)} ${TITLES[q]} →</button>` : `<button class="btn primary" type="button" data-go="home">${T.name} 과정 끝 · 대표 페이지로 →</button>`;
   return `<nav class="lesson-nav" aria-label="회차 이동">${prev}${next}</nav>`;
 }
 
@@ -2340,9 +3452,9 @@ function qHTML(n, q, i){
   </div>`;
 }
 
-/* ---------- 2~10회차 ---------- */
+/* ---------- 데이터 기반 회차 (GenOS 2~10, GenD 1~6) ---------- */
 function lessonHTML(L){
-  const n = L.n, sk = SKEL[n] || {docs: [], unknown: []};
+  const n = L.n, sk = SKEL[n] || {docs: L.docs || [], unknown: L.unknown || []}, T = trackOf(n), lbl = LBL(n);
   const checks = (arr, pre) => `<ul class="checks">${arr.map((t, i) => `<li><label><input type="checkbox" id="c-${n}-${pre}${i+1}" data-bind="checks.${pre}${i+1}"><span>${fmt(t)}</span></label></li>`).join("")}</ul>`;
   const figsAt = where => ((L.figs && L.figs[where]) || []).map(figHTML).join("");
   const block = (b, i) => `<div class="ablock"><h4>${fmt(b.h)}</h4>${b.intro ? `<p class="small muted prose">${fmt(b.intro)}</p>` : ""}${b.table ? tableHTML(b.table) : ""}${b.items ? bul(b.items) : ""}</div>${figsAt("apply:" + i)}`;
@@ -2354,16 +3466,18 @@ function lessonHTML(L){
       <dt>담당자 확인</dt><dd>${bul(c.owner)}</dd>
       <dt>재검증 기준</dt><dd>${fmt(c.recheck)}</dd></dl>
       <p class="small muted">가능한 원인은 후보입니다. 확인 결과로 좁히기 전에는 어느 것도 실제 원인으로 확정하지 않습니다.</p></div>`;
+  const live = L.live ? `<div class="live"><h4><span class="stamp s-live">실환경</span>실제 환경에서 확인 · genos.genon.ai v1.9.6 · 2026-11-03</h4>${bul(L.live)}</div>` : "";
+  const note = L.note ? `<p class="callout"><b>문서 기준</b> ${fmt(L.note)}</p>` : "";
   return `<section id="view-${n}" data-view="${n}" hidden>
-    <div class="lesson-head"><div class="k">${n}회차 · 30분</div><h2>${fmt(L.title)}</h2><p class="meta">근거: ${fmt(L.basis)}</p></div>
+    <div class="lesson-head"><div class="k"><span class="track-tag" data-track-tag="${T.id}">${T.name}</span>${lbl} · 30분</div><h2>${fmt(L.title)}</h2><p class="meta">근거: ${fmt(L.basis)}</p></div>
     <div class="step"><div class="num">①</div><div class="body"><h3>오늘의 목표</h3><p class="muted small">수업을 마치고 스스로 설명할 수 있으면 체크하세요.</p>${checks(L.goals, "g")}</div></div>
     <div class="step"><div class="num">②</div><div class="body"><h3>쉬운 설명</h3><div class="prose">${L.explain.map(p => `<p>${fmt(p)}</p>`).join("")}</div>${figsAt("explain")}</div></div>
-    <div class="step"><div class="num">③</div><div class="body"><h3>자사 플랫폼 적용</h3>${L.apply.map(block).join("")}${L.live ? `<div class="live"><h4><span class="stamp s-live">실환경</span>실제 환경에서 확인 · genos.genon.ai v1.9.6 · 2026-11-03</h4>${bul(L.live)}</div>` : ""}</div></div>
+    <div class="step"><div class="num">③</div><div class="body"><h3>자사 플랫폼 적용</h3>${note}${L.apply.map(block).join("")}${live}</div></div>
     <div class="step"><div class="num">④</div><div class="body"><h3>직접 확인 (10분): ${fmt(L.task.title)}</h3>${checks(L.task.steps, "t")}
       <p class="small muted">찾은 값을 적어 두세요. 여기 적은 내용은 저장되고, 채팅에서 요청하면 Claude가 읽습니다.</p>
       <div class="ev">${L.task.evidence.map(([id, lab]) => `<label class="field"><span>${fmt(lab)}</span><input type="text" id="ev-${n}-${id}" data-bind="evidence.${id}" autocomplete="off"></label>`).join("")}</div>
       <p class="callout"><b>예상 결과</b> ${fmt(L.task.expected)}</p>
-      <p class="callout"><b>권한이 없다면</b> ${fmt(L.task.fallback)}</p></div></div>
+      <p class="callout"><b>${T.id === "gend" ? "운영 환경 계정을 받으면" : "권한이 없다면"}</b> ${fmt(L.task.fallback)}</p></div></div>
     <div class="step"><div class="num">⑤</div><div class="body"><h3>PM 판단</h3>
       <div class="quote"><span class="eyebrow">고객 설명 문장</span><p id="pitch-${n}">${fmt(L.pm.pitch)}</p><div class="row"><button class="btn copy-btn" type="button" data-target="pitch-${n}">문장 복사</button><span class="small muted copy-msg" aria-live="polite"></span></div></div>
       <div class="prose"><p class="small"><b>확인 전까지 약속하지 않을 것</b></p>${bul(L.pm.avoid)}</div>
@@ -2371,12 +3485,12 @@ function lessonHTML(L){
       <div class="prose"><p class="small"><b>개발팀에 확인할 질문</b></p><ol class="qlist small">${L.pm.devq.map(([q, w]) => `<li>${fmt(q)}<span class="why">${fmt(w)}</span></li>`).join("")}</ol></div></div></div>
     <div class="step"><div class="num">§</div><div class="body"><h3>실무 사례</h3>${L.cases.map(caseHTML).join("")}</div></div>
     <div class="step"><div class="num">⑥</div><div class="body"><h3>이해도 확인</h3>
-      <p class="prose small muted">답을 쓰면 자동 저장됩니다. 채팅에서 "${n}회차 답 확인해줘"라고 하면 Claude가 저장된 답을 읽고 피드백합니다. claude.ai에서 열었을 때는 아래에 '피드백 받기' 버튼이 보이며, 누르면 이 페이지에서 바로 받을 수 있습니다(내 Claude 사용량이 쓰임). 모범답안은 페이지에 표시하지 않습니다.</p>
+      <p class="prose small muted">답을 쓰면 자동 저장됩니다. 채팅에서 "${lbl} 답 확인해줘"라고 하면 Claude가 저장된 답을 읽고 피드백합니다. claude.ai에서 열었을 때는 아래에 '피드백 받기' 버튼이 보이며, 누르면 이 페이지에서 바로 받을 수 있습니다(내 Claude 사용량이 쓰임). 모범답안은 페이지에 표시하지 않습니다.</p>
       <div class="qs">${L.questions.map((q, i) => qHTML(n, q, i)).join("")}</div></div></div>
     <div class="step"><div class="num">✎</div><div class="body"><h3>학습 기록</h3>
       <label class="field" style="max-width:720px"><span>이해한 것, 헷갈린 것, 미해결 질문</span><textarea id="memo-${n}" data-bind="memo" rows="5"></textarea></label>
-      <div class="row"><label class="row small" style="cursor:pointer"><input type="checkbox" id="done-${n}" data-bind="done" class="donebox">${n}회차 완료로 표시</label></div></div></div>
-    <div class="step"><div class="num">Aa</div><div class="body"><h3>${n}회차 용어</h3><dl class="gloss">${L.gloss.map(g => glossItem(g)).join("")}</dl></div></div>
+      <div class="row"><label class="row small" style="cursor:pointer"><input type="checkbox" id="done-${n}" data-bind="done" class="donebox">${lbl} 완료로 표시</label></div></div></div>
+    <div class="step"><div class="num">Aa</div><div class="body"><h3>${lbl} 용어</h3><dl class="gloss">${L.gloss.map(g => glossItem(g, null, T.name)).join("")}</dl></div></div>
     <div class="step"><div class="num">¶</div><div class="body"><h3>근거 문서와 미리 확인할 것</h3>
       <ul class="doclist">${sk.docs.map(d => `<li><a href="${d.u}" target="_blank" rel="noopener">${d.t}</a></li>`).join("")}</ul>
       ${sk.unknown && sk.unknown.length ? `<p class="small"><b>공개 문서로 판단할 수 없는 것</b></p>${bul(sk.unknown.map(u => u + " {need}"))}` : ""}</div></div>
@@ -2386,6 +3500,29 @@ function lessonHTML(L){
 function renderLessons(){
   document.getElementById("lesson-views").innerHTML = LESSON_CONTENT.map(lessonHTML).join("");
   document.getElementById("view-1").insertAdjacentHTML("beforeend", navHTML(1));
+}
+
+/* ---------- 대표 페이지 ---------- */
+function trackCard(T){
+  const label = {done: "완료", active: "진행 중", todo: "시작 전"};
+  const done = T.nums.filter(n => states[n].done).length;
+  const next = T.nums.find(n => !states[n].done) || T.nums[0];
+  const pct = Math.round(T.nums.reduce((a, n) => a + (states[n].done ? 100 : progressOf(n)), 0) / T.nums.length);
+  const started = T.nums.some(n => states[n].done || progressOf(n) > 0);
+  return `<article class="track" data-track-card="${T.id}">
+    <div class="track-head"><span class="track-tag" data-track-tag="${T.id}">${T.name}</span><span class="ts">${T.sub} · ${T.nums.length}회</span></div>
+    <h3 class="tn">${T.name}</h3>
+    <p class="td">${T.desc}</p>
+    <p class="tw small muted">${T.who}</p>
+    <p class="tb">${T.basis}</p>
+    <div class="track-meter"><span class="meter"><span class="bar"><i style="width:${pct}%"></i></span><span>완료 ${done}/${T.nums.length} · ${pct}%</span></span></div>
+    <div class="row"><button class="btn primary" type="button" data-go="${next}">${started ? "이어서 보기" : "시작하기"}: ${T.label(next)} ${TITLES[next]} →</button></div>
+    <ol class="track-list">${T.nums.map(n => { const st = lessonStatus(n); return `<li><button type="button" data-go="${n}" data-st="${st}"><span class="n">${T.short(n)}</span><span class="t">${TITLES[n]}</span><span class="s">${label[st]}</span></button></li>`; }).join("")}</ol>
+  </article>`;
+}
+function renderHome(){
+  const box = document.getElementById("tracks"); if(!box) return;
+  box.innerHTML = trackCard(TRACKS.genos) + trackCard(TRACKS.gend);
 }
 
 /* ---------- 용어 찾기 (전체 회차) ---------- */
@@ -2400,7 +3537,14 @@ function renderGloss(){
 document.getElementById("gloss-q").addEventListener("input", renderGloss);
 
 /* ---------- 회차 이동 ---------- */
-function currentView(){ const m = /^#lesson-(\d+)$/.exec(location.hash); const n = m ? +m[1] : 1; return n >= 1 && n <= 10 ? n : 1; }
+function currentView(){
+  const h = location.hash.replace(/^#/, "");
+  if(!h || h === "home") return "home";
+  let m = /^(?:lesson|genos)-(\d+)$/.exec(h); if(m) return ALLNUMS.includes(+m[1]) && +m[1] <= 10 ? +m[1] : "home";
+  m = /^gend-(\d+)$/.exec(h); if(m) return ALLNUMS.includes(10 + +m[1]) ? 10 + +m[1] : "home";
+  return "home";
+}
+const hashFor = v => v === "home" ? "home" : trackOf(v).hash(v);
 function progressOf(n){
   const s = states[n], keys = CHECKKEYS[n];
   const c = keys.filter(k => s.checks && s.checks[k]).length;
@@ -2408,31 +3552,52 @@ function progressOf(n){
   return Math.round(((c + a) / (keys.length + QSETS[n].length)) * 100);
 }
 function lessonStatus(n){ if(states[n].done) return "done"; return progressOf(n) > 0 ? "active" : "todo"; }
+function renderTrackSwitch(){
+  const sw = document.getElementById("track-switch"); if(!sw) return;
+  sw.innerHTML = Object.values(TRACKS).map(T => `<button type="button" role="tab" data-track="${T.id}" aria-selected="${T.id === activeTrack}">${T.name}<span class="c">${T.nums.filter(n => states[n].done).length}/${T.nums.length}</span></button>`).join("");
+}
 function renderRail(){
-  const cur = currentView(), label = {done: "완료", active: "진행 중", todo: "시작 전"};
+  const cur = currentView(), T = TRACKS[activeTrack], label = {done: "완료", active: "진행 중", todo: "시작 전"};
   const rl = document.getElementById("rail");
-  rl.innerHTML = NUMS.map(n => {
+  rl.innerHTML = `<li><button data-go="home" data-st="home" aria-current="${cur === "home"}"><span class="n">⌂</span><span class="t">대표 페이지</span><span class="s">제품 고르기</span></button></li>` + T.nums.map(n => {
     const st = lessonStatus(n);
-    return `<li><button data-go="${n}" data-st="${st}" aria-current="${n === cur}"><span class="n">${String(n).padStart(2, "0")}</span><span class="t">${TITLES[n]}</span><span class="s">${label[st]}</span></button></li>`;
+    return `<li><button data-go="${n}" data-st="${st}" aria-current="${n === cur}"><span class="n">${T.short(n)}</span><span class="t">${TITLES[n]}</span><span class="s">${label[st]}</span></button></li>`;
   }).join("");
   const act = rl.querySelector('[aria-current="true"]');
   if(act && rl.scrollWidth > rl.clientWidth){ rl.scrollLeft += act.getBoundingClientRect().left - rl.getBoundingClientRect().left - 8; }
 }
 function updateProgress(){
-  const n = currentView(), pct = states[n].done ? 100 : progressOf(n);
-  const doneCount = NUMS.filter(i => states[i].done).length;
-  document.getElementById("meter-fill").style.width = pct + "%";
-  document.getElementById("meter-text").textContent = `${n}회차 ${states[n].done ? "완료" : pct + "%"} · 완료 ${doneCount}/10`;
+  const v = currentView();
+  const doneAll = ALLNUMS.filter(i => states[i].done).length;
+  const fill = document.getElementById("meter-fill"), text = document.getElementById("meter-text");
+  if(v === "home"){
+    fill.style.width = Math.round(doneAll / ALLNUMS.length * 100) + "%";
+    text.textContent = `GenOS ${TRACKS.genos.nums.filter(n => states[n].done).length}/10 · GenD ${TRACKS.gend.nums.filter(n => states[n].done).length}/6 완료`;
+    return;
+  }
+  const T = trackOf(v), pct = states[v].done ? 100 : progressOf(v);
+  fill.style.width = pct + "%";
+  text.textContent = `${LBL(v)} ${states[v].done ? "완료" : pct + "%"} · ${T.name} 완료 ${T.nums.filter(n => states[n].done).length}/${T.nums.length}`;
+}
+function updateHeader(){
+  const v = currentView(), eb = document.getElementById("eyebrow");
+  if(!eb) return;
+  eb.textContent = v === "home" ? "GenOS 공식 문서 v1.9.6 · GenD 공식 가이드 v1.4.4 · 확인일 2026-11-04" : trackOf(v).basis;
 }
 function showView(){
-  const n = currentView();
-  document.querySelectorAll("[data-view]").forEach(s => s.hidden = (+s.dataset.view !== n));
-  renderRail(); updateProgress();
+  const v = currentView();
+  if(v !== "home" && trackOf(v).id !== activeTrack){ activeTrack = trackOf(v).id; try { localStorage.setItem("genos-study-track", activeTrack); } catch(e){} }
+  document.querySelectorAll("[data-view]").forEach(s => s.hidden = (s.dataset.view !== String(v)));
+  renderTrackSwitch(); renderRail(); updateProgress(); updateHeader();
+  if(v === "home") renderHome();
 }
 document.addEventListener("click", e => {
+  const tb = e.target.closest("[data-track]");
+  if(tb){ activeTrack = tb.dataset.track; try { localStorage.setItem("genos-study-track", activeTrack); } catch(e2){} renderTrackSwitch(); renderRail(); return; }
   const b = e.target.closest("[data-go]"); if(!b) return;
-  const n = +b.dataset.go;
-  if(location.hash !== "#lesson-" + n) location.hash = "lesson-" + n; else showView();
+  const v = b.dataset.go === "home" ? "home" : +b.dataset.go;
+  const h = hashFor(v);
+  if(location.hash !== "#" + h) location.hash = h; else showView();
   document.getElementById("main").scrollIntoView({block: "start", behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth"});
 });
 window.addEventListener("hashchange", showView);
@@ -2447,14 +3612,14 @@ document.addEventListener("click", e => {
 
 /* ---------- 상태와 저장 ---------- */
 const states = {};
-NUMS.forEach(n => states[n] = {checks: {}, evidence: {}, answers: {}, feedback: {}, memo: "", done: false});
+ALLNUMS.forEach(n => states[n] = {checks: {}, evidence: {}, answers: {}, feedback: {}, memo: "", done: false});
 const LKEY = n => "genos-study-lesson-" + n;
 const dirty = new Set();
 let db = null, mode = "init";
 const saving = {}, again = {}, timers = {}, retried = {};
 function getPath(o, p){ return p.split(".").reduce((a, k) => (a == null ? undefined : a[k]), o); }
 function setPath(o, p, v){ const ks = p.split("."); let a = o; for(let i = 0; i < ks.length - 1; i++){ if(typeof a[ks[i]] !== "object" || a[ks[i]] === null) a[ks[i]] = {}; a = a[ks[i]]; } a[ks[ks.length - 1]] = v; }
-function lessonOf(el){ const v = el.closest("[data-view]"); return v ? +v.dataset.view : 1; }
+function lessonOf(el){ const v = el.closest("[data-view]"); return v && v.dataset.view !== "home" ? +v.dataset.view : 1; }
 function readLocal(n){ try { const s = JSON.parse(localStorage.getItem(LKEY(n)) || "null"); if(s && typeof s === "object") Object.assign(states[n], s); } catch(e){} }
 function writeLocal(n){ try { localStorage.setItem(LKEY(n), JSON.stringify(states[n])); } catch(e){} }
 function hasContent(s){ return !!(s.done || s.memo || Object.values(s.checks || {}).some(Boolean) || Object.values(s.answers || {}).some(v => (v || "").trim()) || Object.values(s.evidence || {}).some(v => (v || "").trim())); }
@@ -2474,10 +3639,11 @@ function hydrateInputs(skipFocused){
     const v = getPath(states[n], el.dataset.bind);
     if(el.type === "checkbox") el.checked = !!v; else el.value = (v == null ? "" : String(v));
   });
-  NUMS.forEach(n => QSETS[n].forEach(q => showFeedback(n, q.id)));
+  ALLNUMS.forEach(n => QSETS[n].forEach(q => showFeedback(n, q.id)));
 }
+function refreshAll(){ updateProgress(); renderRail(); renderTrackSwitch(); if(currentView() === "home") renderHome(); }
 function scheduleSave(n){
-  writeLocal(n); updateProgress(); renderRail();
+  writeLocal(n); refreshAll();
   if(mode === "local"){ setStatus("local"); return; }
   setStatus("pending"); clearTimeout(timers[n]); timers[n] = setTimeout(() => flush(n), 900);
 }
@@ -2487,7 +3653,7 @@ async function flush(n){
   saving[n] = true;
   const keys = Array.from(dirty).filter(k => k.startsWith(n + "|"));
   try {
-    const body = JSON.parse(JSON.stringify({...states[n], lesson: n, title: LONGTITLE[n], updatedAt: new Date().toISOString()}));
+    const body = JSON.parse(JSON.stringify({...states[n], lesson: n, track: trackOf(n).id, label: LBL(n), title: LONGTITLE[n], updatedAt: new Date().toISOString()}));
     await db.doc("study/lesson-" + n).set(body);
     keys.forEach(k => dirty.delete(k)); retried[n] = false;
     saving[n] = false;
@@ -2526,8 +3692,8 @@ function applyRemote(n, d){
   writeLocal(n);
 }
 async function initStore(){
-  NUMS.forEach(readLocal);
-  hydrateInputs(false); updateProgress(); renderRail();
+  ALLNUMS.forEach(readLocal);
+  hydrateInputs(false); refreshAll();
   try { db = await (window.claude && window.claude.use ? window.claude.use("db") : null); } catch(e){ db = null; }
   if(!db){ mode = "local"; setStatus("local"); return; }
   try {
@@ -2535,18 +3701,18 @@ async function initStore(){
     const seen = new Set();
     snap.docs.forEach(d => { const m = /^lesson-(\d+)$/.exec(d.id); if(m && states[+m[1]]){ seen.add(+m[1]); applyRemote(+m[1], d.data()); } });
     mode = "db";
-    hydrateInputs(true); updateProgress(); renderRail();
-    NUMS.forEach(n => { if(!seen.has(n) && hasContent(states[n])) dirty.add(n + "|*"); });
+    hydrateInputs(true); refreshAll();
+    ALLNUMS.forEach(n => { if(!seen.has(n) && hasContent(states[n])) dirty.add(n + "|*"); });
     const pend = new Set(Array.from(dirty).map(k => +k.split("|")[0]));
     if(pend.size){ setStatus("pending"); pend.forEach(n => flush(n)); } else setStatus("saved");
     db.collection("study").onSnapshot(qs => {
       let changed = false;
       qs.docChanges().forEach(ch => {
         if(ch.type === "removed" || (ch.doc.metadata && ch.doc.metadata.hasPendingWrites)) return;
-        const m = /^lesson-(\d+)$/.exec(ch.doc.id); if(!m) return;
+        const m = /^lesson-(\d+)$/.exec(ch.doc.id); if(!m || !states[+m[1]]) return;
         applyRemote(+m[1], ch.doc.data()); changed = true;
       });
-      if(changed){ hydrateInputs(true); updateProgress(); renderRail(); }
+      if(changed){ hydrateInputs(true); refreshAll(); }
     }, () => {});
   } catch(e){ mode = "local"; setStatus("local"); }
 }
@@ -2559,8 +3725,10 @@ function showFeedback(n, qid){
   if(f && f.text){ wrap.hidden = false; document.getElementById("fb-" + k).textContent = f.text; document.getElementById("fbm-" + k).textContent = f.at ? `받은 시각 ${new Date(f.at).toLocaleString("ko-KR")}` : ""; }
 }
 function promptFor(n, q, answer){
+  const P = PRODUCT(n), T = trackOf(n);
+  const scope = T.id === "gend" ? "GenD 내용은 공식 가이드 문서 기준이며 실제 운영 환경에서 확인된 것이 아니다. GenOS와 GenD를 혼동하지 마라." : "";
   return [
-    `너는 기업용 AI 플랫폼 GenOS를 공부하는 PM의 학습 코치다. 지금은 ${n}회차 「${LONGTITLE[n]}」 수업이다. 아래 [수업 근거]만 GenOS에 대한 사실로 사용하라. 근거에 없는 GenOS 기능, 메뉴, 수치는 만들지 말고, 필요하면 '확인 필요' 또는 '일반 AI 원리'라고 표시하라. 가능한 원인을 실제 원인으로 확정하지 마라.`,
+    `너는 기업용 AI 플랫폼 ${P}를 공부하는 PM의 학습 코치다. 지금은 ${LBL(n)} 「${LONGTITLE[n]}」 수업이다. 아래 [수업 근거]만 ${P}에 대한 사실로 사용하라. 근거에 없는 ${P} 기능, 메뉴, 수치는 만들지 말고, 필요하면 '확인 필요' 또는 '일반 AI 원리'라고 표시하라. 가능한 원인을 실제 원인으로 확정하지 마라. ${scope}`.trim(),
     "", "[수업 근거]", ...FACTSETS[n].map(f => "- " + f),
     "", "[질문]", q.t.replace(/<[^>]+>/g, ""),
     "", "[채점 메모 - 학습자에게 통째로 보여 주지 말고 피드백에 필요한 만큼만 녹여라]", q.rubric,
@@ -2600,7 +3768,7 @@ document.addEventListener("click", async e => {
     else if(["not_granted", "sampling_disabled", "not_declared", "capability_disabled", "capability_removed"].includes(code)){
       document.querySelectorAll(".fb-btn").forEach(b => b.hidden = true);
       out.textContent = ""; wrap.hidden = !(states[n].feedback && states[n].feedback[q.id]); showFeedback(n, q.id);
-      msg.textContent = `이 페이지에서는 피드백을 받을 수 없습니다. 채팅에서 '${n}회차 답 확인해줘'라고 요청해 주세요.`;
+      msg.textContent = `이 페이지에서는 피드백을 받을 수 없습니다. 채팅에서 '${LBL(n)} 답 확인해줘'라고 요청해 주세요.`;
     }
     else { out.textContent = (code === "refused" ? "" : (err && err.text) || ""); msg.textContent = ERR[code] || ERR.upstream_error; }
   } finally {
